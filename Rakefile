@@ -15,7 +15,7 @@ end
 # Packaging tasks: -------------------------------------------------------
 
 PKG_NAME     = 'mb-discid'
-PKG_VERSION  = '0.0.1'
+PKG_VERSION  = '0.1.0'
 PKG_SUMMARY  = 'Ruby bindings for libdiscid.'
 PKG_AUTHOR   = 'Philipp Wolfer'
 PKG_EMAIL    = 'phw@rubyforge.org'
