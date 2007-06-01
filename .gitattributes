@@ -4,5 +4,5 @@
 /README -text
 /Rakefile -text
 examples/discid.rb -text svn_keywords=Id
-ext/discid.c -text
+ext/discid.c -text svn_keywords=Id
 ext/extconf.rb -text svn_keywords=Id
