@@ -1,5 +1,4 @@
 * text=auto !eol
-/.project -text
 /LICENSE -text
 /README -text
 /Rakefile -text
