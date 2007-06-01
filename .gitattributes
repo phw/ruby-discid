@@ -1,1 +1,8 @@
 * text=auto !eol
+/.project -text
+/LICENSE -text
+/README -text
+/Rakefile -text
+examples/discid.rb -text svn_keywords=Id
+ext/discid.c -text
+ext/extconf.rb -text svn_keywords=Id

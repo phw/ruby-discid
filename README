@@ -1,0 +1,23 @@
+= MB-DiscID - Ruby bindings for MusicBrainz libdiscid
+
+== About
+MB-DiscID provides Ruby bindings for the MusicBrainz DiscID library libdsicid.
+It allows you to calculate MusicBrainz DiscIDs from audio CDs which you can use
+to find the release entry for your CD in the MusicBrainz database. 
+
+== Installation
+Before installing rdiscid make sure you have libdiscid installed. See
+http://musicbrainz.org/doc/libdiscid for more information on how to do this.
+
+=== Install with gem
+ gem install mb-discid
+ 
+=== Installing from source
+ rake install
+
+== Usage
+See the files in the examples directory for usage information.
+
+== License
+Copyright (c) 2007, Philipp Wolfer
+Licensing information can be found in the file LICENSE.
