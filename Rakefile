@@ -69,7 +69,7 @@ task :build do
       break
     end
 
-    unless system('make')
+    unless system('make') or system('nmake')
       STDERR.puts 'ERROR: could not build extension!'
       break
     end
