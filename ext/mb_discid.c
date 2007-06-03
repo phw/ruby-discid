@@ -203,6 +203,9 @@ static VALUE mb_discid_read(int argc, VALUE *argv, VALUE self)
 	else
 		cdevice = STR2CSTR(device);
 	
+	// Mark the disc id as unread in case something goes wrong.
+	rb_iv_set(self, "@read", Qfalse);
+	
 	// Read the discid
 	if (discid_read(disc, cdevice) == 0)
 		rb_raise(rb_eException, discid_get_error_msg(disc));
@@ -249,7 +252,8 @@ VALUE mb_discid_default_device(VALUE class)
 /**
  * Initialize the DiscID class and make it available in Ruby.
  */
-void Init_MB_DiscID() {
+void Init_MB_DiscID()
+{
 	mMusicBrainz = rb_define_module("MusicBrainz");
   	cDiscID = rb_define_class_under(mMusicBrainz, "DiscID", rb_cObject);
 	rb_define_singleton_method(cDiscID, "new", mb_discid_new, -1);
