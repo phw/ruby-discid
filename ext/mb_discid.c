@@ -30,11 +30,13 @@ static VALUE mb_discid_id(VALUE self)
 {
 	if (rb_iv_get(self, "@read") == Qfalse)
 		return Qnil;
-	
-	DiscId *disc;
-	Data_Get_Struct(self, DiscId, disc);
-	
-	return rb_str_new2(discid_get_id(disc));
+	else
+	{
+		DiscId *disc;
+		Data_Get_Struct(self, DiscId, disc);
+		
+		return rb_str_new2(discid_get_id(disc));
+	}
 }
 
 /**
@@ -46,11 +48,13 @@ static VALUE mb_discid_submission_url(VALUE self)
 {
 	if (rb_iv_get(self, "@read") == Qfalse)
 		return Qnil;
-	
-	DiscId *disc;
-	Data_Get_Struct(self, DiscId, disc);
-	
-	return rb_str_new2(discid_get_submission_url(disc));
+	else
+	{
+		DiscId *disc;
+		Data_Get_Struct(self, DiscId, disc);
+		
+		return rb_str_new2(discid_get_submission_url(disc));
+	}
 }
 
 /**
@@ -62,11 +66,13 @@ static VALUE mb_discid_freedb_id(VALUE self)
 {
 	if (rb_iv_get(self, "@read") == Qfalse)
 		return Qnil;
-	
-	DiscId *disc;
-	Data_Get_Struct(self, DiscId, disc);
-	
-	return rb_str_new2(discid_get_freedb_id(disc));
+	else
+	{
+		DiscId *disc;
+		Data_Get_Struct(self, DiscId, disc);
+		
+		return rb_str_new2(discid_get_freedb_id(disc));
+	}
 }
 
 /**
@@ -78,11 +84,13 @@ static VALUE mb_discid_first_track_num(VALUE self)
 {
 	if (rb_iv_get(self, "@read") == Qfalse)
 		return Qnil;
-	
-	DiscId *disc;
-	Data_Get_Struct(self, DiscId, disc);
-	
-	return INT2FIX(discid_get_first_track_num(disc));
+	else
+	{
+		DiscId *disc;
+		Data_Get_Struct(self, DiscId, disc);
+		
+		return INT2FIX(discid_get_first_track_num(disc));
+	}
 }
 
 /**
@@ -94,11 +102,13 @@ static VALUE mb_discid_last_track_num(VALUE self)
 {
 	if (rb_iv_get(self, "@read") == Qfalse)
 		return Qnil;
-	
-	DiscId *disc;
-	Data_Get_Struct(self, DiscId, disc);
-	
-	return INT2FIX(discid_get_last_track_num(disc));
+	else
+	{
+		DiscId *disc;
+		Data_Get_Struct(self, DiscId, disc);
+		
+		return INT2FIX(discid_get_last_track_num(disc));
+	}
 }
 
 /**
@@ -110,11 +120,13 @@ static VALUE mb_discid_sectors(VALUE self)
 {
 	if (rb_iv_get(self, "@read") == Qfalse)
 		return Qnil;
-	
-	DiscId *disc;
-	Data_Get_Struct(self, DiscId, disc);
-	
-	return INT2FIX(discid_get_sectors(disc));
+	else
+	{
+		DiscId *disc;
+		Data_Get_Struct(self, DiscId, disc);
+		
+		return INT2FIX(discid_get_sectors(disc));
+	}
 }
 
 /**
@@ -130,31 +142,37 @@ static VALUE mb_discid_tracks(VALUE self)
 {
 	if (rb_iv_get(self, "@read") == Qfalse)
 		return Qnil;
-	
-	DiscId *disc;
-	Data_Get_Struct(self, DiscId, disc);
-	
-	VALUE result = rb_ary_new(); // Array of all [offset, length] tuples
-	VALUE tuple; // Array to store one [offset, length] tuple.
-	int track = discid_get_first_track_num(disc); // Track number
-	while (track <= discid_get_last_track_num(disc))
-	{
-		tuple = rb_ary_new3(2,
-			INT2FIX(discid_get_track_offset(disc, track)),
-			INT2FIX(discid_get_track_length(disc, track)) );
-		
-	   	if (rb_block_given_p())
-			rb_yield(tuple);
-		else
-			rb_ary_push(result, tuple);
-			
-		track++;
-	}
-	
-	if (rb_block_given_p())
-		return Qnil;
 	else
-		return result;
+	{
+		DiscId *disc;
+		Data_Get_Struct(self, DiscId, disc);
+		
+		{ // Stupid MS compiler.
+		
+		VALUE result = rb_ary_new(); // Array of all [offset, length] tuples
+		VALUE tuple; // Array to store one [offset, length] tuple.
+		int track = discid_get_first_track_num(disc); // Track number
+		while (track <= discid_get_last_track_num(disc))
+		{
+			tuple = rb_ary_new3(2,
+				INT2FIX(discid_get_track_offset(disc, track)),
+				INT2FIX(discid_get_track_length(disc, track)) );
+			
+		   	if (rb_block_given_p())
+				rb_yield(tuple);
+			else
+				rb_ary_push(result, tuple);
+				
+			track++;
+		}
+		
+		if (rb_block_given_p())
+			return Qnil;
+		else
+			return result;
+		
+		} // Stupid MS compiler.
+	}
 }
 
 /**
@@ -166,6 +184,8 @@ static VALUE mb_discid_read(int argc, VALUE *argv, VALUE self)
 {
 	DiscId *disc;
 	Data_Get_Struct(self, DiscId, disc);
+	
+	{ // Stupid MS compiler.
 	
 	VALUE device = Qnil; // The device string as a Ruby string.
 	char* cdevice;       // The device string as a C string.
@@ -190,6 +210,8 @@ static VALUE mb_discid_read(int argc, VALUE *argv, VALUE self)
 		rb_iv_set(self, "@read", Qtrue);
 	
 	return Qnil;
+	
+	} // Stupid MS compiler.
 }
 
 /**
@@ -227,7 +249,7 @@ VALUE mb_discid_default_device(VALUE class)
 /**
  * Initialize the DiscID class and make it available in Ruby.
  */
-void Init_DiscID() {
+void Init_MB_DiscID() {
 	mMusicBrainz = rb_define_module("MusicBrainz");
   	cDiscID = rb_define_class_under(mMusicBrainz, "DiscID", rb_cObject);
 	rb_define_singleton_method(cDiscID, "new", mb_discid_new, -1);

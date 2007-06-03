@@ -9,8 +9,21 @@ to find the release entry for your CD in the MusicBrainz database.
 Before installing rdiscid make sure you have libdiscid installed. See
 http://musicbrainz.org/doc/libdiscid for more information on how to do this.
 
-=== Install with gem
+=== Installation with RubyGems
  gem install mb-discid
+ 
+== Installation on Windows operating systems.
+For Windows a binary gem "mb-discid-0.1.1-mswin32.gem" is available. To install
+it follow the instructions below:
+
+1. Make sure you have at least Ruby 1.8.6 installed.
+2. Install RubyGems, if you don't already have it.
+3. Download "libdiscid-0.1.1-win32bin.zip" from
+   http://musicbrainz.org/doc/libdiscid.
+4. Copy the file "discid.dll" from "libdiscid-0.1.1-win32bin.zip" to your Ruby
+   bin directory (normally "C:\ruby\bin".
+5. Run "gem install mb-discid" to install MB-DiscID.
+6. To test the installation try to run "discid.rb" in the examples directory.
  
 === Installing from source
  rake install

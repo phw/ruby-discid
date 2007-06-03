@@ -15,7 +15,7 @@ end
 # Packaging tasks: -------------------------------------------------------
 
 PKG_NAME     = 'mb-discid'
-PKG_VERSION  = '0.1.0'
+PKG_VERSION  = '0.1.1'
 PKG_SUMMARY  = 'Ruby bindings for libdiscid.'
 PKG_AUTHOR   = 'Philipp Wolfer'
 PKG_EMAIL    = 'phw@rubyforge.org'
@@ -27,19 +27,27 @@ EOF
 PKG_FILES = FileList[
   'Rakefile', 'LICENSE', 'README',
   'examples/**/*',
-  'ext/**/*.{c,rb}'
+  'ext/**/*.{c,rb}',
+  'lib/**/*.rb'
 ]
 
 spec = Gem::Specification.new do |spec|
-  spec.platform = Gem::Platform::RUBY
   spec.name = PKG_NAME
   spec.version = PKG_VERSION
   spec.summary = PKG_SUMMARY
+  if ENV['BINARY_GEM'] == 'win32'
+    spec.platform = Gem::Platform::WIN32
+    spec.files = PKG_FILES << 'ext/MB_DiscID.so'
+    spec.bindir = 'bin'
+    spec.required_ruby_version = ">= #{RUBY_VERSION}"
+  else
+    spec.platform = Gem::Platform::RUBY
+    spec.files = PKG_FILES
+    spec.extensions << 'ext/extconf.rb'
+  end
   spec.requirements << 'libdiscid (http://musicbrainz.org/doc/libdiscid)'
-  spec.require_path = 'lib'
+  spec.require_paths = ['lib', 'ext']
   spec.autorequire = spec.name
-  spec.files = PKG_FILES
-  spec.extensions << 'ext/extconf.rb'
   spec.description = PKG_DESCRIPTION
   spec.author = PKG_AUTHOR
   spec.email = PKG_EMAIL

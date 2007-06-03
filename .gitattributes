@@ -1,7 +1,9 @@
 * text=auto !eol
 /LICENSE -text
 /README -text
-/Rakefile -text
+/Rakefile -text svn_keywords=Id
 examples/discid.rb -text svn_keywords=Id
-ext/discid.c -text svn_keywords=Id
 ext/extconf.rb -text svn_keywords=Id
+ext/mb_discid.c -text svn_keywords=Id
+lib/mb-discid.rb -text svn_keywords=Id
+win32/vs-build-environment.bat -text

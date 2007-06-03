@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby
 
-require 'DiscID'
+require 'mb-discid'
 
 # Read the device name from the command line or use the default.
 device = $*[0] ? $*[0] : MusicBrainz::DiscID.default_device
