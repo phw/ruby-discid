@@ -1,11 +1,12 @@
 /**
  * $Id$
- * Copyright (c) 2007, Philipp Wolfer
- * All rights reserved.
- * See LICENSE for permissions.
  *
  * Ruby bindings for libdiscid. See http://musicbrainz.org/doc/libdiscid
  * for more information on libdiscid and MusicBrainz.
+ * 
+ * Author::    Philipp Wolfer (mailto:phw@rubyforge.org)
+ * Copyright:: Copyright (c) 2007, Philipp Wolfer
+ * License::   MB-DiscID is free software. See LICENSE for permissions.
  */
 
 #include "ruby.h"
@@ -76,7 +77,7 @@ static VALUE mb_discid_freedb_id(VALUE self)
 }
 
 /**
- * Return the number of the first track on this disc.
+ * Return the number of the first track on this disc (usually 1).
  * 
  * Returns +nil+ if no ID was yet read.
  */
@@ -180,6 +181,7 @@ static VALUE mb_discid_tracks(VALUE self)
  * Read the disc ID from the given device.
  * 
  * If no device is given the default device of the platform will be used.
+ * Throws an <tt>Exception</tt> if the CD's TOC can not be read.
  */
 static VALUE mb_discid_read(int argc, VALUE *argv, VALUE self)
 {
@@ -223,6 +225,7 @@ static VALUE mb_discid_read(int argc, VALUE *argv, VALUE self)
  * 
  * Use this instead of read if the TOC information was already read elsewhere
  * and you want to recalculate the ID.
+ * Throws an <tt>Exception</tt> if the CD's TOC can not be read.
  * 
  * <b>Parameters:</b>
  * [first_track] The number of the first track on the disc (usually 1).
