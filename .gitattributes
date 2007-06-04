@@ -1,6 +1,6 @@
 * text=auto !eol
 /LICENSE -text
-/README -text
+/README -text svn_keywords=Id
 /Rakefile -text svn_keywords=Id
 examples/discid.rb -text svn_keywords=Id
 ext/extconf.rb -text svn_keywords=Id

@@ -7,6 +7,7 @@
 
 require 'rubygems'
 require 'rake/gempackagetask'
+require 'rake/rdoctask'
 
 task :default do
   puts "Please see 'rake --tasks' for an overview of the available tasks."
@@ -30,6 +31,7 @@ PKG_FILES = FileList[
   'ext/**/*.{c,rb}',
   'lib/**/*.rb'
 ]
+PKG_EXTRA_RDOC_FILES = ['README', 'LICENSE']
 
 spec = Gem::Specification.new do |spec|
   spec.name = PKG_NAME
@@ -53,6 +55,8 @@ spec = Gem::Specification.new do |spec|
   spec.email = PKG_EMAIL
   spec.homepage = PKG_HOMEPAGE
   spec.rubyforge_project = 'rbrainz'
+  spec.has_rdoc = true
+  spec.extra_rdoc_files = PKG_EXTRA_RDOC_FILES
 end
 
 Rake::GemPackageTask.new(spec) do |pkg|
@@ -108,4 +112,14 @@ task :rebuild => [:clobber_build, :build]
 
 desc 'Remove all files created during the build process'
 task :clobber => [:clobber_build, :clobber_package]
+
+# Documentation tasks: ---------------------------------------------------
+
+Rake::RDocTask.new do |rdoc|
+  rdoc.title    = "MB-DiscID %s" % PKG_VERSION
+  rdoc.main     = 'README'
+  rdoc.rdoc_dir = 'doc/api'
+  rdoc.rdoc_files.include('lib/**/*.rb', 'ext/**/*.c', PKG_EXTRA_RDOC_FILES)
+  rdoc.options << '--inline-source' << '--line-numbers' #<< '--diagram'
+end
 

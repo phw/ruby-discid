@@ -12,7 +12,7 @@ http://musicbrainz.org/doc/libdiscid for more information on how to do this.
 === Installation with RubyGems
  gem install mb-discid
  
-== Installation on Windows operating systems.
+=== Installation on Windows operating systems.
 For Windows a binary gem "mb-discid-0.1.1-mswin32.gem" is available. To install
 it follow the instructions below:
 
@@ -29,8 +29,11 @@ it follow the instructions below:
  rake install
 
 == Usage
-See the files in the examples directory for usage information.
+See the documentation of MusicBrainz::DiscID or the example files in the
+examples directory for usage information.
 
 == License
 Copyright (c) 2007, Philipp Wolfer
 Licensing information can be found in the file LICENSE.
+
+$Id$
