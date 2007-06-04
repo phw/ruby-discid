@@ -26,12 +26,12 @@ PKG_DESCRIPTION = <<EOF
     for more information on libdiscid and MusicBrainz.
 EOF
 PKG_FILES = FileList[
-  'Rakefile', 'LICENSE', 'README',
+  'Rakefile', 'LICENSE', 'README',, 'CHANGES'
   'examples/**/*',
   'ext/**/*.{c,rb}',
   'lib/**/*.rb'
 ]
-PKG_EXTRA_RDOC_FILES = ['README', 'LICENSE']
+PKG_EXTRA_RDOC_FILES = ['README', 'LICENSE', 'CHANGES']
 
 spec = Gem::Specification.new do |spec|
   spec.name = PKG_NAME

@@ -6,7 +6,8 @@
  * 
  * Author::    Philipp Wolfer (mailto:phw@rubyforge.org)
  * Copyright:: Copyright (c) 2007, Philipp Wolfer
- * License::   MB-DiscID is free software. See LICENSE for permissions.
+ * License::   MB-DiscID is free software distributed under a BSD style license.
+ *             See LICENSE for permissions.
  */
 
 #include "ruby.h"

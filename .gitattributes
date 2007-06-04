@@ -1,4 +1,5 @@
 * text=auto !eol
+/CHANGES -text svn_keywords=Id
 /LICENSE -text
 /README -text svn_keywords=Id
 /Rakefile -text svn_keywords=Id
