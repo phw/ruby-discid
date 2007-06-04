@@ -248,8 +248,8 @@ static VALUE mb_discid_put(VALUE self, VALUE first_track, VALUE sectors,
 	// Convert the Ruby array to an C array of integers. discid_puts expects
 	// always an offsets array with exactly 100 elements.
 	int coffsets[100];
-	coffsets[0] = NUM2INT(sectors); // 0 is always the leadout track.
 	int i = 1;
+	coffsets[0] = NUM2INT(sectors); // 0 is always the leadout track.
 	while (i <= length && i < 100)
 	{
 		coffsets[i] = NUM2INT(rb_ary_entry(offsets, i - 1));

@@ -26,7 +26,7 @@ PKG_DESCRIPTION = <<EOF
     for more information on libdiscid and MusicBrainz.
 EOF
 PKG_FILES = FileList[
-  'Rakefile', 'LICENSE', 'README',, 'CHANGES'
+  'Rakefile', 'LICENSE', 'README', 'CHANGES',
   'examples/**/*',
   'ext/**/*.{c,rb}',
   'lib/**/*.rb'

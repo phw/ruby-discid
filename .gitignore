@@ -1,6 +1,6 @@
 /.project
 ext/*.so
-ext/DiscID-i386-mswin32.*
+ext/MB_DiscID-i386-mswin32.*
 ext/Makefile
 ext/vc80.*
 /pkg
