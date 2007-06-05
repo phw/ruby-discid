@@ -118,7 +118,7 @@ task :clobber => [:clobber_build, :clobber_package]
 # Test tasks: ------------------------------------------------------------
 
 desc "Run just the unit tests"
-Rake::TestTask.new(:test => [:build]) do |test|
+Rake::TestTask.new(:test => [:rebuild]) do |test|
   test.test_files = FileList['test/test*.rb']
   test.libs = ['lib', 'ext']
   test.warning = true

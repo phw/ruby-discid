@@ -147,14 +147,14 @@ static VALUE mb_discid_tracks(VALUE self)
 		return Qnil;
 	else
 	{
-		DiscId *disc;
+		DiscId *disc; /* Pointer to the disc struct */
+		VALUE result = rb_ary_new(); /* Array of all [offset, length] tuples */
+		VALUE tuple; /* Array to store one [offset, length] tuple. */
+		int track;   /* Counter for the track number to process. */
+		
 		Data_Get_Struct(self, DiscId, disc);
 		
-		{ // Stupid MS compiler.
-		
-		VALUE result = rb_ary_new(); // Array of all [offset, length] tuples
-		VALUE tuple; // Array to store one [offset, length] tuple.
-		int track = discid_get_first_track_num(disc); // Track number
+		track = discid_get_first_track_num(disc); /* First track number */
 		while (track <= discid_get_last_track_num(disc))
 		{
 			tuple = rb_ary_new3(2,
@@ -173,8 +173,6 @@ static VALUE mb_discid_tracks(VALUE self)
 			return Qnil;
 		else
 			return result;
-		
-		} // Stupid MS compiler.
 	}
 }
 
@@ -186,39 +184,36 @@ static VALUE mb_discid_tracks(VALUE self)
  */
 static VALUE mb_discid_read(int argc, VALUE *argv, VALUE self)
 {
-	DiscId *disc;
+	DiscId *disc;        /* Pointer to the disc struct */
+	VALUE device = Qnil; /* The device string as a Ruby string */
+	char* cdevice;       /* The device string as a C string */
+	
 	Data_Get_Struct(self, DiscId, disc);
 	
-	{ // Stupid MS compiler.
-	
-	VALUE device = Qnil; // The device string as a Ruby string.
-	char* cdevice;       // The device string as a C string.
-	
-	// Check the number of arguments
+	/* Check the number of arguments */
 	if (argc > 1)
 		rb_raise(rb_eArgError, "wrong number of arguments (%d for 1)", argc);
-	// Convert the given device to a T_STRING
+	/* Convert the given device to a T_STRING */
 	else if (argc > 0)	
 		device = rb_funcall(argv[0], rb_intern("to_s"), 0, 0);
 	
-	// Use the default device if none was given.
+	/* Use the default device if none was given. */
 	if (argc < 1 || RSTRING(device)->len == 0)
 		cdevice = discid_get_default_device();
 	else
 		cdevice = STR2CSTR(device);
 	
-	// Mark the disc id as unread in case something goes wrong.
+	/* Mark the disc id as unread in case something goes wrong. */
 	rb_iv_set(self, "@read", Qfalse);
 	
-	// Read the discid
+	/* Read the discid */
 	if (discid_read(disc, cdevice) == 0)
 		rb_raise(rb_eException, discid_get_error_msg(disc));
-	else // Remember that we already read the ID.
+	else /* Remember that we already read the ID. */
 		rb_iv_set(self, "@read", Qtrue);
 	
 	return Qnil;
 	
-	} // Stupid MS compiler.
 }
 
 /**
@@ -236,38 +231,34 @@ static VALUE mb_discid_read(int argc, VALUE *argv, VALUE self)
 static VALUE mb_discid_put(VALUE self, VALUE first_track, VALUE sectors,
                            VALUE offsets)
 {
-	DiscId *disc;
+	DiscId *disc;                       /* Pointer to the disc struct */
+	long length = RARRAY(offsets)->len; /* length of the offsets array */
+	int cfirst  = NUM2INT(first_track); /* number of the first track */
+	int clast   = length + 1 - cfirst;  /* number of the last track */
+	int coffsets[100];                  /* C array to hold the offsets */
+	int i = 1;                          /* Counter for iterating over coffsets*/
+	
 	Data_Get_Struct(self, DiscId, disc);
 	
-	{ // Stupid MS compiler.
-	
-	long length = RARRAY(offsets)->len; // length of the offsets array
-	int cfirst  = NUM2INT(first_track); // number of the first track
-	int clast   = length + 1 - cfirst;  // number of the last track
-	
-	// Convert the Ruby array to an C array of integers. discid_puts expects
-	// always an offsets array with exactly 100 elements.
-	int coffsets[100];
-	int i = 1;
-	coffsets[0] = NUM2INT(sectors); // 0 is always the leadout track.
+	/* Convert the Ruby array to an C array of integers. discid_puts expects
+	   always an offsets array with exactly 100 elements. */
+	coffsets[0] = NUM2INT(sectors); /* 0 is always the leadout track */
 	while (i <= length && i < 100)
 	{
 		coffsets[i] = NUM2INT(rb_ary_entry(offsets, i - 1));
 		i++;
 	}
 	
-	// Mark the disc id as unread in case something goes wrong.
+	/* Mark the disc id as unread in case something goes wrong. */
 	rb_iv_set(self, "@read", Qfalse);
 	
-	// Read the discid
+	/* Read the discid */
 	if (discid_put(disc, cfirst, clast, coffsets) == 0)
 		rb_raise(rb_eException, discid_get_error_msg(disc));
-	else // Remember that we already read the ID.
+	else /* Remember that we already read the ID. */
 		rb_iv_set(self, "@read", Qtrue);
 	
 	return Qnil;
-	
-	} // Stupid MS compiler.
 }
 
 /**

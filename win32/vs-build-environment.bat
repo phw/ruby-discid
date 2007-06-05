@@ -1,2 +1,2 @@
 "%VS80COMNTOOLS%vsvars32.bat"
-set DISCID_DIR=discid.dll
+set BINARY_GEM=win32
