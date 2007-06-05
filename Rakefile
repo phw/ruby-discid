@@ -7,6 +7,7 @@
 
 require 'rubygems'
 require 'rake/gempackagetask'
+require 'rake/testtask'
 require 'rake/rdoctask'
 
 task :default do
@@ -112,6 +113,15 @@ task :rebuild => [:clobber_build, :build]
 
 desc 'Remove all files created during the build process'
 task :clobber => [:clobber_build, :clobber_package]
+
+# Test tasks: ------------------------------------------------------------
+
+desc "Run just the unit tests"
+Rake::TestTask.new(:test => [:build]) do |test|
+  test.test_files = FileList['test/test*.rb']
+  test.libs = ['lib', 'ext']
+  test.warning = true
+end
 
 # Documentation tasks: ---------------------------------------------------
 

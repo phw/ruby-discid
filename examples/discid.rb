@@ -22,5 +22,3 @@ disc.tracks do |offset, length|
   puts "Track #{track}: Offset #{offset}, Length #{length}"
   track += 1
 end
-
-puts disc.tracks.collect{|v| v[0]}.inspect
