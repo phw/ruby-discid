@@ -1,4 +1,4 @@
-# $Id: test_alias.rb 78 2007-06-04 19:47:11Z phw $
+# $Id$
 #
 # Author::    Philipp Wolfer (mailto:phw@rubyforge.org)
 # Copyright:: Copyright (c) 2007, Philipp Wolfer
