@@ -8,6 +8,16 @@
 require 'test/unit'
 require 'mb-discid'
 
+# Helper class which can't be converted into a string.
+class NotAString
+  
+  private
+  
+  def to_s
+  end
+
+end
+
 # Unit test for the MusicBrainz::DiscID class.
 class TestDiscID < Test::Unit::TestCase
 
@@ -28,6 +38,26 @@ class TestDiscID < Test::Unit::TestCase
   # Test reading the disc id from a device.
   def test_read
     assert false, "Not implemented yet"
+  end
+  
+  # Test how read reacts on different arguments.
+  # Those reads should all fail, but they must never cause a segmentation fault.
+  def test_read_invalid_arguments
+    assert_raise(Exception) {MusicBrainz::DiscID.new(NotAString.new)}
+    assert_raise(Exception) {MusicBrainz::DiscID.new(1)}
+    assert_raise(Exception) {MusicBrainz::DiscID.new('invalid_device')}
+    assert_raise(Exception) {MusicBrainz::DiscID.new(:invalid_device)}
+    assert_raise(ArgumentError) {MusicBrainz::DiscID.new(
+                                           MusicBrainz::DiscID.default_device,
+                                           'second argument')}
+    
+    disc = MusicBrainz::DiscID.new
+    assert_raise(Exception) {disc.read(NotAString.new)}
+    assert_raise(Exception) {disc.read(1)}
+    assert_raise(Exception) {disc.read('invalid_device')}
+    assert_raise(Exception) {disc.read(:invalid_device)}
+    assert_raise(ArgumentError) {disc.read(MusicBrainz::DiscID.default_device,
+                                           'second argument')}
   end
   
   # Test calculation of the disc id if the TOC information
