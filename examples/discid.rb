@@ -16,12 +16,14 @@ require 'mb-discid'
 # Read the device name from the command line or use the default.
 device = $*[0] ? $*[0] : MusicBrainz::DiscID.default_device
 
+puts "Reading TOC from device '#{device}'."
+
 disc = MusicBrainz::DiscID.new
 disc.read(device)
 
 print <<EOF
+
 DiscID     : #{disc.id}
-Submit via : #{disc.submission_url}
 FreeDB ID  : #{disc.freedb_id}
 First track: #{disc.first_track_num}
 Last track : #{disc.last_track_num}
@@ -33,3 +35,5 @@ disc.tracks do |offset, length|
   puts "Track #{track}: Offset #{offset}, Length #{length}"
   track += 1
 end
+
+puts "\nSubmit via #{disc.submission_url}"
