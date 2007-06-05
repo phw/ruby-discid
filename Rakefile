@@ -30,7 +30,8 @@ PKG_FILES = FileList[
   'Rakefile', 'LICENSE', 'README', 'CHANGES',
   'examples/**/*',
   'ext/**/*.{c,rb}',
-  'lib/**/*.rb'
+  'lib/**/*.rb',
+  'test/**/*.rb'
 ]
 PKG_EXTRA_RDOC_FILES = ['README', 'LICENSE', 'CHANGES']
 
