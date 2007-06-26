@@ -1,7 +1,7 @@
 = MB-DiscID - Ruby bindings for MusicBrainz libdiscid
 
 == About
-MB-DiscID provides Ruby bindings for the MusicBrainz DiscID library libdsicid.
+MB-DiscID provides Ruby bindings for the MusicBrainz DiscID library libdiscid.
 It allows you to calculate MusicBrainz DiscIDs from audio CDs which you can use
 to find the release entry for your CD in the MusicBrainz database. 
 

@@ -36,9 +36,10 @@ class TestDiscID < Test::Unit::TestCase
   end
   
   # Test reading the disc id from a device.
-  def test_read
-    assert false, "Not implemented yet"
-  end
+  # We would need some kind of small test data to do this.
+  #def test_read
+  #  assert false, "Not implemented yet"
+  #end
   
   # Test how read reacts on different arguments.
   # Those reads should all fail, but they must never cause a segmentation fault.
