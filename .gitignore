@@ -1,4 +1,5 @@
 /.project
+doc/api
 ext/*.so
 ext/MB_DiscID-i386-mswin32.*
 ext/Makefile
