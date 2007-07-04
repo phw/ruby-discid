@@ -1,6 +1,6 @@
 = Changelog
 
-== 0.1.2 (not yet released)
+== 0.1.2 (2007-07-04)
 * Support the method +put+ to set the TOC information directly instead of
   reading it from a device.
 * Fixed possible core dump if +read+ was called twice and failed the
