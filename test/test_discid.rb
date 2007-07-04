@@ -44,7 +44,7 @@ class TestDiscID < Test::Unit::TestCase
   # Test how read reacts on different arguments.
   # Those reads should all fail, but they must never cause a segmentation fault.
   def test_read_invalid_arguments
-    assert_raise(Exception) {MusicBrainz::DiscID.new(NotAString.new)}
+    assert_raise(TypeError) {MusicBrainz::DiscID.new(NotAString.new)}
     assert_raise(Exception) {MusicBrainz::DiscID.new(1)}
     assert_raise(Exception) {MusicBrainz::DiscID.new('invalid_device')}
     assert_raise(Exception) {MusicBrainz::DiscID.new(:invalid_device)}
@@ -53,7 +53,7 @@ class TestDiscID < Test::Unit::TestCase
                                            'second argument')}
     
     disc = MusicBrainz::DiscID.new
-    assert_raise(Exception) {disc.read(NotAString.new)}
+    assert_raise(TypeError) {disc.read(NotAString.new)}
     assert_raise(Exception) {disc.read(1)}
     assert_raise(Exception) {disc.read('invalid_device')}
     assert_raise(Exception) {disc.read(:invalid_device)}

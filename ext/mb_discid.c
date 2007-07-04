@@ -195,7 +195,12 @@ static VALUE mb_discid_read(int argc, VALUE *argv, VALUE self)
 		rb_raise(rb_eArgError, "wrong number of arguments (%d for 1)", argc);
 	/* Convert the given device to a T_STRING */
 	else if (argc == 1)
-		device = rb_any_to_s(argv[0]);
+	{
+		if(rb_respond_to(argv[0], rb_intern("to_s")))
+			device = rb_funcall(argv[0], rb_intern("to_s"), 0, 0);
+		else
+			rb_raise(rb_eTypeError, "wrong argument type (expected String)");
+	}
 	
 	/* Use the default device if none was given. */
 	if (argc < 1 || RSTRING(device)->len == 0)
