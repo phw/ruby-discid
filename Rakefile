@@ -28,7 +28,7 @@ PKG_DESCRIPTION = <<EOF
 EOF
 PKG_FILES = FileList[
   'Rakefile', 'LICENSE', 'README', 'CHANGES',
-  'examples/**/*',
+  'examples/**/*.rb',
   'ext/**/*.{c,rb}',
   'lib/**/*.rb',
   'test/**/*.rb'
