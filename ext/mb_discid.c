@@ -181,6 +181,8 @@ static VALUE mb_discid_tracks(VALUE self)
  * 
  * If no device is given the default device of the platform will be used.
  * Throws an <tt>Exception</tt> if the CD's TOC can not be read.
+ *
+ * Raises:: +ArgumentError+, +TypeError+, +Exception+
  */
 static VALUE mb_discid_read(int argc, VALUE *argv, VALUE self)
 {
@@ -232,6 +234,8 @@ static VALUE mb_discid_read(int argc, VALUE *argv, VALUE self)
  * [first_track] The number of the first track on the disc (usually 1).
  * [sectors] The total number of sectors on the disc.
  * [offsets] Array of all track offsets. The number of tracks must not exceed 99.
+ *
+ * Raises:: +Exception+
  */
 static VALUE mb_discid_put(VALUE self, VALUE first_track, VALUE sectors,
                            VALUE offsets)
@@ -272,6 +276,8 @@ static VALUE mb_discid_put(VALUE self, VALUE first_track, VALUE sectors,
  * As an optional argument the name of the device to read the ID from
  * may be given. If you don't specify a device here you can later read
  * the ID with the read method.
+ *
+ * Raises:: +ArgumentError+, +TypeError+, +Exception+
  */
 VALUE mb_discid_new(int argc, VALUE *argv, VALUE class)
 {

@@ -26,13 +26,18 @@ module MusicBrainz
   #  
   #  require 'mb-discid'
   #  
-  #  # Create a new DiscID object
+  #  # Create a new DiscID object.
   #  disc = MusicBrainz::DiscID.new
   #  
   #  # Read the TOC from the default device.
   #  # An audio CD must be inserted in the drive. An exception will be thrown
   #  # if the CD can't be read.
-  #  disc.read
+  #  begin
+  #    disc.read
+  #  rescue Exception => e
+  #    puts e
+  #    exit(0)
+  #  end
   #  
   #  # Print information about the disc:
   #  print <<EOF

@@ -32,6 +32,16 @@ install it follow the instructions below:
 See the documentation of MusicBrainz::DiscID or the example files in the
 +examples+ directory for usage information.
 
+== Contact
+MB-DiscID is part of the RBrainz project which provides a library to query
+the MusicBrainz XML web service. For more information about MB-DiscID or
+RBrainz visit http://rbrainz.rubyforge.org.
+
+If you have any questions or suggestions regarding MB-DiscID please write to
+the rbrainz-user mailinglist[http://rubyforge.org/mail/?group_id=3677].
+If you find bugs or if you have any feature requests please use the
+RBrainz bug tracker[http://rubyforge.org/tracker/?group_id=3677]. 
+
 == License
 MB-DiscID is Copyright (c) 2007 Philipp Wolfer.
 It is free softare distributed under a BSD style license. See
