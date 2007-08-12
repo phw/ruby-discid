@@ -208,7 +208,7 @@ static VALUE mb_discid_read(int argc, VALUE *argv, VALUE self)
 	if (argc < 1 || RSTRING(device)->len == 0)
 		cdevice = discid_get_default_device();
 	else
-		cdevice = STR2CSTR(device);
+		cdevice = StringValuePtr(device);
 	
 	/* Mark the disc id as unread in case something goes wrong. */
 	rb_iv_set(self, "@read", Qfalse);
