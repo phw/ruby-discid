@@ -24,6 +24,9 @@ static VALUE mMusicBrainz;
 static VALUE cDiscID;
 
 /**
+ * call-seq:
+ *  id() -> string or nil
+ * 
  * Returns the DiscID as a string.
  * 
  * Returns +nil+ if no ID was yet read.
@@ -42,6 +45,9 @@ static VALUE mb_discid_id(VALUE self)
 }
 
 /**
+ * call-seq:
+ *  submission_url() -> string or nil
+ * 
  * Returns a submission URL for the DiscID as a string.
  * 
  * Returns +nil+ if no ID was yet read.
@@ -60,7 +66,10 @@ static VALUE mb_discid_submission_url(VALUE self)
 }
 
 /**
- * Return a FreeDB DiscID as a string.
+* call-seq:
+ *  freedb_id() -> string or nil
+ * 
+  * Returns a FreeDB DiscID as a string.
  * 
  * Returns +nil+ if no ID was yet read.
  */
@@ -78,7 +87,10 @@ static VALUE mb_discid_freedb_id(VALUE self)
 }
 
 /**
- * Return the number of the first track on this disc (usually 1).
+ * call-seq:
+ *  first_track_num() -> int or nil
+ * 
+  * Return the number of the first track on this disc (usually 1).
  * 
  * Returns +nil+ if no ID was yet read.
  */
@@ -96,6 +108,9 @@ static VALUE mb_discid_first_track_num(VALUE self)
 }
 
 /**
+ * call-seq:
+ *  last_track_num() -> int or nil
+ * 
  * Return the number of the last track on this disc.
  * 
  * Returns +nil+ if no ID was yet read.
@@ -114,6 +129,9 @@ static VALUE mb_discid_last_track_num(VALUE self)
 }
 
 /**
+ * call-seq:
+ *  sectors() -> int or nil
+ * 
  * Return the length of the disc in sectors.
  * 
  * Returns +nil+ if no ID was yet read.
@@ -132,6 +150,10 @@ static VALUE mb_discid_sectors(VALUE self)
 }
 
 /**
+ * call-seq:
+ *  tracks() -> array
+ *  tracks() {|offset, length| block }
+ * 
  * Returns an array of <tt>[offset, length]</tt> tuples for each track.
  * 
  * Offset and length are both integer values representing sectors.
@@ -177,12 +199,15 @@ static VALUE mb_discid_tracks(VALUE self)
 }
 
 /**
+ * call-seq:
+ *  read(device=nil)
+ * 
  * Read the disc ID from the given device.
  * 
  * If no device is given the default device of the platform will be used.
- * Throws an <tt>Exception</tt> if the CD's TOC can not be read.
+ * Throws an _Exception_ if the CD's TOC can not be read.
  *
- * Raises:: +ArgumentError+, +TypeError+, +Exception+
+ * Raises:: ArgumentError, TypeError, Exception
  */
 static VALUE mb_discid_read(int argc, VALUE *argv, VALUE self)
 {
@@ -224,18 +249,21 @@ static VALUE mb_discid_read(int argc, VALUE *argv, VALUE self)
 }
 
 /**
+ * call-seq:
+ *  put(first_track, sectors, offsets)
+ * 
  * Set the TOC information directly instead of reading it from a device.
  * 
  * Use this instead of read if the TOC information was already read elsewhere
  * and you want to recalculate the ID.
- * Throws an <tt>Exception</tt> if the CD's TOC can not be read.
+ * Throws an _Exception_ if the CD's TOC can not be read.
  * 
  * <b>Parameters:</b>
  * [first_track] The number of the first track on the disc (usually 1).
  * [sectors] The total number of sectors on the disc.
  * [offsets] Array of all track offsets. The number of tracks must not exceed 99.
  *
- * Raises:: +Exception+
+ * Raises:: Exception
  */
 static VALUE mb_discid_put(VALUE self, VALUE first_track, VALUE sectors,
                            VALUE offsets)
@@ -271,6 +299,9 @@ static VALUE mb_discid_put(VALUE self, VALUE first_track, VALUE sectors,
 }
 
 /**
+ * call-seq:
+ *  MusicBrainz::DiscID.new(device=nil) -> obj
+ *
  * Construct a new DiscID object.
  * 
  * As an optional argument the name of the device to read the ID from
@@ -297,6 +328,9 @@ VALUE mb_discid_new(int argc, VALUE *argv, VALUE class)
 }
 
 /**
+ * call-seq:
+ *  MusicBrainz::DiscID.default_device(device=nil) -> string
+ *
  * Returns a device string for the default device for this platform.
  */
 VALUE mb_discid_default_device(VALUE class)
@@ -310,18 +344,18 @@ VALUE mb_discid_default_device(VALUE class)
 void Init_MB_DiscID()
 {
 	mMusicBrainz = rb_define_module("MusicBrainz");
-  	cDiscID = rb_define_class_under(mMusicBrainz, "DiscID", rb_cObject);
+	cDiscID = rb_define_class_under(mMusicBrainz, "DiscID", rb_cObject);
 	rb_define_singleton_method(cDiscID, "new", mb_discid_new, -1);
 	rb_define_singleton_method(cDiscID, "default_device",
 	                           mb_discid_default_device, 0);
 	
-  	rb_define_method(cDiscID, "read", mb_discid_read, -1);
-  	rb_define_method(cDiscID, "put", mb_discid_put, 3);
-  	rb_define_method(cDiscID, "id", mb_discid_id, 0);
-  	rb_define_method(cDiscID, "submission_url", mb_discid_submission_url, 0);
-  	rb_define_method(cDiscID, "freedb_id", mb_discid_freedb_id, 0);
-  	rb_define_method(cDiscID, "first_track_num", mb_discid_first_track_num, 0);
-  	rb_define_method(cDiscID, "last_track_num", mb_discid_last_track_num, 0);
-  	rb_define_method(cDiscID, "sectors", mb_discid_sectors, 0);
-  	rb_define_method(cDiscID, "tracks", mb_discid_tracks, 0);
+	rb_define_method(cDiscID, "read", mb_discid_read, -1);
+	rb_define_method(cDiscID, "put", mb_discid_put, 3);
+	rb_define_method(cDiscID, "id", mb_discid_id, 0);
+	rb_define_method(cDiscID, "submission_url", mb_discid_submission_url, 0);
+	rb_define_method(cDiscID, "freedb_id", mb_discid_freedb_id, 0);
+	rb_define_method(cDiscID, "first_track_num", mb_discid_first_track_num, 0);
+	rb_define_method(cDiscID, "last_track_num", mb_discid_last_track_num, 0);
+	rb_define_method(cDiscID, "sectors", mb_discid_sectors, 0);
+	rb_define_method(cDiscID, "tracks", mb_discid_tracks, 0);
 }

@@ -83,7 +83,8 @@ module MusicBrainz
   #  
   class DiscID
     
-    # DiscID to String conversion. Same as calling the method id.
+    # DiscID to String conversion. Same as calling the method id but guaranteed
+    # to return a string.
     def to_s
       return id.to_s
     end
