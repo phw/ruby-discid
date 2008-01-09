@@ -1,0 +1,5 @@
+mb-discid (0.1.2-1) gutsy; urgency=low
+
+   * Initial packaging
+
+ -- Philipp Wolfer <phw@rubyforge.org>  Mon, 17 Dec 2007 22:56:57 +0100

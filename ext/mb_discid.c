@@ -308,7 +308,7 @@ static VALUE mb_discid_put(VALUE self, VALUE first_track, VALUE sectors,
  * may be given. If you don't specify a device here you can later read
  * the ID with the read method.
  *
- * Raises:: +ArgumentError+, +TypeError+, +Exception+
+ * Raises:: ArgumentError, TypeError, Exception
  */
 VALUE mb_discid_new(int argc, VALUE *argv, VALUE class)
 {

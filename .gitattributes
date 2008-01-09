@@ -3,9 +3,15 @@
 /LICENSE -text
 /README -text svn_keywords=Id
 /Rakefile -text svn_keywords=Id
+debian/changelog -text
+debian/compat -text
+debian/control -text
+debian/copyright -text
+debian/rules -text
 examples/discid.rb -text svn_keywords=Id
 ext/extconf.rb -text svn_keywords=Id
 ext/mb_discid.c -text svn_keywords=Id
 lib/mb-discid.rb -text svn_keywords=Id
+/setup.rb -text
 test/test_discid.rb -text svn_keywords=Id
 win32/vs-build-environment.bat -text
