@@ -217,20 +217,15 @@ static VALUE mb_discid_read(int argc, VALUE *argv, VALUE self)
 	
 	Data_Get_Struct(self, DiscId, disc);
 	
-	/* Check the number of arguments */
-	if (argc > 1)
-		rb_raise(rb_eArgError, "wrong number of arguments (%d for 1)", argc);
-	/* Convert the given device to a T_STRING */
-	else if (argc == 1)
-	{
-		if(rb_respond_to(argv[0], rb_intern("to_s")))
-			device = rb_funcall(argv[0], rb_intern("to_s"), 0, 0);
-		else
-			rb_raise(rb_eTypeError, "wrong argument type (expected String)");
-	}
+	/* Check the number and types of arguments */
+	rb_scan_args(argc, argv, "1", &device);
+	if(rb_respond_to(device, rb_intern("to_s")))
+		device = rb_funcall(device, rb_intern("to_s"), 0, 0);
+	else
+		rb_raise(rb_eTypeError, "wrong argument type (expected String)");
 	
 	/* Use the default device if none was given. */
-	if (argc < 1 || RSTRING(device)->len == 0)
+	if (device == Qnil)
 		cdevice = discid_get_default_device();
 	else
 		cdevice = StringValuePtr(device);
@@ -314,15 +309,15 @@ VALUE mb_discid_new(int argc, VALUE *argv, VALUE class)
 {
 	DiscId *disc = discid_new();
 	VALUE tdata = Data_Wrap_Struct(class, 0, discid_free, disc);
+	VALUE device = Qnil;
 	rb_obj_call_init(tdata, 0, 0);
 	rb_iv_set(tdata, "@read", Qfalse);
 	
 	// Check the number of arguments
-	if (argc > 1)
-		rb_raise(rb_eArgError, "wrong number of arguments (%d for 1)", argc);
-	// If a device was given try to read the disc id from this device.
-	else if (argc > 0)
-		rb_funcall(tdata, rb_intern("read"), 1, argv[0]);
+	rb_scan_args(argc, argv, "01", &device);
+	
+	if (device != Qnil)
+		rb_funcall(tdata, rb_intern("read"), 1, device);
 	
 	return tdata;
 }
