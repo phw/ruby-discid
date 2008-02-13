@@ -17,7 +17,7 @@ end
 # Packaging tasks: -------------------------------------------------------
 
 PKG_NAME     = 'mb-discid'
-PKG_VERSION  = '0.1.2'
+PKG_VERSION  = '0.1.3'
 PKG_SUMMARY  = 'Ruby bindings for libdiscid.'
 PKG_AUTHOR   = 'Philipp Wolfer'
 PKG_EMAIL    = 'phw@rubyforge.org'
@@ -130,7 +130,7 @@ Rake::RDocTask.new do |rdoc|
   rdoc.title    = "MB-DiscID %s" % PKG_VERSION
   rdoc.main     = 'README'
   rdoc.rdoc_dir = 'doc/api'
-  rdoc.rdoc_files.include('lib/**/*.rb', 'ext/**/*.c', PKG_EXTRA_RDOC_FILES)
+  rdoc.rdoc_files.include('ext/**/*.c', 'lib/**/*.rb', PKG_EXTRA_RDOC_FILES)
   rdoc.options << '--inline-source' << '--line-numbers' #<< '--diagram'
 end
 

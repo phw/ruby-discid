@@ -22,26 +22,34 @@ puts "Reading TOC from device '#{device}'."
 begin
   disc = MusicBrainz::DiscID.new
   disc.read(device)
+  
+  # Instead of reading from a device we could set the TOC directly:
+  # disc.put(1, 82255, [150, 16157, 35932, 57527])
 rescue Exception => e
   puts e
-  exit(0)
+  exit(1)
 end
 
 # Print information about the disc:
 print <<EOF
 
-DiscID     : #{disc.id}
-FreeDB ID  : #{disc.freedb_id}
-First track: #{disc.first_track_num}
-Last track : #{disc.last_track_num}
-Sectors    : #{disc.sectors}
+DiscID      : #{disc.id}
+FreeDB ID   : #{disc.freedb_id}
+First track : #{disc.first_track_num}
+Last track  : #{disc.last_track_num}
+Total length: #{disc.seconds} seconds
+Sectors     : #{disc.sectors}
 EOF
 
 # Print information about individual tracks:
-track = disc.first_track_num
-disc.tracks do |offset, length|
-  puts "Track #{track}: Offset #{offset}, Length #{length}"
-  track += 1
+disc.track_details do |track_info|
+  puts "Track ##{track_info.number}"
+  puts "  Length: %02d:%02d (%i sectors)" %
+      [track_info.seconds / 60, track_info.seconds % 60, track_info.sectors]
+  puts "  Start : %02d:%02d (sector %i)" %
+      [track_info.start_time / 60, track_info.start_time % 60, track_info.start_sector]
+  puts "  End   : %02d:%02d (sector %i)" %
+      [track_info.end_time / 60, track_info.end_time % 60, track_info.end_sector]
 end
 
 # Print a submission URL that can be used to submit

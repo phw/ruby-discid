@@ -66,10 +66,10 @@ static VALUE mb_discid_submission_url(VALUE self)
 }
 
 /**
-* call-seq:
+ * call-seq:
  *  freedb_id() -> string or nil
  * 
-  * Returns a FreeDB DiscID as a string.
+ * Returns a FreeDB DiscID as a string.
  * 
  * Returns +nil+ if no ID was yet read.
  */
@@ -90,7 +90,7 @@ static VALUE mb_discid_freedb_id(VALUE self)
  * call-seq:
  *  first_track_num() -> int or nil
  * 
-  * Return the number of the first track on this disc (usually 1).
+ * Return the number of the first track on this disc (usually 1).
  * 
  * Returns +nil+ if no ID was yet read.
  */
@@ -162,6 +162,9 @@ static VALUE mb_discid_sectors(VALUE self)
  *
  * Returns always +nil+ if no ID was yet read. The block won't be called in
  * this case.
+ *
+ * You may want to use the method track_details instead of this method to
+ * retrieve more detailed information about the tracks.
  */
 static VALUE mb_discid_tracks(VALUE self)
 {
