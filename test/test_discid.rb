@@ -154,7 +154,7 @@ class TestDiscID < Test::Unit::TestCase
     track_info = []                               
     assert_nothing_raised {track_info = disc.track_details}
     assert track_info.is_a?(Array)
-    track_info.each &proc_test_track
+    track_info.each(&proc_test_track)
     assert_equal disc.last_track_num, number
     
     # Calling track_info directly with a given block
