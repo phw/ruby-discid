@@ -2,8 +2,9 @@ Source: mb-discid
 Section: libs
 Priority: optional
 Maintainer: Philipp Wolfer <phw@rubyforge.org>
+Homepage: http://rbrainz.rubyforge.org/
 Build-Depends: debhelper (>= 5), ruby1.8-dev, libdiscid0-dev (>= 0.1.0), rdoc (>= 1.8), rake (>= 0.7), rubygems
-Standards-Version: 3.7.3
+Standards-Version: 3.8.0
 
 Package: mb-discid
 Architecture: any
