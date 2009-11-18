@@ -48,6 +48,7 @@ spec = Gem::Specification.new do |spec|
     spec.platform = Gem::Platform::RUBY
     spec.files = PKG_FILES
     spec.extensions << 'ext/extconf.rb'
+    spec.required_ruby_version = ">= 1.8.6"
   end
   spec.requirements << 'libdiscid (http://musicbrainz.org/doc/libdiscid)'
   spec.require_paths = ['lib', 'ext']

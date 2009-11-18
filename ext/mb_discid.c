@@ -267,7 +267,7 @@ static VALUE mb_discid_put(VALUE self, VALUE first_track, VALUE sectors,
                            VALUE offsets)
 {
 	DiscId *disc;                       /* Pointer to the disc struct */
-	long length = RARRAY(offsets)->len; /* length of the offsets array */
+	long length = RARRAY_LEN(offsets);  /* length of the offsets array */
 	int cfirst  = NUM2INT(first_track); /* number of the first track */
 	int clast   = length + 1 - cfirst;  /* number of the last track */
 	int coffsets[100];                  /* C array to hold the offsets */

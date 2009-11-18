@@ -4,6 +4,7 @@
 * Added singleton method +sectors_to_seconds+ to convert sectors into seconds
 * Added method +seconds+ to retrieve disc length in seconds
 * Added method +track_info+ for accessing more detailed information about tracks
+* Fixed building with Ruby 1.9 (Mihaly Csomay)
 
 == 0.1.2 (2007-07-04)
 * Support the method +put+ to set the TOC information directly instead of
