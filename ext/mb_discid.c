@@ -316,7 +316,7 @@ VALUE mb_discid_new(int argc, VALUE *argv, VALUE class)
 	rb_obj_call_init(tdata, 0, 0);
 	rb_iv_set(tdata, "@read", Qfalse);
 	
-	// Check the number of arguments
+	/* Check the number of arguments */
 	rb_scan_args(argc, argv, "01", &device);
 	
 	if (device != Qnil)
