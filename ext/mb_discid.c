@@ -186,7 +186,7 @@ static VALUE mb_discid_tracks(VALUE self)
 				INT2FIX(discid_get_track_offset(disc, track)),
 				INT2FIX(discid_get_track_length(disc, track)) );
 			
-		   	if (rb_block_given_p())
+			if (rb_block_given_p())
 				rb_yield(tuple);
 			else
 				rb_ary_push(result, tuple);
@@ -221,17 +221,18 @@ static VALUE mb_discid_read(int argc, VALUE *argv, VALUE self)
 	Data_Get_Struct(self, DiscId, disc);
 	
 	/* Check the number and types of arguments */
-	rb_scan_args(argc, argv, "1", &device);
-	if(rb_respond_to(device, rb_intern("to_s")))
-		device = rb_funcall(device, rb_intern("to_s"), 0, 0);
-	else
-		rb_raise(rb_eTypeError, "wrong argument type (expected String)");
-	
+	rb_scan_args(argc, argv, "01", &device);
+
 	/* Use the default device if none was given. */
 	if (device == Qnil)
 		cdevice = discid_get_default_device();
-	else
+	else if (rb_respond_to(device, rb_intern("to_s")))
+	{
+		device = rb_funcall(device, rb_intern("to_s"), 0, 0);
 		cdevice = StringValuePtr(device);
+	}
+	else
+		rb_raise(rb_eTypeError, "wrong argument type (expected String)");
 	
 	/* Mark the disc id as unread in case something goes wrong. */
 	rb_iv_set(self, "@read", Qfalse);

@@ -1,5 +1,8 @@
 = Changelog
 
+== 0.1.4 (2009-11-19)
+* Fixed calling +read+ method without argument
+
 == 0.1.3 (2009-11-19)
 * Added singleton method +sectors_to_seconds+ to convert sectors into seconds
 * Added method +seconds+ to retrieve disc length in seconds
