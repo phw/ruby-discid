@@ -17,7 +17,7 @@ end
 # Packaging tasks: -------------------------------------------------------
 
 PKG_NAME     = 'mb-discid'
-PKG_VERSION  = '0.1.3'
+PKG_VERSION  = '0.1.4'
 PKG_SUMMARY  = 'Ruby bindings for libdiscid.'
 PKG_AUTHOR   = 'Philipp Wolfer'
 PKG_EMAIL    = 'phw@rubyforge.org'
@@ -39,8 +39,8 @@ spec = Gem::Specification.new do |spec|
   spec.name = PKG_NAME
   spec.version = PKG_VERSION
   spec.summary = PKG_SUMMARY
-  if ENV['BINARY_GEM'] == 'win32'
-    spec.platform = Gem::Platform::WIN32
+  if ENV['BINARY_GEM']
+    spec.platform = Gem::Platform::CURRENT
     spec.files = PKG_FILES << 'ext/MB_DiscID.so'
     spec.bindir = 'bin'
     spec.required_ruby_version = ">= #{RUBY_VERSION}"
