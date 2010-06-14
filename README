@@ -7,7 +7,7 @@ to find the release entry for your CD in the MusicBrainz database.
 
 == Requirements
 * Ruby >= 1.8.6
-* libdiscid >= 0.1.0
+* libdiscid >= 0.2.2
 
 == Installation
 Before installing rdiscid make sure you have libdiscid installed. See

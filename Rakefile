@@ -50,7 +50,7 @@ spec = Gem::Specification.new do |spec|
     spec.extensions << 'ext/extconf.rb'
     spec.required_ruby_version = ">= 1.8.6"
   end
-  spec.requirements << 'libdiscid (http://musicbrainz.org/doc/libdiscid)'
+  spec.requirements << 'libdiscid >= 0.2.2 (http://musicbrainz.org/doc/libdiscid)'
   spec.require_paths = ['lib', 'ext']
   spec.autorequire = spec.name
   spec.description = PKG_DESCRIPTION
