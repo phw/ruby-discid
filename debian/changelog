@@ -1,3 +1,9 @@
+mb-discid (0.1.4-1) karmic; urgency=low
+
+  * New upstream release
+
+ -- Philipp Wolfer <ph.wolfer@googlemail.com>  Mon, 14 Jun 2010 23:10:51 +0200
+
 mb-discid (0.1.2-1) gutsy; urgency=low
 
    * Initial packaging
