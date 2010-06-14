@@ -67,6 +67,30 @@ static VALUE mb_discid_submission_url(VALUE self)
 
 /**
  * call-seq:
+ *  webservice_url() -> string or nil
+ * 
+ * Return an URL for retrieving CD information from MusicBrainz' web service
+ *
+ * The URL provides the CD information in XML. 
+ * See http://musicbrainz.org/development/mmd for details.
+ *
+ * Returns +nil+ if no ID was yet read.
+ */
+static VALUE mb_discid_webservice_url(VALUE self)
+{
+	if (rb_iv_get(self, "@read") == Qfalse)
+		return Qnil;
+	else
+	{
+		DiscId *disc;
+		Data_Get_Struct(self, DiscId, disc);
+		
+		return rb_str_new2(discid_get_webservice_url(disc));
+	}
+}
+
+/**
+ * call-seq:
  *  freedb_id() -> string or nil
  * 
  * Returns a FreeDB DiscID as a string.
@@ -352,6 +376,7 @@ void Init_MB_DiscID()
 	rb_define_method(cDiscID, "put", mb_discid_put, 3);
 	rb_define_method(cDiscID, "id", mb_discid_id, 0);
 	rb_define_method(cDiscID, "submission_url", mb_discid_submission_url, 0);
+	rb_define_method(cDiscID, "webservice_url", mb_discid_webservice_url, 0);
 	rb_define_method(cDiscID, "freedb_id", mb_discid_freedb_id, 0);
 	rb_define_method(cDiscID, "first_track_num", mb_discid_first_track_num, 0);
 	rb_define_method(cDiscID, "last_track_num", mb_discid_last_track_num, 0);

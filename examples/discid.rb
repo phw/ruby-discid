@@ -11,6 +11,10 @@
 #
 # $Id$
 
+# Just make sure we can run this example from the command
+# line even if RBrainz is not yet installed properly.
+$: << 'lib/' << 'ext/' << '../ext/' << '../lib/'
+
 require 'mb-discid'
 
 # Read the device name from the command line or use the default.
@@ -55,3 +59,4 @@ end
 # Print a submission URL that can be used to submit
 # the disc ID to MusicBrainz.org.
 puts "\nSubmit via #{disc.submission_url}"
+puts "\nWebservice #{disc.webservice_url}"
