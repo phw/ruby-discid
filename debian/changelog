@@ -1,3 +1,9 @@
+mb-discid (0.1.4-2) lucid; urgency=low
+
+  * Fixed building on Maverick and Natty
+
+ -- Philipp Wolfer <ph.wolfer@googlemail.com>  Mon, 16 May 2011 00:05:40 +0200
+
 mb-discid (0.1.4-1) karmic; urgency=low
 
   * New upstream release
