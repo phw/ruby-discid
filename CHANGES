@@ -1,6 +1,7 @@
 = Changelog
 
 == 0.1.5 (2011-07-02)
+* Added binding for get_webservice_url()
 * Add lib path detection, allows out-of-the-box install when your
   libdiscid is in /usr/local (Matt Patterson)
 
