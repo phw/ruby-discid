@@ -3,12 +3,12 @@ Section: libs
 Priority: optional
 Maintainer: Philipp Wolfer <phw@rubyforge.org>
 Homepage: http://rbrainz.rubyforge.org/
-Build-Depends: debhelper (>= 5), ruby1.8-dev, libdiscid0-dev (>= 0.1.0), rdoc, rake (>= 0.7), rubygems
+Build-Depends: debhelper (>= 5), ruby1.8-dev, libdiscid0-dev (>= 0.2.2), rdoc, rake (>= 0.7), rubygems
 Standards-Version: 3.8.3
 
 Package: mb-discid
 Architecture: any
-Depends: ruby (>= 1.8), libdiscid0 (>= 0.1.0)
+Depends: ruby (>= 1.8), libdiscid0 (>= 0.2.2)
 Description: Ruby bindings for libdiscid
  MB-DiscID provides Ruby bindings for the MusicBrainz DiscID library
  libdiscid. It allows you to calculate MusicBrainz DiscIDs from audio CDs,
