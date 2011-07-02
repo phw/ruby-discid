@@ -1,5 +1,9 @@
 = Changelog
 
+== 0.1.5 (2011-07-02)
+* Add lib path detection, allows out-of-the-box install when your
+  libdiscid is in /usr/local (Matt Patterson)
+
 == 0.1.4 (2009-11-19)
 * Fixed calling +read+ method without argument
 
