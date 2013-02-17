@@ -4,6 +4,7 @@
 doc/api
 ext/*.obj
 ext/*.pdb
+ext/*.o
 ext/*.so
 ext/MB_DiscID-i386-mswin32.*
 ext/Makefile

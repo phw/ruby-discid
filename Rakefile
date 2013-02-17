@@ -6,9 +6,9 @@
 # Rakefile for RDiscID
 
 require 'rubygems'
-require 'rake/gempackagetask'
+require 'rubygems/package_task'
 require 'rake/testtask'
-require 'rake/rdoctask'
+require 'rdoc/task'
 
 task :default do
   puts "Please see 'rake --tasks' for an overview of the available tasks."
@@ -62,7 +62,7 @@ spec = Gem::Specification.new do |spec|
   spec.extra_rdoc_files = PKG_EXTRA_RDOC_FILES
 end
 
-Rake::GemPackageTask.new(spec) do |pkg|
+Gem::PackageTask.new(spec) do |pkg|
   pkg.need_zip = true
   pkg.need_tar_gz= true
 end
