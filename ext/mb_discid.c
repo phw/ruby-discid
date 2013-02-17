@@ -307,7 +307,7 @@ static VALUE mb_discid_read(int argc, VALUE *argv, VALUE self)
 	
 	/* Read the discid */
 	if (discid_read(disc, cdevice) == 0)
-		rb_raise(rb_eException, discid_get_error_msg(disc));
+		rb_raise(rb_eException, "%s", discid_get_error_msg(disc));
 	else /* Remember that we already read the ID. */
 		rb_iv_set(self, "@read", Qtrue);
 	
@@ -357,7 +357,7 @@ static VALUE mb_discid_put(VALUE self, VALUE first_track, VALUE sectors,
 	
 	/* Read the discid */
 	if (discid_put(disc, cfirst, clast, coffsets) == 0)
-		rb_raise(rb_eException, discid_get_error_msg(disc));
+		rb_raise(rb_eException, "%s", discid_get_error_msg(disc));
 	else /* Remember that we already read the ID. */
 		rb_iv_set(self, "@read", Qtrue);
 	
