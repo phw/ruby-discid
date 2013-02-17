@@ -264,7 +264,7 @@ static VALUE mb_discid_tracks(VALUE self)
  */
 static VALUE mb_discid_isrc(VALUE self, VALUE track)
 {
-#ifdef DISCID_GET_TRACK_ISRC
+#ifdef HAVE_DISCID_GET_TRACK_ISRC
 	if (rb_iv_get(self, "@read") == Qfalse)
 		return Qnil;
 	else
