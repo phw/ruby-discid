@@ -52,7 +52,6 @@ spec = Gem::Specification.new do |spec|
   end
   spec.requirements << 'libdiscid >= 0.3.0 (http://musicbrainz.org/doc/libdiscid)'
   spec.require_paths = ['lib', 'ext']
-  spec.autorequire = spec.name
   spec.description = PKG_DESCRIPTION
   spec.author = PKG_AUTHOR
   spec.email = PKG_EMAIL

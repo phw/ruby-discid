@@ -3,14 +3,14 @@
 
 require 'mkmf'
 
-LIBDIR = Config::CONFIG['libdir']
-INCLUDEDIR = Config::CONFIG['includedir']
+LIBDIR = RbConfig::CONFIG['libdir']
+INCLUDEDIR = RbConfig::CONFIG['includedir']
 
 $CFLAGS << " #{ENV["CFLAGS"]}"
 $LIBS << " #{ENV["LIBS"]}"
 
 # totally thieved from Nokogiri's extconf.rb
-if Config::CONFIG['target_os'] =~ /mswin32/
+if RbConfig::CONFIG['target_os'] =~ /mswin32/
   # There's no default include/lib dir on Windows. Let's just add the Ruby ones
   # and resort on the search path specified by INCLUDE and LIB environment
   # variables
