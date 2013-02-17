@@ -8,7 +8,7 @@ Standards-Version: 3.8.3
 
 Package: mb-discid
 Architecture: any
-Depends: ruby (>= 1.8), libdiscid0 (>= 0.2.2)
+Depends: ruby (>= 1.8), libdiscid0 (>= 0.3.0)
 Description: Ruby bindings for libdiscid
  MB-DiscID provides Ruby bindings for the MusicBrainz DiscID library
  libdiscid. It allows you to calculate MusicBrainz DiscIDs from audio CDs,
