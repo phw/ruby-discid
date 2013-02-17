@@ -1,9 +1,9 @@
 # $Id$
-# Copyright (c) 2007, Philipp Wolfer
+# Copyright (c) 2007-2013, Philipp Wolfer
 # All rights reserved.
 # See LICENSE for permissions.
  
-# Rakefile for RDiscID
+# Rakefile for MBDiscID
 
 require 'rubygems'
 require 'rubygems/package_task'
@@ -17,7 +17,7 @@ end
 # Packaging tasks: -------------------------------------------------------
 
 PKG_NAME     = 'mb-discid'
-PKG_VERSION  = '0.1.5'
+PKG_VERSION  = '0.2.0'
 PKG_SUMMARY  = 'Ruby bindings for libdiscid.'
 PKG_AUTHOR   = 'Philipp Wolfer'
 PKG_EMAIL    = 'phw@rubyforge.org'
@@ -50,7 +50,7 @@ spec = Gem::Specification.new do |spec|
     spec.extensions << 'ext/extconf.rb'
     spec.required_ruby_version = ">= 1.8.6"
   end
-  spec.requirements << 'libdiscid >= 0.2.2 (http://musicbrainz.org/doc/libdiscid)'
+  spec.requirements << 'libdiscid >= 0.3.0 (http://musicbrainz.org/doc/libdiscid)'
   spec.require_paths = ['lib', 'ext']
   spec.autorequire = spec.name
   spec.description = PKG_DESCRIPTION
@@ -79,8 +79,7 @@ task :build do
 
   cd 'ext' do
     unless system("ruby extconf.rb #{extconf_args}")
-      STDERR.puts "ERROR: could not configure extension!\n" +
-                  "\n#{INFO_NOTE}\n"
+      STDERR.puts "ERROR: could not configure extension!"
       break
     end
 

@@ -1,4 +1,6 @@
 = Changelog
+== 0.2.0 (2013-02-17)
+* Support for MCN and ISRC (requires libdiscid >= 0.3)
 
 == 0.1.5 (2011-07-02)
 * Added binding for get_webservice_url()

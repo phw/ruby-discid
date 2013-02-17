@@ -7,7 +7,7 @@ to find the release entry for your CD in the MusicBrainz database.
 
 == Requirements
 * Ruby >= 1.8.6
-* libdiscid >= 0.2.2
+* libdiscid >= 0.2.2 (>= 0.3.0 for MCN and ISRC support)
 
 == Installation
 Before installing rdiscid make sure you have libdiscid installed. See
@@ -47,7 +47,7 @@ If you find bugs or if you have any feature requests please use the
 RBrainz bug tracker[http://rubyforge.org/tracker/?group_id=3677]. 
 
 == License
-MB-DiscID is Copyright (c) 2007 Philipp Wolfer.
+MB-DiscID is Copyright (c) 2007-2013 Philipp Wolfer.
 It is free softare distributed under a BSD style license. See
 LICENSE[link:files/LICENSE.html] for details.
 
