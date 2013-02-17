@@ -112,6 +112,27 @@ static VALUE mb_discid_freedb_id(VALUE self)
 
 /**
  * call-seq:
+ *  mcn() -> string or nil
+ * 
+ * Return the media catalogue number of the release, if present.
+ * 
+ * Returns +nil+ if no ID was yet read.
+ */
+static VALUE mb_discid_mcn(VALUE self)
+{
+	if (rb_iv_get(self, "@read") == Qfalse)
+		return Qnil;
+	else
+	{
+		DiscId *disc;
+		Data_Get_Struct(self, DiscId, disc);
+
+		return rb_str_new2(discid_get_mcn(disc));
+	}
+}
+
+/**
+ * call-seq:
  *  first_track_num() -> int or nil
  * 
  * Return the number of the first track on this disc (usually 1).
@@ -227,6 +248,29 @@ static VALUE mb_discid_tracks(VALUE self)
 
 /**
  * call-seq:
+ *  isrc(track)
+ * 
+ * Returns the International Standard Recording Code (ISRC) for the track.
+ * 
+ * Returns always +nil+ if no ID was yet read.
+ */
+static VALUE mb_discid_isrc(VALUE self, VALUE track)
+{
+	if (rb_iv_get(self, "@read") == Qfalse)
+		return Qnil;
+	else
+	{
+		DiscId *disc; /* Pointer to the disc struct */
+		int ctrack = NUM2INT(track); /* Track number to process. */
+		
+		Data_Get_Struct(self, DiscId, disc);
+		//return rb_str_new2(discid_get_freedb_id(disc));
+		return rb_str_new2(discid_get_track_isrc(disc, ctrack));
+	}
+}
+
+/**
+ * call-seq:
  *  read(device=nil)
  * 
  * Read the disc ID from the given device.
@@ -268,7 +312,6 @@ static VALUE mb_discid_read(int argc, VALUE *argv, VALUE self)
 		rb_iv_set(self, "@read", Qtrue);
 	
 	return Qnil;
-	
 }
 
 /**
@@ -378,8 +421,11 @@ void Init_MB_DiscID()
 	rb_define_method(cDiscID, "submission_url", mb_discid_submission_url, 0);
 	rb_define_method(cDiscID, "webservice_url", mb_discid_webservice_url, 0);
 	rb_define_method(cDiscID, "freedb_id", mb_discid_freedb_id, 0);
+	rb_define_method(cDiscID, "media_catalog_number", mb_discid_mcn, 0);
 	rb_define_method(cDiscID, "first_track_num", mb_discid_first_track_num, 0);
 	rb_define_method(cDiscID, "last_track_num", mb_discid_last_track_num, 0);
 	rb_define_method(cDiscID, "sectors", mb_discid_sectors, 0);
 	rb_define_method(cDiscID, "tracks", mb_discid_tracks, 0);
+	
+	rb_define_method(cDiscID, "isrc", mb_discid_isrc, 1);
 }

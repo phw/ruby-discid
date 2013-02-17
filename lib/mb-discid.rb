@@ -122,11 +122,15 @@ module MusicBrainz
       # Start position of the track on the disc in sectors.
       attr_reader :start_sector
       
+      # ISRC number of the trac
+      attr_reader :isrc
+      
       # Returns a new TrackInfo.
-      def initialize(number, offset, length)
+      def initialize(number, offset, length, isrc)
         @number = number
         @start_sector = offset
         @sectors = length
+        @isrc = isrc
       end
       
       # End position of the track on the disc in sectors.
@@ -171,6 +175,7 @@ module MusicBrainz
         :seconds      => seconds,
         :start_time   => start_time,
         :end_time     => end_time,
+        :isrc         => isrc,
         }
       end
       
@@ -204,7 +209,8 @@ module MusicBrainz
         
         self.tracks do |offset, length|
           track_number += 1
-          track_info = TrackInfo.new(track_number, offset, length)
+          isrc = self.isrc(track_number)
+          track_info = TrackInfo.new(track_number, offset, length, isrc)
           
           if block_given?
             yield track_info

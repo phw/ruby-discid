@@ -43,6 +43,7 @@ First track : #{disc.first_track_num}
 Last track  : #{disc.last_track_num}
 Total length: #{disc.seconds} seconds
 Sectors     : #{disc.sectors}
+MCN         : #{disc.media_catalog_number}
 EOF
 
 # Print information about individual tracks:
@@ -54,6 +55,7 @@ disc.track_details do |track_info|
       [track_info.start_time / 60, track_info.start_time % 60, track_info.start_sector]
   puts "  End   : %02d:%02d (sector %i)" %
       [track_info.end_time / 60, track_info.end_time % 60, track_info.end_sector]
+  puts "  ISRC  : %s" % track_info.isrc
 end
 
 # Print a submission URL that can be used to submit
