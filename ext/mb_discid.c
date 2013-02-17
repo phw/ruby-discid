@@ -5,7 +5,7 @@
  * for more information on libdiscid and MusicBrainz.
  * 
  * Author::    Philipp Wolfer (mailto:phw@rubyforge.org)
- * Copyright:: Copyright (c) 2007, Philipp Wolfer
+ * Copyright:: Copyright (c) 2007-2013, Philipp Wolfer
  * License::   MB-DiscID is free software distributed under a BSD style license.
  *             See LICENSE for permissions.
  */
@@ -116,10 +116,13 @@ static VALUE mb_discid_freedb_id(VALUE self)
  * 
  * Return the media catalogue number of the release, if present.
  * 
+ * Requires libdiscid >= 0.3. If not supported this method will always return +nil+.
+ * 
  * Returns +nil+ if no ID was yet read.
  */
 static VALUE mb_discid_mcn(VALUE self)
 {
+#ifdef HAVE_DISCID_GET_MCN
 	if (rb_iv_get(self, "@read") == Qfalse)
 		return Qnil;
 	else
@@ -129,6 +132,9 @@ static VALUE mb_discid_mcn(VALUE self)
 
 		return rb_str_new2(discid_get_mcn(disc));
 	}
+#else
+	return Qnil;
+#endif
 }
 
 /**
@@ -252,10 +258,13 @@ static VALUE mb_discid_tracks(VALUE self)
  * 
  * Returns the International Standard Recording Code (ISRC) for the track.
  * 
+ * Requires libdiscid >= 0.3. If not supported this method will always return +nil+.
+ * 
  * Returns always +nil+ if no ID was yet read.
  */
 static VALUE mb_discid_isrc(VALUE self, VALUE track)
 {
+#ifdef DISCID_GET_TRACK_ISRC
 	if (rb_iv_get(self, "@read") == Qfalse)
 		return Qnil;
 	else
@@ -264,9 +273,11 @@ static VALUE mb_discid_isrc(VALUE self, VALUE track)
 		int ctrack = NUM2INT(track); /* Track number to process. */
 		
 		Data_Get_Struct(self, DiscId, disc);
-		//return rb_str_new2(discid_get_freedb_id(disc));
 		return rb_str_new2(discid_get_track_isrc(disc, ctrack));
 	}
+#else
+	return Qnil;
+#endif
 }
 
 /**
