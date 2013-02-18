@@ -112,7 +112,7 @@ static VALUE mb_discid_freedb_id(VALUE self)
 
 /**
  * call-seq:
- *  mcn() -> string or nil
+ *  media_catalog_number() -> string or nil
  * 
  * Return the media catalogue number of the release, if present.
  * 

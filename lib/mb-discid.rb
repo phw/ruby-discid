@@ -48,6 +48,7 @@ module MusicBrainz
   #  Last track  : #{disc.last_track_num}
   #  Total length: #{disc.seconds} seconds
   #  Sectors     : #{disc.sectors}
+  #  MCN         : #{disc.media_catalog_number}
   #  EOF
   #  
   #  # Print information about individual tracks:
@@ -59,6 +60,7 @@ module MusicBrainz
   #       [track_info.start_time / 60, track_info.start_time % 60, track_info.start_sector]
   #    puts "  End   : %02d:%02d (sector %i)" %
   #       [track_info.end_time / 60, track_info.end_time % 60, track_info.end_sector]
+  #    puts "  ISRC  : %s" % track_info.isrc
   #  end
   #  
   #  # Print a submission URL that can be used to submit
@@ -102,6 +104,8 @@ module MusicBrainz
     # [seconds]      Length of the track in seconds.
     # [start_time]   Start position of the track on the disc in seconds.
     # [end_time]     End position of the track on the disc in seconds.
+    # [isrc]         The track's ISRC (International Standard Recordings Code)
+    #                if available.
     # 
     # You can access all fields either with directly or with the square bracket
     # notation:
