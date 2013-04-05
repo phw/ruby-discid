@@ -27,13 +27,13 @@ PKG_DESCRIPTION = <<EOF
     for more information on libdiscid and MusicBrainz.
 EOF
 PKG_FILES = FileList[
-  'Rakefile', 'LICENSE', 'README', 'CHANGES',
+  'Rakefile', 'LICENSE', 'README.rdoc', 'CHANGES',
   'examples/**/*.rb',
   'ext/**/*.{c,rb}',
   'lib/**/*.rb',
   'test/**/*.rb'
 ]
-PKG_EXTRA_RDOC_FILES = ['README', 'LICENSE', 'CHANGES']
+PKG_EXTRA_RDOC_FILES = ['README.rdoc', 'LICENSE', 'CHANGES']
 
 spec = Gem::Specification.new do |spec|
   spec.name = PKG_NAME
@@ -127,7 +127,7 @@ end
 
 Rake::RDocTask.new do |rdoc|
   rdoc.title    = "MB-DiscID %s" % PKG_VERSION
-  rdoc.main     = 'README'
+  rdoc.main     = 'README.rdoc'
   rdoc.rdoc_dir = 'doc/api'
   rdoc.rdoc_files.include('ext/**/*.c', 'lib/**/*.rb', PKG_EXTRA_RDOC_FILES)
   rdoc.options << '--inline-source' << '--line-numbers' #<< '--diagram'
