@@ -1,5 +1,3 @@
-# $Id$
-#
 # Just a helper file to allow loading the MB-DiscID library with
 # <tt>require 'mb-discid'</tt>, which is the only recommended way
 # to load the library.
@@ -8,7 +6,7 @@
 # to avoid to have to write everything in C.
 # 
 # Author::    Philipp Wolfer (mailto:phw@rubyforge.org)
-# Copyright:: Copyright (c) 2007, Philipp Wolfer
+# Copyright:: Copyright (c) 2007-2013, Philipp Wolfer
 # License::   MB-DiscID is free software distributed under a BSD style license.
 #             See LICENSE[file:../LICENSE.html] for permissions.
 

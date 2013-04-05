@@ -1,6 +1,4 @@
 /**
- * $Id$
- *
  * Ruby bindings for libdiscid. See http://musicbrainz.org/doc/libdiscid
  * for more information on libdiscid and MusicBrainz.
  * 

@@ -1,5 +1,4 @@
 #!/usr/bin/env ruby
-# $Id$
 
 require 'mkmf'
 

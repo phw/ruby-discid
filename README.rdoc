@@ -50,5 +50,3 @@ RBrainz bug tracker[http://rubyforge.org/tracker/?group_id=3677].
 MB-DiscID is Copyright (c) 2007-2013 Philipp Wolfer.
 It is free softare distributed under a BSD style license. See
 LICENSE[link:files/LICENSE.html] for details.
-
-$Id$

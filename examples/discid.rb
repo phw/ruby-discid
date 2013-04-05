@@ -8,8 +8,6 @@
 # 
 # Example:
 #  ./discid.rb /dev/dvd
-#
-# $Id$
 
 # Just make sure we can run this example from the command
 # line even if RBrainz is not yet installed properly.

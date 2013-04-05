@@ -1,4 +1,3 @@
-# $Id$
 # Copyright (c) 2007-2013, Philipp Wolfer
 # All rights reserved.
 # See LICENSE for permissions.
