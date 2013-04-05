@@ -19,7 +19,7 @@ PKG_NAME     = 'mb-discid'
 PKG_VERSION  = '0.2.0'
 PKG_SUMMARY  = 'Ruby bindings for libdiscid.'
 PKG_AUTHOR   = 'Philipp Wolfer'
-PKG_EMAIL    = 'phw@rubyforge.org'
+PKG_EMAIL    = 'ph.wolfer@gmail.com'
 PKG_HOMEPAGE = 'http://rbrainz.rubyforge.org'
 PKG_DESCRIPTION = <<EOF
     Ruby bindings for libdiscid. See http://musicbrainz.org/doc/libdiscid

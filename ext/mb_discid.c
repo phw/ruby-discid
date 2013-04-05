@@ -2,7 +2,7 @@
  * Ruby bindings for libdiscid. See http://musicbrainz.org/doc/libdiscid
  * for more information on libdiscid and MusicBrainz.
  * 
- * Author::    Philipp Wolfer (mailto:phw@rubyforge.org)
+ * Author::    Philipp Wolfer (mailto:ph.wolfer@gmail.com)
  * Copyright:: Copyright (c) 2007-2013, Philipp Wolfer
  * License::   MB-DiscID is free software distributed under a BSD style license.
  *             See LICENSE for permissions.

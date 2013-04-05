@@ -5,7 +5,7 @@
 # This file may even provide extensions to the library in the future
 # to avoid to have to write everything in C.
 # 
-# Author::    Philipp Wolfer (mailto:phw@rubyforge.org)
+# Author::    Philipp Wolfer (mailto:ph.wolfer@gmail.com)
 # Copyright:: Copyright (c) 2007-2013, Philipp Wolfer
 # License::   MB-DiscID is free software distributed under a BSD style license.
 #             See LICENSE[file:../LICENSE.html] for permissions.

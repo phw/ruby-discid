@@ -1,4 +1,4 @@
-# Author::    Philipp Wolfer (mailto:phw@rubyforge.org)
+# Author::    Philipp Wolfer (mailto:ph.wolfer@gmail.com)
 # Copyright:: Copyright (c) 2007, Philipp Wolfer
 # License::   RBrainz is free software distributed under a BSD style license.
 #             See LICENSE[file:../LICENSE.html] for permissions.
