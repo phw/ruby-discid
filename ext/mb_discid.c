@@ -10,6 +10,8 @@
  *             See LICENSE for permissions.
  */
 
+#include <limits.h>
+
 #include "ruby.h"
 #include "discid/discid.h"
 
@@ -22,6 +24,44 @@ static VALUE mMusicBrainz;
  * The DiscID class.
  */
 static VALUE cDiscID;
+
+#ifdef HAVE_DISCID_READ_SPARSE
+unsigned int parse_features(VALUE flags)
+{
+	unsigned int features = 0;
+	VALUE flag;
+	char* cflag;
+	int i;
+
+	if (flags == Qnil || RARRAY_LEN(flags) == 0)
+	{
+		return UINT_MAX;
+	}
+
+	for (i = 0; i < RARRAY_LEN(flags); i++)
+	{
+		flag = rb_ary_entry(flags, i);
+
+		if (rb_respond_to(flag, rb_intern("to_s")))
+		{
+			flag = rb_funcall(flag, rb_intern("to_s"), 0, 0);
+			cflag = StringValuePtr(flag);
+
+			if (strcmp(DISCID_FEATURE_STR_MCN, cflag) == 0)
+			{
+				features |= DISCID_FEATURE_MCN;
+			}
+			else if (strcmp(DISCID_FEATURE_STR_ISRC, cflag) == 0)
+			{
+				features |= DISCID_FEATURE_ISRC;
+			}
+		}
+	}
+	
+	return features;
+}
+#endif
+
 
 /**
  * call-seq:
@@ -283,24 +323,38 @@ static VALUE mb_discid_isrc(VALUE self, VALUE track)
 /**
  * call-seq:
  *  read(device=nil)
+ *  read(device, *features)
  * 
  * Read the disc ID from the given device.
- * 
+ *
  * If no device is given the default device of the platform will be used.
+ * By default this method will read only the disc TOC. You can use additional
+ * features, such as ISRC or MCN reading, by passing :isrc or :mcn for the 
+ * features parameter.
+ *
  * Throws an _Exception_ if the CD's TOC can not be read.
+ * 
+ * == Example
+ *  # Read the disc in the default device
+ *  disc.read
+ *
+ *  # Read the disc in /dev/dvd and enable the ISRC and MCN reading features
+ *  disc.read("/dev/dvd", :isrc, :mcn)
  *
  * Raises:: ArgumentError, TypeError, Exception
  */
 static VALUE mb_discid_read(int argc, VALUE *argv, VALUE self)
 {
-	DiscId *disc;        /* Pointer to the disc struct */
-	VALUE device = Qnil; /* The device string as a Ruby string */
-	char* cdevice;       /* The device string as a C string */
+	DiscId *disc;              /* Pointer to the disc struct */
+	VALUE device = Qnil;       /* The device string as a Ruby string */
+	VALUE flags = Qnil;        /* Feature flags */
+	char* cdevice;             /* The device string as a C string */
+	unsigned int features;     /* The actual features to use based on the flags */
 	
 	Data_Get_Struct(self, DiscId, disc);
 	
 	/* Check the number and types of arguments */
-	rb_scan_args(argc, argv, "01", &device);
+	rb_scan_args(argc, argv, "01*", &device, &flags);
 
 	/* Use the default device if none was given. */
 	if (device == Qnil)
@@ -317,7 +371,12 @@ static VALUE mb_discid_read(int argc, VALUE *argv, VALUE self)
 	rb_iv_set(self, "@read", Qfalse);
 	
 	/* Read the discid */
+#ifdef HAVE_DISCID_READ_SPARSE
+	features = parse_features(flags);
+	if (discid_read_sparse(disc, cdevice, features) == 0)
+#else
 	if (discid_read(disc, cdevice) == 0)
+#endif
 		rb_raise(rb_eException, "%s", discid_get_error_msg(disc));
 	else /* Remember that we already read the ID. */
 		rb_iv_set(self, "@read", Qtrue);
@@ -378,12 +437,13 @@ static VALUE mb_discid_put(VALUE self, VALUE first_track, VALUE sectors,
 /**
  * call-seq:
  *  MusicBrainz::DiscID.new(device=nil) -> obj
+ *  MusicBrainz::DiscID.new(device, *features) -> obj
  *
  * Construct a new DiscID object.
  * 
  * As an optional argument the name of the device to read the ID from
  * may be given. If you don't specify a device here you can later read
- * the ID with the read method.
+ * the ID with the read method. See read for more details.
  *
  * Raises:: ArgumentError, TypeError, Exception
  */
@@ -391,15 +451,11 @@ VALUE mb_discid_new(int argc, VALUE *argv, VALUE class)
 {
 	DiscId *disc = discid_new();
 	VALUE tdata = Data_Wrap_Struct(class, 0, discid_free, disc);
-	VALUE device = Qnil;
 	rb_obj_call_init(tdata, 0, 0);
 	rb_iv_set(tdata, "@read", Qfalse);
 	
-	/* Check the number of arguments */
-	rb_scan_args(argc, argv, "01", &device);
-	
-	if (device != Qnil)
-		rb_funcall(tdata, rb_intern("read"), 1, device);
+	if (argc > 0)
+		rb_funcall2(tdata, rb_intern("read"), argc, argv);
 	
 	return tdata;
 }
