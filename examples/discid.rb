@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby
 #
-# Example script for MB-DiscID.
+# Example script for DiscId.
 # 
 # This script will read the disc ID from the default device and print
 # the results. You can specify an alternate device to use by giving the
@@ -13,16 +13,16 @@
 # line even if RBrainz is not yet installed properly.
 $: << 'lib/' << 'ext/' << '../ext/' << '../lib/'
 
-require 'mb-discid'
+require 'discid'
 
 # Read the device name from the command line or use the default.
-device = $*[0] ? $*[0] : MusicBrainz::DiscID.default_device
+device = $*[0] ? $*[0] : DiscId.default_device
 
 # Create a new DiscID object and read the disc information.
 # In case of errors exit the application.
 puts "Reading TOC from device '#{device}'."
 begin
-  disc = MusicBrainz::DiscID.new
+  disc = DiscId::DiscId.new
   disc.read(device)
   
   # Instead of reading from a device we could set the TOC directly:
@@ -41,22 +41,22 @@ First track : #{disc.first_track_num}
 Last track  : #{disc.last_track_num}
 Total length: #{disc.seconds} seconds
 Sectors     : #{disc.sectors}
-MCN         : #{disc.media_catalog_number}
+MCN         : #{disc.mcn}
 EOF
 
 # Print information about individual tracks:
-disc.track_details do |track_info|
-  puts "Track ##{track_info.number}"
+disc.tracks do |track|
+  puts "Track ##{track.number}"
   puts "  Length: %02d:%02d (%i sectors)" %
-      [track_info.seconds / 60, track_info.seconds % 60, track_info.sectors]
+      [track.seconds / 60, track.seconds % 60, track.sectors]
   puts "  Start : %02d:%02d (sector %i)" %
-      [track_info.start_time / 60, track_info.start_time % 60, track_info.start_sector]
+      [track.start_time / 60, track.start_time % 60, track.start_sector]
   puts "  End   : %02d:%02d (sector %i)" %
-      [track_info.end_time / 60, track_info.end_time % 60, track_info.end_sector]
-  puts "  ISRC  : %s" % track_info.isrc
+      [track.end_time / 60, track.end_time % 60, track.end_sector]
+  puts "  ISRC  : %s" % track.isrc
 end
 
 # Print a submission URL that can be used to submit
 # the disc ID to MusicBrainz.org.
 puts "\nSubmit via #{disc.submission_url}"
-puts "\nWebservice #{disc.webservice_url}"
+#puts "\nWebservice #{disc.webservice_url}"
