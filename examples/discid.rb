@@ -23,10 +23,10 @@ device = $*[0] ? $*[0] : DiscId::DiscId.default_device
 puts "Reading TOC from device '#{device}'."
 begin
   disc = DiscId::DiscId.new
-  #disc.read(device)
+  disc.read(device, :isrc, :mcn)
   
   # Instead of reading from a device we could set the TOC directly:
-  disc.put(1, 82255, [150, 16157, 35932, 57527])
+  #disc.put(1, 82255, [150, 16157, 35932, 57527])
 rescue Exception => e
   puts e
   exit(1)
@@ -42,6 +42,7 @@ Last track  : #{disc.last_track_num}
 Total length: #{disc.seconds} seconds
 Sectors     : #{disc.sectors}
 MCN         : #{disc.mcn}
+
 EOF
 
 # Print information about individual tracks:

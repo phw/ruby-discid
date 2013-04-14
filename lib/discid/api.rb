@@ -38,14 +38,27 @@ module DiscId
 
     attach_function :get_track_isrc, :discid_get_track_isrc, [:pointer, :int], :string
 
-    enum :feature, [:read, 1 << 0,
-                    :mcn, 1 << 1,
-                    :isrc, 1 << 2]
+    Features = enum(:read, 1 << 0,
+                   :mcn, 1 << 1,
+                   :isrc, 1 << 2)
 
     #attach_function :has_feature, :discid_has_feature, [:feature], :int
 
     #attach_function :get_feature_list, :discid_get_feature_list, [:pointer], :void
     
     #attach_function :get_version_string, :discid_get_version_string, [], :string
+
+    def self.features_to_int(features)
+      feature_flag = 0
+      features.each do |feature|
+        if feature.respond_to? :to_sym
+          feature = feature.to_sym
+          feature_flag |= Api::Features[feature] if
+            Api::Features.symbols.include?(feature)
+        end
+      end
+
+      return feature_flag
+    end
   end
 end

@@ -13,13 +13,13 @@ module DiscId
 
     def read(device, *features)
       @read = false
-      device = self.default_device if device.nil?
+      device = self.class.default_device if device.nil?
       if not device.respond_to? :to_s
         raise TypeError, 'wrong argument type (expected String)'
       end
      
-      # TODO: Handle features
-      result = Api.read @handle, device.to_s, 0
+      flags = Api.features_to_int features
+      result = Api.read @handle, device.to_s, flags
 
       if result == 0
         raise Exception, Api.get_error_msg(@handle)
@@ -74,7 +74,7 @@ module DiscId
     # 
     # Returns <tt>nil</tt> if no ID was yet read. 
     def seconds
-      DiscId.sectors_to_seconds(sectors) if @read
+      self.class.sectors_to_seconds(sectors) if @read
     end
 
     def mcn
@@ -134,5 +134,6 @@ module DiscId
     def self.sectors_to_seconds(sectors)
       return (sectors.to_f / 75).round
     end
+
   end
 end
