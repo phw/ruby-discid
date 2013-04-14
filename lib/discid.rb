@@ -5,10 +5,24 @@ require 'discid/version'
 
 module DiscId
   class DiscId
+    private_class_method :new
+
     def initialize
       pointer = Api.new
       @handle = FFI::AutoPointer.new(pointer, Api.method(:free))
       @read = false
+    end
+
+    def self.read(device, *features)
+      disc = new
+      disc.read device, *features
+      return disc
+    end
+    
+    def self.put(first_track, sectors, offsets)
+      disc = new
+      disc.put first_track, sectors, offsets
+      return disc
     end
 
     def read(device, *features)

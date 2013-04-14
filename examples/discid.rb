@@ -22,11 +22,10 @@ device = $*[0] ? $*[0] : DiscId::DiscId.default_device
 # In case of errors exit the application.
 puts "Reading TOC from device '#{device}'."
 begin
-  disc = DiscId::DiscId.new
-  disc.read(device, :isrc, :mcn)
+  disc = DiscId::DiscId.read(device, :isrc, :mcn)
   
   # Instead of reading from a device we could set the TOC directly:
-  #disc.put(1, 82255, [150, 16157, 35932, 57527])
+  #disc = DiscId::DiscId.put(1, 82255, [150, 16157, 35932, 57527])
 rescue Exception => e
   puts e
   exit(1)
