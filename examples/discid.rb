@@ -10,22 +10,22 @@
 #  ./discid.rb /dev/dvd
 
 # Just make sure we can run this example from the command
-# line even if RBrainz is not yet installed properly.
+# line even if DiscId is not yet installed properly.
 $: << 'lib/' << 'ext/' << '../ext/' << '../lib/'
 
 require 'discid'
 
 # Read the device name from the command line or use the default.
-device = $*[0] ? $*[0] : DiscId::DiscId.default_device
+device = $*[0] ? $*[0] : DiscId.default_device
 
 # Create a new DiscID object and read the disc information.
 # In case of errors exit the application.
 puts "Reading TOC from device '#{device}'."
 begin
-  disc = DiscId::DiscId.read(device, :isrc, :mcn)
+  disc = DiscId.read(device, :isrc, :mcn)
   
   # Instead of reading from a device we could set the TOC directly:
-  #disc = DiscId::DiscId.put(1, 82255, [150, 16157, 35932, 57527])
+  #disc = DiscId.put(1, 82255, [150, 16157, 35932, 57527])
 rescue Exception => e
   puts e
   exit(1)
@@ -34,6 +34,7 @@ end
 # Print information about the disc:
 print <<EOF
 
+Device      : #{disc.device}
 DiscID      : #{disc.id}
 FreeDB ID   : #{disc.freedb_id}
 First track : #{disc.first_track_num}

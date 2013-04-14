@@ -47,6 +47,13 @@ module DiscId
     #attach_function :get_feature_list, :discid_get_feature_list, [:pointer], :void
     
     #attach_function :get_version_string, :discid_get_version_string, [], :string
+    
+    # Converts sectors to seconds.
+    # 
+    # According to the red book standard 75 sectors are one second.
+    def self.sectors_to_seconds(sectors)
+      return (sectors.to_f / 75).round
+    end
 
     def self.features_to_int(features)
       feature_flag = 0

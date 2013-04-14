@@ -43,19 +43,10 @@ class TestDiscID < Test::Unit::TestCase
   # Test how read reacts on different arguments.
   # Those reads should all fail, but they must never cause a segmentation fault.
   def test_read_invalid_arguments
-    # assert_raise(TypeError) {DiscId::DiscId.new(NotAString.new)}
-    # assert_raise(Exception) {DiscId::DiscId.new(1)}
-    # assert_raise(Exception) {DiscId::DiscId.new('invalid_device')}
-    # assert_raise(Exception) {DiscId::DiscId.new(:invalid_device)}
-    # assert_raise(ArgumentError) {DiscId::DiscId.new(
-    #                                        DiscId::DiscId.default_device,
-    #                                        'second argument')}
-    
-    disc = DiscId::DiscId.new
-    assert_raise(TypeError) {disc.read(NotAString.new)}
-    assert_raise(Exception) {disc.read(1)}
-    assert_raise(Exception) {disc.read('invalid_device')}
-    assert_raise(Exception) {disc.read(:invalid_device)}
+    assert_raise(TypeError) {DiscId.read(NotAString.new)}
+    assert_raise(Exception) {DiscId.read(1)}
+    assert_raise(Exception) {DiscId.read('invalid_device')}
+    assert_raise(Exception) {DiscId.read(:invalid_device)}
     # assert_raise(ArgumentError) {disc.read(DiscId::DiscId.default_device,
     #                                       'second argument')}
   end
@@ -65,7 +56,7 @@ class TestDiscID < Test::Unit::TestCase
   # All attributes should be nil after a failure, even if there was a
   # successfull put before.
   def test_put
-    disc = DiscId::DiscId.new
+    disc = DiscId::Disc.new
     assert_equal nil, disc.id
     assert_equal '', disc.to_s
     assert_equal nil, disc.first_track_num
@@ -73,9 +64,10 @@ class TestDiscID < Test::Unit::TestCase
     assert_equal nil, disc.sectors
     assert_equal nil, disc.seconds
     assert_equal nil, disc.tracks
-    
-    # First erroneous put
-    assert_raise(Exception) {disc.put(-1, @fiction_sectors, @fiction_offsets)}
+    assert_equal nil, disc.device
+
+    # Erroneous put
+    assert_raise(Exception) {disc = DiscId.put(-1, @fiction_sectors, @fiction_offsets)}
     assert_equal nil, disc.id
     assert_equal '', disc.to_s
     assert_equal nil, disc.first_track_num
@@ -83,10 +75,11 @@ class TestDiscID < Test::Unit::TestCase
     assert_equal nil, disc.sectors
     assert_equal nil, disc.seconds
     assert_equal nil, disc.tracks
+    assert_equal nil, disc.device
     
     # Second successfull put
-    assert_nothing_raised {disc.put(@fiction_first_track, @fiction_sectors,
-                                    @fiction_offsets)}
+    assert_nothing_raised {disc = DiscId.put(@fiction_first_track, @fiction_sectors,
+                                             @fiction_offsets)}
     assert_equal @fiction_disc_id, disc.id
     assert_equal @fiction_disc_id, disc.to_s
     assert_equal @fiction_first_track, disc.first_track_num
@@ -95,26 +88,15 @@ class TestDiscID < Test::Unit::TestCase
     assert_equal @fiction_seconds, disc.seconds
     assert_equal @fiction_offsets, disc.tracks.map{|t| t.start_sector}
     assert_equal @fiction_lengths, disc.tracks.map{|t| t.sectors}
-    
-    # Third erroneous put
-    assert_raise(IndexError) {disc.put(@fiction_first_track, @fiction_sectors, 
-                                      Array.new(100, 1))}
-    assert_equal nil, disc.id
-    assert_equal '', disc.to_s
-    assert_equal nil, disc.first_track_num
-    assert_equal nil, disc.last_track_num
-    assert_equal nil, disc.sectors
-    assert_equal nil, disc.seconds
-    assert_equal nil, disc.tracks
+    assert_equal nil, disc.device
   end
   
-  # Test the track info method and TrackInfo objects
+  # Test the tracks method and TrackInfo objects
   def test_tracks
-    disc = DiscId::DiscId.new
+    disc = nil
     
-    assert_equal nil, disc.tracks
-    assert_nothing_raised {disc.put(@fiction_first_track, @fiction_sectors,
-                                    @fiction_offsets)}
+    assert_nothing_raised {disc = DiscId.put(@fiction_first_track, @fiction_sectors,
+                                             @fiction_offsets)}
     
     
     # Save a block for testing each track
@@ -127,13 +109,11 @@ class TestDiscID < Test::Unit::TestCase
       assert_equal @fiction_offsets[number]+ @fiction_lengths[number],
                    track.end_sector
                    
-      assert_equal DiscId::DiscId.sectors_to_seconds(@fiction_offsets[number]),
-                   track.start_time
-      assert_equal DiscId::DiscId.sectors_to_seconds(@fiction_lengths[number]),
-                   track.seconds
-      assert_equal DiscId::DiscId.sectors_to_seconds(
+      assert_equal DiscId.sectors_to_seconds(@fiction_offsets[number]), track.start_time
+      assert_equal DiscId.sectors_to_seconds(@fiction_lengths[number]), track.seconds
+      assert_equal DiscId.sectors_to_seconds(
                      @fiction_offsets[number]+ @fiction_lengths[number]),
-                   track.end_time
+                     track.end_time
       
       assert_equal track.number, track[:number]
       assert_equal track.sectors, track[:sectors]
@@ -163,9 +143,9 @@ class TestDiscID < Test::Unit::TestCase
   
   # Test the conversion from sectors to seconds
   def test_sectors_to_seconds
-    assert_equal 0, DiscId::DiscId.sectors_to_seconds(0)
+    assert_equal 0, DiscId.sectors_to_seconds(0)
     assert_equal @fiction_seconds,
-                 DiscId::DiscId.sectors_to_seconds(@fiction_sectors)
+                 DiscId.sectors_to_seconds(@fiction_sectors)
   end
   
 end
