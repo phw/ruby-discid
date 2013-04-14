@@ -19,6 +19,12 @@ module DiscId
     Lib.default_device
   end
 
+  def self.has_feature?(feature)
+    feature = feature.to_sym if feature.respond_to? :to_sym
+    result = Lib.has_feature feature if Lib::Features.symbols.include? feature
+    return result == 1
+  end
+
   # Converts sectors to seconds.
   # 
   # According to the red book standard 75 sectors are one second.

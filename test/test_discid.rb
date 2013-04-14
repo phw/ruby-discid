@@ -147,5 +147,16 @@ class TestDiscID < Test::Unit::TestCase
     assert_equal @fiction_seconds,
                  DiscId.sectors_to_seconds(@fiction_sectors)
   end
+
+  def test_has_feature
+    assert(DiscId.has_feature?(:read),
+           "Feature :read should be supported")
+    assert(DiscId.has_feature?("read"),
+           "Feature 'read' should be supported")
+    assert(!DiscId.has_feature?(:notafeature),
+           "Feature :notafeature should not be supported")
+    assert(!DiscId.has_feature?("notafeature"),
+           "Feature 'notafeature' should not be supported")
+  end
   
 end

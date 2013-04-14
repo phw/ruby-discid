@@ -38,23 +38,16 @@ module DiscId
 
     attach_function :get_track_isrc, :discid_get_track_isrc, [:pointer, :int], :string
 
-    Features = enum(:read, 1 << 0,
-                    :mcn, 1 << 1,
-                    :isrc, 1 << 2)
+    Features = enum(:feature, [:read, 1 << 0,
+                               :mcn, 1 << 1,
+                               :isrc, 1 << 2])
 
-    #attach_function :has_feature, :discid_has_feature, [:feature], :int
+    attach_function :has_feature, :discid_has_feature, [:feature], :int
 
     #attach_function :get_feature_list, :discid_get_feature_list, [:pointer], :void
     
-    #attach_function :get_version_string, :discid_get_version_string, [], :string
+    attach_function :get_version_string, :discid_get_version_string, [], :string
     
-    # Converts sectors to seconds.
-    # 
-    # According to the red book standard 75 sectors are one second.
-    def self.sectors_to_seconds(sectors)
-      return (sectors.to_f / 75).round
-    end
-
     def self.features_to_int(features)
       feature_flag = 0
       features.each do |feature|
