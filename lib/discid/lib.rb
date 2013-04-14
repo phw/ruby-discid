@@ -1,7 +1,7 @@
 require "ffi"
 
 module DiscId
-  module Api
+  module Lib
     extend FFI::Library
     ffi_lib %w[discid, libdiscid.so.0]
 
@@ -39,8 +39,8 @@ module DiscId
     attach_function :get_track_isrc, :discid_get_track_isrc, [:pointer, :int], :string
 
     Features = enum(:read, 1 << 0,
-                   :mcn, 1 << 1,
-                   :isrc, 1 << 2)
+                    :mcn, 1 << 1,
+                    :isrc, 1 << 2)
 
     #attach_function :has_feature, :discid_has_feature, [:feature], :int
 
@@ -53,8 +53,8 @@ module DiscId
       features.each do |feature|
         if feature.respond_to? :to_sym
           feature = feature.to_sym
-          feature_flag |= Api::Features[feature] if
-            Api::Features.symbols.include?(feature)
+          feature_flag |= self::Features[feature] if
+            self::Features.symbols.include?(feature)
         end
       end
 

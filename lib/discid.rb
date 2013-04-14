@@ -1,5 +1,5 @@
 require 'ffi'
-require 'discid/api'
+require 'discid/lib'
 require 'discid/track_info'
 require 'discid/version'
 
@@ -8,8 +8,8 @@ module DiscId
     private_class_method :new
 
     def initialize
-      pointer = Api.new
-      @handle = FFI::AutoPointer.new(pointer, Api.method(:free))
+      pointer = Lib.new
+      @handle = FFI::AutoPointer.new(pointer, Lib.method(:free))
       @read = false
     end
 
@@ -32,11 +32,11 @@ module DiscId
         raise TypeError, 'wrong argument type (expected String)'
       end
      
-      flags = Api.features_to_int features
-      result = Api.read @handle, device.to_s, flags
+      flags = Lib.features_to_int features
+      result = Lib.read @handle, device.to_s, flags
 
       if result == 0
-        raise Exception, Api.get_error_msg(@handle)
+        raise Exception, Lib.get_error_msg(@handle)
       else
         @read = true
       end
@@ -49,10 +49,10 @@ module DiscId
       # discid_puts expects always an offsets array with exactly 100 elements.
       FFI::MemoryPointer.new(:int, 100) do |p|
         p.write_array_of_int([sectors] + offsets)
-        result = Api.put @handle, first_track, last_track, p
+        result = Lib.put @handle, first_track, last_track, p
         
         if result == 0
-          raise Exception, Api.get_error_msg(@handle)
+          raise Exception, Lib.get_error_msg(@handle)
         else
           @read = true
         end
@@ -61,27 +61,27 @@ module DiscId
 
     def id
       return nil unless @read
-      return Api.get_id @handle
+      return Lib.get_id @handle
     end
 
     def freedb_id
       return nil unless @read
-      return Api.get_freedb_id @handle
+      return Lib.get_freedb_id @handle
     end
     
     def first_track_num
       return nil unless @read
-      return Api.get_first_track_num @handle
+      return Lib.get_first_track_num @handle
     end
 
     def last_track_num
       return nil unless @read
-      return Api.get_last_track_num @handle
+      return Lib.get_last_track_num @handle
     end
 
     def sectors
       return nil unless @read
-      return Api.get_sectors @handle
+      return Lib.get_sectors @handle
     end
 
     # Return the length of the disc in sectors.
@@ -93,12 +93,12 @@ module DiscId
 
     def mcn
       return nil unless @read
-      return Api.get_mcn @handle
+      return Lib.get_mcn @handle
     end
 
     def submission_url
       return nil unless @read
-      return Api.get_submission_url @handle
+      return Lib.get_submission_url @handle
     end
 
     # DiscId to String conversion. Same as calling the method id but guaranteed
@@ -122,9 +122,9 @@ module DiscId
         
         while track_number < self.last_track_num do
           track_number += 1
-          isrc = Api.get_track_isrc(@handle, track_number)
-          offset = Api.get_track_offset(@handle, track_number)
-          length = Api.get_track_length(@handle, track_number)
+          isrc = Lib.get_track_isrc(@handle, track_number)
+          offset = Lib.get_track_offset(@handle, track_number)
+          length = Lib.get_track_length(@handle, track_number)
           track_info = TrackInfo.new(track_number, offset, length, isrc)
           
           if block_given?
@@ -139,7 +139,7 @@ module DiscId
     end
 
     def self.default_device
-      Api.default_device
+      Lib.default_device
     end
 
     # Converts sectors to seconds.
