@@ -12,7 +12,7 @@ module DiscId
     # TODO: Handle old discid_read
     attach_function :read, :discid_read_sparse, [:pointer, :string, :uint], :int
 
-    # TODD: discid_put
+    attach_function :put, :discid_put, [:pointer, :int, :int, :pointer], :int
 
     attach_function :get_error_msg, :discid_get_error_msg, [:pointer], :string
     
@@ -22,8 +22,6 @@ module DiscId
 
     attach_function :get_submission_url, :discid_get_submission_url, [:pointer], :string
     
-    # TODO: webservice_url
-
     attach_function :default_device, :discid_get_default_device, [], :string
 
     attach_function :get_first_track_num, :discid_get_first_track_num, [:pointer], :int
@@ -44,9 +42,10 @@ module DiscId
                     :mcn, 1 << 1,
                     :isrc, 1 << 2]
 
-    attach_function :has_feature, :discid_has_feature, [:feature], :int
+    #attach_function :has_feature, :discid_has_feature, [:feature], :int
 
-    # TODO: discid_get_feature_list
-    # TODO: discid_get_version_string
+    #attach_function :get_feature_list, :discid_get_feature_list, [:pointer], :void
+    
+    #attach_function :get_version_string, :discid_get_version_string, [], :string
   end
 end

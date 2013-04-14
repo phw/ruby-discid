@@ -16,17 +16,17 @@ $: << 'lib/' << 'ext/' << '../ext/' << '../lib/'
 require 'discid'
 
 # Read the device name from the command line or use the default.
-device = $*[0] ? $*[0] : DiscId.default_device
+device = $*[0] ? $*[0] : DiscId::DiscId.default_device
 
 # Create a new DiscID object and read the disc information.
 # In case of errors exit the application.
 puts "Reading TOC from device '#{device}'."
 begin
   disc = DiscId::DiscId.new
-  disc.read(device)
+  #disc.read(device)
   
   # Instead of reading from a device we could set the TOC directly:
-  # disc.put(1, 82255, [150, 16157, 35932, 57527])
+  disc.put(1, 82255, [150, 16157, 35932, 57527])
 rescue Exception => e
   puts e
   exit(1)
