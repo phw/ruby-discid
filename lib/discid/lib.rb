@@ -1,6 +1,11 @@
 require "ffi"
 
 module DiscId
+
+  # This module encapsulates the C interface for libdiscid using FFI.
+  # The Lib module is intended for internal use only and should be considered private.
+  #
+  # @private
   module Lib
     extend FFI::Library
     ffi_lib %w[discid, libdiscid.so.0]
