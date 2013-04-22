@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset='utf-8' />
+    <meta http-equiv="X-UA-Compatible" content="chrome=1" />
+    <meta name="description" content="ruby-discid : Ruby bindings for libdiscid" />
+
+    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+
+    <title>ruby-discid</title>
+  </head>
+
+  <body>
+
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+          <a id="forkme_banner" href="https://github.com/phw/ruby-discid">View on GitHub</a>
+
+          <h1 id="project_title">ruby-discid</h1>
+          <h2 id="project_tagline">Ruby bindings for libdiscid</h2>
+
+            <section id="downloads">
+              <a class="zip_download_link" href="https://github.com/phw/ruby-discid/zipball/master">Download this project as a .zip file</a>
+              <a class="tar_download_link" href="https://github.com/phw/ruby-discid/tarball/master">Download this project as a tar.gz file</a>
+            </section>
+        </header>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
+        <h1>Ruby bindings for MusicBrainz libdiscid</h1>
+
+<h2>About</h2>
+
+<p>ruby-discid provides Ruby bindings for the MusicBrainz DiscID library libdiscid.
+It allows calculating DiscIDs (MusicBrainz and freedb) for Audio CDs. Additionally
+the library can extract the MCN/UPC/EAN and the ISRCs from disc.</p>
+
+<h2>Requirements</h2>
+
+<ul>
+<li>Ruby &gt;= 1.8.6</li>
+<li>Ruby-FFI</li>
+<li>libdiscid &gt;= 0.2.2</li>
+</ul><h2>Installation</h2>
+
+<p>Before installing ruby-discid make sure you have libdiscid installed. See
+<a href="http://musicbrainz.org/doc/libdiscid">http://musicbrainz.org/doc/libdiscid</a> for more information on how to do this.</p>
+
+<p>Installing ruby-discid is best done using RubyGems:</p>
+
+<pre><code>gem install discid
+</code></pre>
+
+<h2>Usage</h2>
+
+<h3>Read only the TOC</h3>
+
+<div class="highlight"><pre><span class="nb">require</span> <span class="s1">'discid'</span>
+
+<span class="n">device</span> <span class="o">=</span> <span class="s2">"/dev/cdrom"</span>
+<span class="n">disc</span> <span class="o">=</span> <span class="no">DiscId</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
+<span class="nb">puts</span> <span class="n">disc</span><span class="o">.</span><span class="n">id</span>
+</pre></div>
+
+<h3>Read the TOC, MCN and ISRCs</h3>
+
+<div class="highlight"><pre><span class="nb">require</span><span class="s1">'discid'</span>
+
+<span class="n">device</span> <span class="o">=</span> <span class="s2">"/dev/cdrom"</span>
+<span class="n">disc</span> <span class="o">=</span> <span class="no">DiscId</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">device</span><span class="p">,</span> <span class="ss">:mcn</span><span class="p">,</span> <span class="ss">:isrc</span><span class="p">)</span>
+
+<span class="c1"># Print information about the disc:</span>
+<span class="nb">puts</span> <span class="s2">"DiscID      : </span><span class="si">#{</span><span class="n">disc</span><span class="o">.</span><span class="n">id</span><span class="si">}</span><span class="s2">"</span>
+<span class="nb">puts</span> <span class="s2">"FreeDB ID   : </span><span class="si">#{</span><span class="n">disc</span><span class="o">.</span><span class="n">freedb_id</span><span class="si">}</span><span class="s2">"</span>
+<span class="nb">puts</span> <span class="s2">"Total length: </span><span class="si">#{</span><span class="n">disc</span><span class="o">.</span><span class="n">seconds</span><span class="si">}</span><span class="s2"> seconds"</span>
+<span class="nb">puts</span> <span class="s2">"MCN         : </span><span class="si">#{</span><span class="n">disc</span><span class="o">.</span><span class="n">mcn</span><span class="si">}</span><span class="s2">"</span>
+
+<span class="c1"># Print information about individual tracks:</span>
+<span class="n">disc</span><span class="o">.</span><span class="n">tracks</span> <span class="k">do</span> <span class="o">|</span><span class="n">track</span><span class="o">|</span>
+  <span class="nb">puts</span> <span class="s2">"Track #</span><span class="si">#{</span><span class="n">track</span><span class="o">.</span><span class="n">number</span><span class="si">}</span><span class="s2">"</span>
+  <span class="nb">puts</span> <span class="s2">"  Length: %02d:%02d (%i sectors)"</span> <span class="o">%</span>
+      <span class="o">[</span><span class="n">track</span><span class="o">.</span><span class="n">seconds</span> <span class="o">/</span> <span class="mi">60</span><span class="p">,</span> <span class="n">track</span><span class="o">.</span><span class="n">seconds</span> <span class="o">%</span> <span class="mi">60</span><span class="p">,</span> <span class="n">track</span><span class="o">.</span><span class="n">sectors</span><span class="o">]</span>
+  <span class="nb">puts</span> <span class="s2">"  ISRC  : %s"</span> <span class="o">%</span> <span class="n">track</span><span class="o">.</span><span class="n">isrc</span>
+<span class="k">end</span>
+</pre></div>
+
+<p>See the documentation of DiscId or the files in the <code>examples</code> directory for
+more usage information.</p>
+      </section>
+    </div>
+
+    <!-- FOOTER  -->
+    <div id="footer_wrap" class="outer">
+      <footer class="inner">
+        <p class="copyright">ruby-discid maintained by <a href="https://github.com/phw">phw</a></p>
+        <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
+      </footer>
+    </div>
+
+    
+
+  </body>
+</html>
