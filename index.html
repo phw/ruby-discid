@@ -68,7 +68,7 @@ the library can extract the MCN/UPC/EAN and the ISRCs from disc.</p>
 
 <h3>Read the TOC, MCN and ISRCs</h3>
 
-<div class="highlight"><pre><span class="nb">require</span><span class="s1">'discid'</span>
+<div class="highlight"><pre><span class="nb">require</span> <span class="s1">'discid'</span>
 
 <span class="n">device</span> <span class="o">=</span> <span class="s2">"/dev/cdrom"</span>
 <span class="n">disc</span> <span class="o">=</span> <span class="no">DiscId</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">device</span><span class="p">,</span> <span class="ss">:mcn</span><span class="p">,</span> <span class="ss">:isrc</span><span class="p">)</span>
@@ -101,7 +101,17 @@ more usage information.</p>
       </footer>
     </div>
 
-    
+              <script type="text/javascript">
+            var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+            document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+          </script>
+          <script type="text/javascript">
+            try {
+              var pageTracker = _gat._getTracker("UA-1259751-4");
+            pageTracker._trackPageview();
+            } catch(err) {}
+          </script>
+
 
   </body>
 </html>
