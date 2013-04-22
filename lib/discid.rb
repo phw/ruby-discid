@@ -20,6 +20,50 @@ require 'discid/version'
 # The DiscId module allows calculating DiscIDs (MusicBrainz and freedb)
 # for Audio CDs. Additionally the library can extract the MCN/UPC/EAN and
 # the ISRCs from disc.
+#
+# The main interface for using this module are the {read} and {put}
+# methods which both return an instance of {Disc}. {read} allows you to
+# read the data from an actual CD drive while {put} allows you to
+# calculate the DiscID for a previously read CD TOC.
+#
+# Depending on the version of libdiscid and the operating system used
+# additional features like reading the MCN or ISRCs from the disc
+# might be available. You can check for supported features with {has_feature?}.
+#
+# @see http://musicbrainz.org/doc/libdiscid#Feature_Matrix
+#
+# @example Read the TOC, MCN and ISRCs
+#     require 'discid'
+# 
+#     device = "/dev/cdrom"
+#     disc = DiscId.read(device, :mcn, :isrc)
+# 
+#     # Print information about the disc:
+#     puts "DiscID      : #{disc.id}"
+#     puts "FreeDB ID   : #{disc.freedb_id}"
+#     puts "Total length: #{disc.seconds} seconds"
+#     puts "MCN         : #{disc.mcn}"
+#
+#     # Print information about individual tracks:
+#     disc.tracks do |track|
+#       puts "Track ##{track.number}"
+#       puts "  Length: %02d:%02d (%i sectors)" %
+#           [track.seconds / 60, track.seconds % 60, track.sectors]
+#       puts "  ISRC  : %s" % track.isrc
+#     end
+#
+# @example Get the DiscID for an existing TOC
+#     require 'discid'
+#
+#     first_track = 1
+#     sectors = 82255
+#     offsets = [150, 16157, 35932, 57527]
+#     disc = DiscId.put(first_track, sectors, offsets)
+#     puts disc.id # Output: E5VLOkhodzhvsMlK8LSNVioYOgY-
+#
+# @example Check for supported MCN feature
+#     disc = DiscId.read(nil, :mcn)
+#     puts "MCN: #{disc.mcn}" if DiscId.has_feature?(:mcn)
 module DiscId
 
   # Read the disc in the given CD-ROM/DVD-ROM drive extracting only the
@@ -47,7 +91,8 @@ module DiscId
   # @raise [TypeError] `device` can not be converted to a String.
   # @raise [Exception] Error reading from `device`. `Exception#message` contains
   #    error details.
-  # @param device [String] The device identifier.
+  # @param device [String] The device identifier. If set to `nil` {default_device}
+  #     will be used.
   # @param features [:mcn, :isrc] List of features to use.
   #     `:read` is always implied.
   # @return [Disc]
@@ -83,6 +128,11 @@ module DiscId
   end
 
   # Check if a certain feature is implemented on the current platform.
+  #
+  # Currently the following features are available:
+  # * :read
+  # * :mcn
+  # * :isrc
   #
   # @note libdiscid >= 0.5.0 required. Older versions will return `true`
   #     for `:read` and `false` for anything else.
