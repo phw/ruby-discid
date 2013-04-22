@@ -96,7 +96,7 @@ module DiscId
   # @param features [:mcn, :isrc] List of features to use.
   #     `:read` is always implied.
   # @return [Disc]
-  def self.read(device, *features)
+  def self.read(device = nil, *features)
     disc = Disc.new
     disc.read device, *features
     return disc

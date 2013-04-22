@@ -36,7 +36,7 @@ module DiscId
     # @private
     def read(device, *features)
       @read = false
-      device = self.class.default_device if device.nil?
+      device = DiscId.default_device if device.nil?
       
       if not device.respond_to? :to_s
         raise TypeError, 'wrong argument type (expected String)'
