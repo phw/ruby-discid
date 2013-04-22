@@ -159,4 +159,9 @@ class TestDiscID < Test::Unit::TestCase
            "Feature 'notafeature' should not be supported")
   end
   
+  def test_feature_list_must_contain_read
+    assert(DiscId.feature_list.include?(:read),
+           "Feature :read should be supported")
+  end
+
 end

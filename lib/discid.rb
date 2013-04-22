@@ -129,10 +129,7 @@ module DiscId
 
   # Check if a certain feature is implemented on the current platform.
   #
-  # Currently the following features are available:
-  # * :read
-  # * :mcn
-  # * :isrc
+  # You can obtain a list of supported features with {feature_list}.
   #
   # @note libdiscid >= 0.5.0 required. Older versions will return `true`
   #     for `:read` and `false` for anything else.
@@ -141,8 +138,20 @@ module DiscId
   # @return [Boolean] True if the feature is implemented and false if not.
   def self.has_feature?(feature)
     feature = feature.to_sym if feature.respond_to? :to_sym
-    result = Lib.has_feature feature if Lib::Features.symbols.include? feature
-    return result == 1
+    return self.feature_list.include? feature
+  end
+
+  # A list of features supported by the current platform.
+  # 
+  # Currently the following features are available:
+  # 
+  # * :read
+  # * :mcn
+  # * :isrc
+  #
+  # @return [Array<Symbol>]
+  def self.feature_list
+    return Lib::Features.symbols.select {|f| Lib.has_feature(f) == 1}
   end
 
   # Converts sectors to seconds.
