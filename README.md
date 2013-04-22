@@ -53,5 +53,16 @@ Or install it from the source tarball:
       puts "  ISRC  : %s" % track.isrc
     end
 
-See the documentation of {DiscId} or the files in the `examples` directory for
-more usage information.
+See the [API documentation](http://rubydoc.info/github/phw/ruby-discid/master/frames)
+of {DiscId} or the files in the `examples` directory for more usage information.
+
+## Contribute
+The source code for ruby-discid is available on
+[GitHub](https://github.com/phw/ruby-discid).
+
+Please report any issues on the
+[issue tracker](https://github.com/phw/ruby-discid/issues).
+
+## License
+ruby-discid is released under the GNU Lesser General Public License Version 3.
+See LICENSE.txt for details.

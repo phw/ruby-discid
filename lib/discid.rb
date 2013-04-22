@@ -149,6 +149,8 @@ module DiscId
   # * :mcn
   # * :isrc
   #
+  # @note libdiscid >= 0.5.0 required. Older versions will return only [:read].
+  #
   # @return [Array<Symbol>]
   def self.feature_list
     return Lib::Features.symbols.select {|f| Lib.has_feature(f) == 1}
