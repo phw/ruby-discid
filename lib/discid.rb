@@ -1,3 +1,18 @@
+# Copyright (C) 2013 Philipp Wolfer
+#
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU Lesser General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU Lesser General Public License for more details.
+#
+# You should have received a copy of the GNU Lesser General Public License
+# along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
 require 'discid/lib'
 require 'discid/disc'
 require 'discid/version'
@@ -18,22 +33,18 @@ module DiscId
   # and `:isrc` can be set using the features parameter. You can set multiple
   # features.
   # 
-  # Examples
-  # --------
-  # Read only the TOC:
-  #    
+  # @example Read only the TOC:
   #     disc = DiscId.read(device)
   #
-  # Read the TOC, MCN and ISRCs:
-  #     
+  # @example Read the TOC, MCN and ISRCs:
   #     disc = DiscId.read(device, :mcn, :isrc)
   #
   # @raise [TypeError] `device` can not be converted to a String.
-  # @raise [Exception] Error reading from `device`. See Exception#message for
+  # @raise [Exception] Error reading from `device`. `Exception#message` contains
   #    error details.
   # @param device [String] The device identifier.
   # @param *features [:mcn, :isrc] List of features to use.
-  #     :read is always implied.
+  #     `:read` is always implied.
   # @return [Disc]
   def self.read(device, *features)
     disc = Disc.new
@@ -46,7 +57,7 @@ module DiscId
   # This function may be used if the TOC has been read earlier and you want to
   # calculate the disc ID afterwards, without accessing the disc drive. 
   #
-  # @raise [Exception] The TOC could not be set. See Exception#message for
+  # @raise [Exception] The TOC could not be set. `Exception#message`contains
   #    error details.
   # @param first_track [Integer] The number of the first audio track on the
   #   disc (usually one).

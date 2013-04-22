@@ -1,29 +1,56 @@
-# Discid
+# Ruby bindings for MusicBrainz libdiscid
 
-TODO: Write a gem description
+## About
+ruby-discid provides Ruby bindings for the MusicBrainz DiscID library libdiscid.
+It allows calculating DiscIDs (MusicBrainz and freedb) for Audio CDs. Additionally
+the library can extract the MCN/UPC/EAN and the ISRCs from disc.
+
+## Requirements
+* Ruby >= 1.8.6
+* Ruby-FFI
+* libdiscid >= 0.2.2
 
 ## Installation
+Before installing ruby-discid make sure you have libdiscid installed. See
+http://musicbrainz.org/doc/libdiscid for more information on how to do this.
 
-Add this line to your application's Gemfile:
+Installing ruby-discid is best done using RubyGems:
 
-    gem 'discid'
+    gem install discid
 
-And then execute:
+Or install it from the source tarball:
 
-    $ bundle
-
-Or install it yourself as:
-
-    $ gem install discid
-
+    rake install
+ 
 ## Usage
+### Read only the TOC
 
-TODO: Write usage instructions here
+    require 'discid'
 
-## Contributing
+    device = "/dev/cdrom"
+    disc = DiscId.read(device)
+    puts disc.id
 
-1. Fork it
-2. Create your feature branch (`git checkout -b my-new-feature`)
-3. Commit your changes (`git commit -am 'Add some feature'`)
-4. Push to the branch (`git push origin my-new-feature`)
-5. Create new Pull Request
+### Read the TOC, MCN and ISRCs
+
+    require 'discid'
+    
+    device = "/dev/cdrom"
+    disc = DiscId.read(device, :mcn, :isrc)
+    
+    # Print information about the disc:
+    puts "DiscID      : #{disc.id}"
+    puts "FreeDB ID   : #{disc.freedb_id}"
+    puts "Total length: #{disc.seconds} seconds"
+    puts "MCN         : #{disc.mcn}"
+
+    # Print information about individual tracks:
+    disc.tracks do |track|
+      puts "Track ##{track.number}"
+      puts "  Length: %02d:%02d (%i sectors)" %
+          [track.seconds / 60, track.seconds % 60, track.sectors]
+      puts "  ISRC  : %s" % track.isrc
+    end
+
+See the documentation of {DiscId} or the files in the `examples` directory for
+more usage information.
