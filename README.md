@@ -23,6 +23,7 @@ Or install it from the source tarball:
     rake install
  
 ## Usage
+
 ### Read only the TOC
 
     require 'discid'

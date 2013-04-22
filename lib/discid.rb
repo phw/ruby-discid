@@ -43,7 +43,7 @@ module DiscId
   # @raise [Exception] Error reading from `device`. `Exception#message` contains
   #    error details.
   # @param device [String] The device identifier.
-  # @param *features [:mcn, :isrc] List of features to use.
+  # @param features [:mcn, :isrc] List of features to use.
   #     `:read` is always implied.
   # @return [Disc]
   def self.read(device, *features)
