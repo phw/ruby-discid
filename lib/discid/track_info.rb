@@ -55,7 +55,11 @@ module DiscId
     # @return [Integer]
     attr_reader :start_sector
     
-    # ISRC number of the trac
+    # ISRC number of the track.
+    #
+    # @note libdiscid >= 0.3.0 required. Older versions will always return nil.
+    #     Not available on all platforms, see
+    #     {http://musicbrainz.org/doc/libdiscid#Feature_Matrix}.
     #
     # @return [String]
     attr_reader :isrc

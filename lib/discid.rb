@@ -39,6 +39,11 @@ module DiscId
   # @example Read the TOC, MCN and ISRCs:
   #     disc = DiscId.read(device, :mcn, :isrc)
   #
+  # @note libdiscid >= 0.5.0 is required for the feature selection to work.
+  #       Older versions will allways read MCN and ISRCs when supported. See
+  #       {http://musicbrainz.org/doc/libdiscid#Feature_Matrix} for a list of
+  #       supported features by version and platform.
+  #
   # @raise [TypeError] `device` can not be converted to a String.
   # @raise [Exception] Error reading from `device`. `Exception#message` contains
   #    error details.
@@ -78,6 +83,9 @@ module DiscId
   end
 
   # Check if a certain feature is implemented on the current platform.
+  #
+  # @note libdiscid >= 0.5.0 required. Older versions will return `true`
+  #     for `:read` and `false` for anything else.
   #
   # @param feature [:read, :mcn, :isrc]
   # @return [Boolean] True if the feature is implemented and false if not.

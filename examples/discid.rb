@@ -41,9 +41,10 @@ First track : #{disc.first_track_num}
 Last track  : #{disc.last_track_num}
 Total length: #{disc.seconds} seconds
 Sectors     : #{disc.sectors}
-MCN         : #{disc.mcn}
-
 EOF
+
+puts "MCN         : #{disc.mcn}" if DiscId.has_feature?(:mcn)
+puts
 
 # Print information about individual tracks:
 disc.tracks do |track|
@@ -54,10 +55,9 @@ disc.tracks do |track|
       [track.start_time / 60, track.start_time % 60, track.start_sector]
   puts "  End   : %02d:%02d (sector %i)" %
       [track.end_time / 60, track.end_time % 60, track.end_sector]
-  puts "  ISRC  : %s" % track.isrc
+  puts "  ISRC  : %s" % track.isrc if DiscId.has_feature?(:isrc)
 end
 
 # Print a submission URL that can be used to submit
 # the disc ID to MusicBrainz.org.
 puts "\nSubmit via #{disc.submission_url}"
-#puts "\nWebservice #{disc.webservice_url}"

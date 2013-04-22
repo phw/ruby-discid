@@ -18,7 +18,8 @@ require "ffi"
 module DiscId
 
   # This module encapsulates the C interface for libdiscid using FFI.
-  # The Lib module is intended for internal use only and should be considered private.
+  # The Lib module is intended for internal use only and should be
+  # considered private.
   #
   # @private
   module Lib
@@ -29,8 +30,15 @@ module DiscId
 
     attach_function :free, :discid_free, [:pointer], :void
   
-    # TODO: Handle old discid_read
-    attach_function :read, :discid_read_sparse, [:pointer, :string, :uint], :int
+    begin
+      attach_function :read, :discid_read_sparse, [:pointer, :string, :uint], :int
+    rescue FFI::NotFoundError
+      attach_function :legacy_read, :discid_read, [:pointer, :string], :int
+      
+      def self.read(handle, device, features)
+        legacy_read(handle, device)
+      end
+    end
 
     attach_function :put, :discid_put, [:pointer, :int, :int, :pointer], :int
 
@@ -54,27 +62,52 @@ module DiscId
 
     attach_function :get_track_length, :discid_get_track_length, [:pointer, :int], :int
 
-    attach_function :get_mcn, :discid_get_mcn, [:pointer], :string
+    begin
+      attach_function :get_mcn, :discid_get_mcn, [:pointer], :string
+    rescue FFI::NotFoundError
+      def self.get_mcn(handle)
+        return nil
+      end
+    end
 
-    attach_function :get_track_isrc, :discid_get_track_isrc, [:pointer, :int], :string
+    begin
+      attach_function :get_track_isrc, :discid_get_track_isrc, [:pointer, :int], :string
+    rescue FFI::NotFoundError
+      def self.get_track_isrc(handle, track)
+        return nil
+      end
+    end
 
     Features = enum(:feature, [:read, 1 << 0,
                                :mcn, 1 << 1,
                                :isrc, 1 << 2])
 
-    attach_function :has_feature, :discid_has_feature, [:feature], :int
+    begin
+      attach_function :has_feature, :discid_has_feature, [:feature], :int
+    rescue FFI::NotFoundError
+      def self.has_feature(feature)
+        return feature.to_sym == :read ? 1 : 0
+      end
+    end
 
     #attach_function :get_feature_list, :discid_get_feature_list, [:pointer], :void
     
-    attach_function :get_version_string, :discid_get_version_string, [], :string
-    
+    begin
+      attach_function :get_version_string, :discid_get_version_string, [], :string
+    rescue FFI::NotFoundError
+      def self.get_version_string
+        return "libdiscid < 0.4.0"
+      end
+    end
+
     def self.features_to_int(features)
       feature_flag = 0
       features.each do |feature|
         if feature.respond_to? :to_sym
           feature = feature.to_sym
           feature_flag |= self::Features[feature] if
-            self::Features.symbols.include?(feature)
+            self::Features.symbols.include?(feature) and
+            self.has_feature(feature)
         end
       end
 

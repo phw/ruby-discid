@@ -123,7 +123,11 @@ module DiscId
     #
     # Requires libdiscid >= 0.5. If not supported this method will always
     # return `nil`.
-    # 
+    #
+    # @note libdiscid >= 0.3.0 required. Older versions will always return nil.
+    #     Not available on all platforms, see
+    #     {http://musicbrainz.org/doc/libdiscid#Feature_Matrix}.
+    #
     # @return [String] MCN or `nil` if no ID was yet read. 
     def mcn
       return nil unless @read

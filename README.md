@@ -8,7 +8,7 @@ the library can extract the MCN/UPC/EAN and the ISRCs from disc.
 ## Requirements
 * Ruby >= 1.8.6
 * Ruby-FFI
-* libdiscid >= 0.2.2
+* libdiscid >= 0.1.0
 
 ## Installation
 Before installing ruby-discid make sure you have libdiscid installed. See
