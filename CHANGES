@@ -1,4 +1,10 @@
 = Changelog
+== 1.0.0.a1 (2013-04-22)
+* Use FFI instead of C module
+* Completely overhauled API
+* Full support for MCN, ISRC and libdiscid feature detection
+* Renamed from mb-discid to just discid
+
 == 0.2.0 (2013-02-17)
 * Support for MCN and ISRC (requires libdiscid >= 0.3)
 
