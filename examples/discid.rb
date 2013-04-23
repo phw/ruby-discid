@@ -23,7 +23,10 @@ device = $*[0] ? $*[0] : MusicBrainz::DiscID.default_device
 puts "Reading TOC from device '#{device}'."
 begin
   disc = MusicBrainz::DiscID.new
-  disc.read(device)
+  # Read the TOC together with MCN and ISRC information.
+  # Reading ISRCs is slower than just reading the TOC, so if 
+  # ISRCs are not needed the :isrc parameter should be omitted.
+  disc.read(device, :isrc, :mcn)
   
   # Instead of reading from a device we could set the TOC directly:
   # disc.put(1, 82255, [150, 16157, 35932, 57527])

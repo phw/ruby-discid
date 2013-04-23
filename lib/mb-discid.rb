@@ -26,12 +26,13 @@ module MusicBrainz
   #  
   #  # Create a new DiscID object.
   #  disc = MusicBrainz::DiscID.new
+  #  device = MusicBrainz::DiscID.default_device
   #  
-  #  # Read the TOC from the default device.
+  #  # Read the TOC from the default device and enable the ISRC and MCN features.
   #  # An audio CD must be inserted in the drive. An exception will be thrown
   #  # if the CD can't be read.
   #  begin
-  #    disc.read
+  #    disc.read(device, :mcn, :isrc)
   #  rescue Exception => e
   #    puts e
   #    exit(1)

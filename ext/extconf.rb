@@ -51,6 +51,7 @@ dir_config('discid', HEADER_DIRS, LIB_DIRS)
 if have_library('discid', 'discid_new') or
    have_library('discid.dll', 'discid_new')
   headers = ['discid/discid.h']
+  have_func('discid_read_sparse', headers)
   have_func('discid_get_mcn', headers)
   have_func('discid_get_track_isrc', headers)
   # Remove -MD from compiler flags on Windows.
