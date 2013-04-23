@@ -164,7 +164,7 @@ module DiscId
         read_tracks if @tracks.nil?
         
         if block_given?
-          @tracks.each &Proc.new
+          @tracks.each(&Proc.new)
           return nil
         else
           return @tracks
