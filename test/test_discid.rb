@@ -90,6 +90,14 @@ class TestDiscID < Test::Unit::TestCase
     assert_equal @fiction_lengths, disc.tracks.map{|t| t.sectors}
     assert_equal nil, disc.device
   end
+
+  def test_put_first_track_not_one
+    disc = DiscId.put(3, @fiction_sectors,
+                      @fiction_offsets)
+    assert_equal 3, disc.first_track_number
+    assert_equal 12, disc.last_track_number
+    assert_equal 10, disc.tracks.size
+  end
   
   # Test the tracks method and TrackInfo objects
   def test_tracks
