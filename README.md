@@ -65,4 +65,4 @@ Please report any issues on the
 
 ## License
 ruby-discid is released under the GNU Lesser General Public License Version 3.
-See LICENSE.txt for details.
+See LICENSE for details.
