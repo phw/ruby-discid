@@ -109,7 +109,7 @@ module DiscId
     #     puts track[:sectors] # 16007
     def [](key)
       if [:number, :sectors, :start_sector, :end_sector,
-          :seconds, :start_time, :end_time].include?(key.to_sym)
+          :seconds, :start_time, :end_time, :isrc].include?(key.to_sym)
         method(key).call
       end
     end
@@ -119,6 +119,7 @@ module DiscId
     # @return [Hash]
     def to_hash
       {
+        :number       => number,
         :sectors      => sectors,
         :start_sector => start_sector,
         :end_sector   => end_sector,

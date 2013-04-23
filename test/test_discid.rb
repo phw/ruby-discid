@@ -26,8 +26,8 @@ class NotAString
 
 end
 
-# Unit test for the MusicBrainz::DiscID class.
-class TestDiscID < Test::Unit::TestCase
+# Unit test for the DiscId module.
+class TestDiscId < Test::Unit::TestCase
 
   def setup
     @fiction_disc_id     = 'Wn8eRBtfLDfM0qjYPdxrz.Zjs_U-'
@@ -59,50 +59,6 @@ class TestDiscID < Test::Unit::TestCase
     assert_raise(DiscId::DiscError) {DiscId.read(:invalid_device)}
   end
   
-  # Test calculation of the disc id if the TOC information
-  # gets set by the put method.
-  # All attributes should be nil after a failure, even if there was a
-  # successfull put before.
-  def test_put
-    disc = DiscId::Disc.new
-    assert_equal nil, disc.id
-    assert_equal '', disc.to_s
-    assert_equal nil, disc.first_track_number
-    assert_equal nil, disc.last_track_number
-    assert_equal nil, disc.sectors
-    assert_equal nil, disc.seconds
-    assert_equal nil, disc.tracks
-    assert_equal nil, disc.device
-
-    # Erroneous put
-    assert_raise(DiscId::DiscError) do
-      disc = DiscId.put(-1, @fiction_sectors, @fiction_offsets)
-    end
-    assert_equal nil, disc.id
-    assert_equal '', disc.to_s
-    assert_equal nil, disc.first_track_number
-    assert_equal nil, disc.last_track_number
-    assert_equal nil, disc.sectors
-    assert_equal nil, disc.seconds
-    assert_equal nil, disc.tracks
-    assert_equal nil, disc.device
-    
-    # Second successfull put
-    assert_nothing_raised do
-      disc = DiscId.put(@fiction_first_track, @fiction_sectors,
-                        @fiction_offsets)
-    end
-    assert_equal @fiction_disc_id, disc.id
-    assert_equal @fiction_disc_id, disc.to_s
-    assert_equal @fiction_first_track, disc.first_track_number
-    assert_equal @fiction_last_track, disc.last_track_number
-    assert_equal @fiction_sectors, disc.sectors
-    assert_equal @fiction_seconds, disc.seconds
-    assert_equal @fiction_offsets, disc.tracks.map{|t| t.start_sector}
-    assert_equal @fiction_lengths, disc.tracks.map{|t| t.sectors}
-    assert_equal nil, disc.device
-  end
-
   def test_put_first_track_not_one
     disc = DiscId.put(3, @fiction_sectors,
                       @fiction_offsets)
@@ -112,14 +68,13 @@ class TestDiscID < Test::Unit::TestCase
   end
   
   # Test the tracks method and TrackInfo objects
-  def test_tracks
+  def test_put_and_tracks
     disc = nil
     
     assert_nothing_raised do
       disc = DiscId.put(@fiction_first_track, @fiction_sectors,
                         @fiction_offsets)
     end
-    
     
     # Save a block for testing each track
     number = 0
@@ -138,16 +93,6 @@ class TestDiscID < Test::Unit::TestCase
       assert_equal(DiscId.sectors_to_seconds(
                    @fiction_offsets[number]+ @fiction_lengths[number]),
                    track.end_time)
-      
-      assert_equal track.number, track[:number]
-      assert_equal track.sectors, track[:sectors]
-      assert_equal track.start_sector, track[:start_sector]
-      assert_equal track.end_sector, track[:end_sector]
-      assert_equal track.seconds, track[:seconds]
-      assert_equal track.start_time, track[:start_time]
-      assert_equal track.end_time, track[:end_time]
-      
-      assert_equal nil, track[:invalid_value]
       
       number += 1
     end
@@ -193,6 +138,11 @@ class TestDiscID < Test::Unit::TestCase
     version = DiscId::LIBDISCID_VERSION
     assert version.kind_of?(String)
     assert version.start_with?("libdiscid")
+  end
+
+  def test_default_device_is_a_string
+    device = DiscId.default_device
+    assert device.kind_of?(String)
   end
 
 end
