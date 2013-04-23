@@ -77,40 +77,35 @@ module DiscId
     #
     # @return [String] The DiscID or `nil` if no ID was yet read.
     def id
-      return nil unless @read
-      return Lib.get_id @handle
+      return Lib.get_id @handle if @read
     end
 
     # The FreeDB DiscID.
     #
     # @return [String] The DiscID or  `nil` if no ID was yet read.
     def freedb_id
-      return nil unless @read
-      return Lib.get_freedb_id @handle
+      return Lib.get_freedb_id @handle if @read
     end
     
     # The number of the first track on this disc.
     # 
     # @return [Integer] The number of the first track or `nil` if no ID was yet read. 
     def first_track_number
-      return nil unless @read
-      return Lib.get_first_track_num @handle
+      return Lib.get_first_track_num @handle if @read
     end
 
     # The number of the last track on this disc.
     # 
     # @return [Integer] The number of the last track or `nil` if no ID was yet read. 
     def last_track_number
-      return nil unless @read
-      return Lib.get_last_track_num @handle
+      return Lib.get_last_track_num @handle if @read
     end
 
     # The length of the disc in sectors.
     # 
     # @return [Integer] Sectors or `nil` if no ID was yet read. 
     def sectors
-      return nil unless @read
-      return Lib.get_sectors @handle
+      return Lib.get_sectors @handle if @read
     end
 
     # The length of the disc in seconds.
@@ -131,8 +126,7 @@ module DiscId
     #
     # @return [String] MCN or `nil` if no ID was yet read. 
     def mcn
-      return nil unless @read
-      return Lib.get_mcn @handle
+      return Lib.get_mcn @handle if @read
     end
 
     # An URL for submitting the DiscID to MusicBrainz.
@@ -143,8 +137,7 @@ module DiscId
     #
     # @return [String] Submission URL
     def submission_url
-      return nil unless @read
-      return Lib.get_submission_url @handle
+      return Lib.get_submission_url @handle if @read
     end
 
     # DiscID to String conversion. Same as calling the method {#id} but guaranteed
