@@ -167,4 +167,11 @@ module DiscId
     return (sectors.to_f / 75).round
   end
 
+  # The libdiscid version.
+  #
+  # @note This will only give meaningful results for libdiscid 0.4.0
+  #  and higher. For lower versions this constant  will always have
+  #  the value "libdiscid < 0.4.0".
+  LIBDISCID_VERSION = Lib.get_version_string
+
 end

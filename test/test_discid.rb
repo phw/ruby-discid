@@ -189,4 +189,10 @@ class TestDiscID < Test::Unit::TestCase
            "Feature :read should be supported")
   end
 
+  def test_libdiscid_version_should_start_with_libdiscid
+    version = DiscId::LIBDISCID_VERSION
+    assert version.kind_of?(String)
+    assert version.start_with?("libdiscid")
+  end
+
 end
