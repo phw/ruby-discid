@@ -26,7 +26,7 @@ begin
   
   # Instead of reading from a device we could set the TOC directly:
   #disc = DiscId.put(1, 82255, [150, 16157, 35932, 57527])
-rescue Exception => e
+rescue DiscId::DiscError => e
   puts e
   exit(1)
 end
