@@ -92,7 +92,7 @@ module DiscId
     # The number of the first track on this disc.
     # 
     # @return [Integer] The number of the first track or `nil` if no ID was yet read. 
-    def first_track_num
+    def first_track_number
       return nil unless @read
       return Lib.get_first_track_num @handle
     end
@@ -100,7 +100,7 @@ module DiscId
     # The number of the last track on this disc.
     # 
     # @return [Integer] The number of the last track or `nil` if no ID was yet read. 
-    def last_track_num
+    def last_track_number
       return nil unless @read
       return Lib.get_last_track_num @handle
     end
@@ -182,10 +182,10 @@ module DiscId
     private
 
     def read_tracks
-      track_number = self.first_track_num - 1
+      track_number = self.first_track_number - 1
       @tracks = []
       
-      while track_number < self.last_track_num do
+      while track_number < self.last_track_number do
         track_number += 1
         isrc = Lib.get_track_isrc(@handle, track_number)
         offset = Lib.get_track_offset(@handle, track_number)

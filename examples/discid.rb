@@ -37,8 +37,8 @@ print <<EOF
 Device      : #{disc.device}
 DiscID      : #{disc.id}
 FreeDB ID   : #{disc.freedb_id}
-First track : #{disc.first_track_num}
-Last track  : #{disc.last_track_num}
+First track : #{disc.last_track_number}
+Last track  : #{disc.first_track_number}
 Total length: #{disc.seconds} seconds
 Sectors     : #{disc.sectors}
 EOF

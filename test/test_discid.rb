@@ -59,8 +59,8 @@ class TestDiscID < Test::Unit::TestCase
     disc = DiscId::Disc.new
     assert_equal nil, disc.id
     assert_equal '', disc.to_s
-    assert_equal nil, disc.first_track_num
-    assert_equal nil, disc.last_track_num
+    assert_equal nil, disc.first_track_number
+    assert_equal nil, disc.last_track_number
     assert_equal nil, disc.sectors
     assert_equal nil, disc.seconds
     assert_equal nil, disc.tracks
@@ -70,8 +70,8 @@ class TestDiscID < Test::Unit::TestCase
     assert_raise(Exception) {disc = DiscId.put(-1, @fiction_sectors, @fiction_offsets)}
     assert_equal nil, disc.id
     assert_equal '', disc.to_s
-    assert_equal nil, disc.first_track_num
-    assert_equal nil, disc.last_track_num
+    assert_equal nil, disc.first_track_number
+    assert_equal nil, disc.last_track_number
     assert_equal nil, disc.sectors
     assert_equal nil, disc.seconds
     assert_equal nil, disc.tracks
@@ -82,8 +82,8 @@ class TestDiscID < Test::Unit::TestCase
                                              @fiction_offsets)}
     assert_equal @fiction_disc_id, disc.id
     assert_equal @fiction_disc_id, disc.to_s
-    assert_equal @fiction_first_track, disc.first_track_num
-    assert_equal @fiction_last_track, disc.last_track_num
+    assert_equal @fiction_first_track, disc.first_track_number
+    assert_equal @fiction_last_track, disc.last_track_number
     assert_equal @fiction_sectors, disc.sectors
     assert_equal @fiction_seconds, disc.seconds
     assert_equal @fiction_offsets, disc.tracks.map{|t| t.start_sector}
@@ -133,12 +133,12 @@ class TestDiscID < Test::Unit::TestCase
     assert_nothing_raised {track_info = disc.tracks}
     assert track_info.is_a?(Array)
     track_info.each(&proc_test_track)
-    assert_equal disc.last_track_num, number
+    assert_equal disc.last_track_number, number
     
     # Calling track_info directly with a given block
     number = 0 # Reset the number of tracks (the above block is a closure, so this works)
     assert_equal nil, disc.tracks(&proc_test_track)
-    assert_equal disc.last_track_num, number
+    assert_equal disc.last_track_number, number
   end
   
   # Test the conversion from sectors to seconds
