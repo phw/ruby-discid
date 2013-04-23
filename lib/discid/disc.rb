@@ -31,6 +31,7 @@ module DiscId
       pointer = Lib.new
       @handle = FFI::AutoPointer.new(pointer, Lib.method(:free))
       @read = false
+      @tracks = nil
     end
 
     # @private
@@ -167,24 +168,31 @@ module DiscId
     # @return [Array<TrackInfo>] Array of {TrackInfo} objects.
     def tracks
       if @read
-        track_number = self.first_track_num - 1
-        tracks = []
+        read_tracks if @tracks.nil?
         
-        while track_number < self.last_track_num do
-          track_number += 1
-          isrc = Lib.get_track_isrc(@handle, track_number)
-          offset = Lib.get_track_offset(@handle, track_number)
-          length = Lib.get_track_length(@handle, track_number)
-          track_info = TrackInfo.new(track_number, offset, length, isrc)
-          
-          if block_given?
-            yield track_info
-          else
-            tracks << track_info
-          end
+        if block_given?
+          @tracks.each &Proc.new
+          return nil
+        else
+          return @tracks
         end
+      end
+    end
+
+    private
+
+    def read_tracks
+      track_number = self.first_track_num - 1
+      @tracks = []
+      
+      while track_number < self.last_track_num do
+        track_number += 1
+        isrc = Lib.get_track_isrc(@handle, track_number)
+        offset = Lib.get_track_offset(@handle, track_number)
+        length = Lib.get_track_length(@handle, track_number)
+        track_info = TrackInfo.new(track_number, offset, length, isrc)
         
-        return tracks unless block_given?
+        @tracks << track_info
       end
     end
 
