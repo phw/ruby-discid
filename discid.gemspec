@@ -13,6 +13,7 @@ Gem::Specification.new do |spec|
   spec.homepage      = "https://github.com/phw/ruby-discid"
   spec.license       = "LGPL-3"
   spec.post_install_message = %q{Please make sure you have libdiscid (http://musicbrainz.org/doc/libdiscid) installed.}
+  spec.requirements  = "libdiscid >= 0.1.0"
 
   spec.files         = `git ls-files`.split($/)
   spec.executables   = spec.files.grep(%r{^bin/}) { |f| File.basename(f) }
