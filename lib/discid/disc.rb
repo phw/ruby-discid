@@ -48,7 +48,7 @@ module DiscId
       result = Lib.read @handle, @device, flags
 
       if result == 0
-        raise Exception, Lib.get_error_msg(@handle)
+        raise DiscError, Lib.get_error_msg(@handle)
       else
         @read = true
       end
@@ -66,7 +66,7 @@ module DiscId
         result = Lib.put @handle, first_track, last_track, p
         
         if result == 0
-          raise Exception, Lib.get_error_msg(@handle)
+          raise DiscError, Lib.get_error_msg(@handle)
         else
           @read = true
         end
@@ -189,5 +189,9 @@ module DiscId
       end
     end
 
+  end
+
+  # This exception is thrown on errors reading the disc or setting the TOC.
+  class DiscError < StandardError
   end
 end

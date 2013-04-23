@@ -89,7 +89,7 @@ module DiscId
   #       supported features by version and platform.
   #
   # @raise [TypeError] `device` can not be converted to a String.
-  # @raise [Exception] Error reading from `device`. `Exception#message` contains
+  # @raise [DiscError] Error reading from `device`. `Exception#message` contains
   #    error details.
   # @param device [String] The device identifier. If set to `nil` {default_device}
   #     will be used.
@@ -107,7 +107,7 @@ module DiscId
   # This function may be used if the TOC has been read earlier and you want to
   # calculate the disc ID afterwards, without accessing the disc drive. 
   #
-  # @raise [Exception] The TOC could not be set. `Exception#message`contains
+  # @raise [DiscError] The TOC could not be set. `Exception#message`contains
   #    error details.
   # @param first_track [Integer] The number of the first audio track on the
   #   disc (usually one).

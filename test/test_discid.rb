@@ -1,7 +1,17 @@
-# Author::    Philipp Wolfer (mailto:ph.wolfer@gmail.com)
-# Copyright:: Copyright (c) 2007-2013, Philipp Wolfer
-# License::   RBrainz is free software distributed under LGPLv3.
-#             See LICENSE[file:../LICENSE.txt] for permissions.
+# Copyright (C) 2013 Philipp Wolfer
+#
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU Lesser General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU Lesser General Public License for more details.
+#
+# You should have received a copy of the GNU Lesser General Public License
+# along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 require 'test/unit'
 require 'discid'
@@ -44,11 +54,9 @@ class TestDiscID < Test::Unit::TestCase
   # Those reads should all fail, but they must never cause a segmentation fault.
   def test_read_invalid_arguments
     assert_raise(TypeError) {DiscId.read(NotAString.new)}
-    assert_raise(Exception) {DiscId.read(1)}
-    assert_raise(Exception) {DiscId.read('invalid_device')}
-    assert_raise(Exception) {DiscId.read(:invalid_device)}
-    # assert_raise(ArgumentError) {disc.read(DiscId::DiscId.default_device,
-    #                                       'second argument')}
+    assert_raise(DiscId::DiscError) {DiscId.read(1)}
+    assert_raise(DiscId::DiscError) {DiscId.read('invalid_device')}
+    assert_raise(DiscId::DiscError) {DiscId.read(:invalid_device)}
   end
   
   # Test calculation of the disc id if the TOC information
@@ -67,7 +75,9 @@ class TestDiscID < Test::Unit::TestCase
     assert_equal nil, disc.device
 
     # Erroneous put
-    assert_raise(Exception) {disc = DiscId.put(-1, @fiction_sectors, @fiction_offsets)}
+    assert_raise(DiscId::DiscError) do
+      disc = DiscId.put(-1, @fiction_sectors, @fiction_offsets)
+    end
     assert_equal nil, disc.id
     assert_equal '', disc.to_s
     assert_equal nil, disc.first_track_number
@@ -78,8 +88,10 @@ class TestDiscID < Test::Unit::TestCase
     assert_equal nil, disc.device
     
     # Second successfull put
-    assert_nothing_raised {disc = DiscId.put(@fiction_first_track, @fiction_sectors,
-                                             @fiction_offsets)}
+    assert_nothing_raised do
+      disc = DiscId.put(@fiction_first_track, @fiction_sectors,
+                        @fiction_offsets)
+    end
     assert_equal @fiction_disc_id, disc.id
     assert_equal @fiction_disc_id, disc.to_s
     assert_equal @fiction_first_track, disc.first_track_number
@@ -103,8 +115,10 @@ class TestDiscID < Test::Unit::TestCase
   def test_tracks
     disc = nil
     
-    assert_nothing_raised {disc = DiscId.put(@fiction_first_track, @fiction_sectors,
-                                             @fiction_offsets)}
+    assert_nothing_raised do
+      disc = DiscId.put(@fiction_first_track, @fiction_sectors,
+                        @fiction_offsets)
+    end
     
     
     # Save a block for testing each track
@@ -117,11 +131,13 @@ class TestDiscID < Test::Unit::TestCase
       assert_equal @fiction_offsets[number]+ @fiction_lengths[number],
                    track.end_sector
                    
-      assert_equal DiscId.sectors_to_seconds(@fiction_offsets[number]), track.start_time
-      assert_equal DiscId.sectors_to_seconds(@fiction_lengths[number]), track.seconds
-      assert_equal DiscId.sectors_to_seconds(
-                     @fiction_offsets[number]+ @fiction_lengths[number]),
-                     track.end_time
+      assert_equal(DiscId.sectors_to_seconds(@fiction_offsets[number]),
+                   track.start_time)
+      assert_equal(DiscId.sectors_to_seconds(@fiction_lengths[number]),
+                   track.seconds)
+      assert_equal(DiscId.sectors_to_seconds(
+                   @fiction_offsets[number]+ @fiction_lengths[number]),
+                   track.end_time)
       
       assert_equal track.number, track[:number]
       assert_equal track.sectors, track[:sectors]
@@ -144,7 +160,8 @@ class TestDiscID < Test::Unit::TestCase
     assert_equal disc.last_track_number, number
     
     # Calling track_info directly with a given block
-    number = 0 # Reset the number of tracks (the above block is a closure, so this works)
+    # Reset the number of tracks (the above block is a closure, so this works)
+    number = 0
     assert_equal nil, disc.tracks(&proc_test_track)
     assert_equal disc.last_track_number, number
   end
