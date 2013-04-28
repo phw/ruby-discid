@@ -14,6 +14,7 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 require "ffi"
+require "rbconfig"
 
 module DiscId
 
@@ -24,7 +25,12 @@ module DiscId
   # @private
   module Lib
     extend FFI::Library
-    ffi_lib %w[discid, libdiscid.so.0, libdiscid.0.dylib]
+    case RbConfig::CONFIG['host_os']
+      when /darwin/i
+        ffi_lib %w[discid, libdiscid.0.dylib]
+      else
+        ffi_lib %w[discid, libdiscid.so.0]
+    end
 
     attach_function :new, :discid_new, [], :pointer
 
