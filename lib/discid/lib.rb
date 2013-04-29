@@ -24,7 +24,7 @@ module DiscId
   # @private
   module Lib
     extend FFI::Library
-    ffi_lib %w[discid, libdiscid.so.0]
+    ffi_lib %w[discid libdiscid.so.0]
 
     attach_function :new, :discid_new, [], :pointer
 
