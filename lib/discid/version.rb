@@ -16,5 +16,5 @@
 
 module DiscId
   # The version of ruby-discid.
-  VERSION = "1.0.0.rc1"
+  VERSION = "1.0.0rc2"
 end
