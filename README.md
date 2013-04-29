@@ -6,8 +6,9 @@ It allows calculating DiscIDs (MusicBrainz and freedb) for Audio CDs. Additional
 the library can extract the MCN/UPC/EAN and the ISRCs from disc.
 
 ## Requirements
-* Ruby >= 1.8.6
-* Ruby-FFI
+* Ruby >= 1.8.7
+* RubyGems >= 1.3.6
+* Ruby-FFI >= 1.6.0
 * libdiscid >= 0.1.0
 
 ## Installation
@@ -18,9 +19,18 @@ Installing ruby-discid is best done using RubyGems:
 
     gem install discid
 
-Or install it from the source tarball:
+You can also install from source. This requires RubyGems and Bundler installed.
+First make sure you have installed bundler:
 
+    gem install bundler
+
+Then inside the ruby-discid source directory run:
+    
+    bundle install
     rake install
+
+`bundle install` will install additional development dependencies (Rake, Yard
+and Kramdown). `rake install` will build the discid gem and install it.
  
 ## Usage
 
