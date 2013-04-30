@@ -14,10 +14,10 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 require 'test/unit'
-require 'discid/track_info'
+require 'discid/track'
 
-# Unit test for the DiscId::TrackInfo class.
-class TestTrackInfo < Test::Unit::TestCase
+# Unit test for the DiscId::Track class.
+class TestTrack < Test::Unit::TestCase
 
   def setup
     @number = 3
@@ -27,7 +27,7 @@ class TestTrackInfo < Test::Unit::TestCase
   end
 
   def test_init_track_info
-    track = DiscId::TrackInfo.new @number, @offset, @length, @isrc
+    track = DiscId::Track.new @number, @offset, @length, @isrc
 
     assert_equal @number, track.number
     assert_equal @offset, track.offset
@@ -41,7 +41,7 @@ class TestTrackInfo < Test::Unit::TestCase
   end
 
   def test_to_hash
-    track = DiscId::TrackInfo.new @number, @offset, @length, @isrc
+    track = DiscId::Track.new @number, @offset, @length, @isrc
     hash = track.to_hash
 
     assert_equal track.number, hash[:number]
@@ -56,7 +56,7 @@ class TestTrackInfo < Test::Unit::TestCase
   end
 
   def test_selector_access
-    track = DiscId::TrackInfo.new @number, @offset, @length, @isrc
+    track = DiscId::Track.new @number, @offset, @length, @isrc
  
     assert_equal track.number, track[:number]
     assert_equal track.offset, track[:offset]
@@ -70,7 +70,7 @@ class TestTrackInfo < Test::Unit::TestCase
   end
 
   def test_invalid_selector_value
-    track = DiscId::TrackInfo.new @number, @offset, @length, @isrc
+    track = DiscId::Track.new @number, @offset, @length, @isrc
     assert_equal nil, track[:invalid_value]
   end
 

@@ -33,12 +33,12 @@ module DiscId
   # You can access all fields either directly or with the square bracket
   # notation:
   # 
-  #     track = TrackInfo.new(1, 150, 16007)
+  #     track = Track.new(1, 150, 16007)
   #     puts track.sectors   # 16007
   #     puts track[:sectors] # 16007
   #  
   # @see DiscId::Disc#tracks
-  class TrackInfo
+  class Track
       
     # The number of the track on the disc.
     #
@@ -64,7 +64,7 @@ module DiscId
     # @return [String]
     attr_reader :isrc
     
-    # Returns a new TrackInfo.
+    # Initializes a new Track object.
     def initialize(number, offset, sectors, isrc)
       @number = number
       @offset = offset
@@ -104,7 +104,7 @@ module DiscId
     # 
     # Example:
     #
-    #     track = TrackInfo.new(1, 150, 16007)
+    #     track = Track.new(1, 150, 16007)
     #     puts track.sectors   # 16007
     #     puts track[:sectors] # 16007
     def [](key)
@@ -114,7 +114,7 @@ module DiscId
       end
     end
     
-    # Converts the TrackInfo into a Hash.
+    # Converts the Track into a Hash.
     #
     # @return [Hash]
     def to_hash

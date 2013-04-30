@@ -15,7 +15,7 @@
 
 require 'ffi'
 require 'discid/lib'
-require 'discid/track_info'
+require 'discid/track'
 
 module DiscId
   # This class holds information about a disc (TOC, MCN, ISRCs).
@@ -149,7 +149,7 @@ module DiscId
       id.to_s
     end
 
-    # Returns an array of {TrackInfo} objects. Each TrackInfo object contains
+    # Returns an array of {Track} objects. Each Track object contains
     # detailed information about the track.
     # 
     # Returns always `nil` if no ID was yet read. The block won't be
@@ -158,7 +158,7 @@ module DiscId
     # @yield [track_info] If a block is given this method returns `nil` and
     #     instead iterates over the block calling the block with one argument.
     # @yieldreturn [nil]
-    # @return [Array<TrackInfo>] Array of {TrackInfo} objects.
+    # @return [Array<Track>] Array of {Track} objects.
     def tracks
       if @read
         read_tracks if @tracks.nil?
@@ -183,7 +183,7 @@ module DiscId
         isrc = Lib.get_track_isrc(@handle, track_number)
         offset = Lib.get_track_offset(@handle, track_number)
         length = Lib.get_track_length(@handle, track_number)
-        track_info = TrackInfo.new(track_number, offset, length, isrc)
+        track_info = Track.new(track_number, offset, length, isrc)
         
         @tracks << track_info
       end
