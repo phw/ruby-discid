@@ -80,7 +80,7 @@ class TestDisc < Test::Unit::TestCase
     assert_equal @fiction_last_track, disc.last_track_number
     assert_equal @fiction_sectors, disc.sectors
     assert_equal @fiction_seconds, disc.seconds
-    assert_equal @fiction_offsets, disc.tracks.map{|t| t.start_sector}
+    assert_equal @fiction_offsets, disc.tracks.map{|t| t.offset}
     assert_equal @fiction_lengths, disc.tracks.map{|t| t.sectors}
   end
 

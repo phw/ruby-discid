@@ -22,7 +22,7 @@ module DiscId
   #
   # * number:       The number of the track on the disc.
   # * sectors:      Length of the track in sectors.
-  # * start_sector: Start position of the track on the disc in sectors.
+  # * offset:       Start position of the track on the disc in sectors.
   # * end_sector:   End position of the track on the disc in sectors.
   # * seconds:      Length of the track in seconds.
   # * start_time:   Start position of the track on the disc in seconds.
@@ -53,7 +53,7 @@ module DiscId
     # Start position of the track on the disc in sectors.
     #
     # @return [Integer]
-    attr_reader :start_sector
+    attr_reader :offset
     
     # ISRC number of the track.
     #
@@ -65,10 +65,10 @@ module DiscId
     attr_reader :isrc
     
     # Returns a new TrackInfo.
-    def initialize(number, offset, length, isrc)
+    def initialize(number, offset, sectors, isrc)
       @number = number
-      @start_sector = offset
-      @sectors = length
+      @offset = offset
+      @sectors = sectors
       @isrc = isrc
     end
       
@@ -76,7 +76,7 @@ module DiscId
     #
     # @return [Integer]
     def end_sector
-      start_sector + sectors
+      offset + sectors
     end
       
     # Length of the track in seconds.
@@ -90,7 +90,7 @@ module DiscId
     #
     # @return [Integer]
     def start_time
-      DiscId.sectors_to_seconds(start_sector)
+      DiscId.sectors_to_seconds(offset)
     end
     
     # End position of the track on the disc in seconds.
@@ -108,7 +108,7 @@ module DiscId
     #     puts track.sectors   # 16007
     #     puts track[:sectors] # 16007
     def [](key)
-      if [:number, :sectors, :start_sector, :end_sector,
+      if [:number, :sectors, :offset, :end_sector,
           :seconds, :start_time, :end_time, :isrc].include?(key.to_sym)
         method(key).call
       end
@@ -121,7 +121,7 @@ module DiscId
       {
         :number       => number,
         :sectors      => sectors,
-        :start_sector => start_sector,
+        :offset       => offset,
         :end_sector   => end_sector,
         :seconds      => seconds,
         :start_time   => start_time,

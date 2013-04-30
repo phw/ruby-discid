@@ -30,7 +30,7 @@ class TestTrackInfo < Test::Unit::TestCase
     track = DiscId::TrackInfo.new @number, @offset, @length, @isrc
 
     assert_equal @number, track.number
-    assert_equal @offset, track.start_sector
+    assert_equal @offset, track.offset
     assert_equal @length, track.sectors
     assert_equal @isrc, track.isrc
 
@@ -45,7 +45,7 @@ class TestTrackInfo < Test::Unit::TestCase
     hash = track.to_hash
 
     assert_equal track.number, hash[:number]
-    assert_equal track.start_sector, hash[:start_sector]
+    assert_equal track.offset, hash[:offset]
     assert_equal track.sectors, hash[:sectors]
     assert_equal track.isrc, hash[:isrc]
 
@@ -59,7 +59,7 @@ class TestTrackInfo < Test::Unit::TestCase
     track = DiscId::TrackInfo.new @number, @offset, @length, @isrc
  
     assert_equal track.number, track[:number]
-    assert_equal track.start_sector, track[:start_sector]
+    assert_equal track.offset, track[:offset]
     assert_equal track.sectors, track[:sectors]
     assert_equal track.isrc, track[:isrc]
 

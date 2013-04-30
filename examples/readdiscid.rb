@@ -52,7 +52,7 @@ disc.tracks do |track|
   puts "  Length: %02d:%02d (%i sectors)" %
       [track.seconds / 60, track.seconds % 60, track.sectors]
   puts "  Start : %02d:%02d (sector %i)" %
-      [track.start_time / 60, track.start_time % 60, track.start_sector]
+      [track.start_time / 60, track.start_time % 60, track.offset]
   puts "  End   : %02d:%02d (sector %i)" %
       [track.end_time / 60, track.end_time % 60, track.end_sector]
   puts "  ISRC  : %s" % track.isrc if DiscId.has_feature?(:isrc)

@@ -81,7 +81,7 @@ class TestDiscId < Test::Unit::TestCase
     proc_test_track = lambda do |track|
       assert_equal number + 1, track.number
       
-      assert_equal @fiction_offsets[number], track.start_sector
+      assert_equal @fiction_offsets[number], track.offset
       assert_equal @fiction_lengths[number], track.sectors
       assert_equal @fiction_offsets[number]+ @fiction_lengths[number],
                    track.end_sector
