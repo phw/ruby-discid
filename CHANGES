@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.0.0 (2013-05-01)
+* Final API and documentation cleanup.
+* Fixed library loading on Windows and OSX.
+
 ## 1.0.0.rc2 (2013-04-29)
 * Fixed loading libdiscid library
 
