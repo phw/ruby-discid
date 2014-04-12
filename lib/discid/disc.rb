@@ -1,4 +1,4 @@
-# Copyright (C) 2013 Philipp Wolfer
+# Copyright (C) 2013-2014 Philipp Wolfer
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Lesser General Public License as published by
@@ -14,6 +14,7 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 require 'ffi'
+require 'discid/disc_error'
 require 'discid/lib'
 require 'discid/track'
 
@@ -189,9 +190,5 @@ module DiscId
       end
     end
 
-  end
-
-  # This exception is thrown on errors reading the disc or setting the TOC.
-  class DiscError < StandardError
   end
 end
