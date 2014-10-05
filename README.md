@@ -2,6 +2,7 @@
 [![Build Status](https://travis-ci.org/phw/ruby-discid.svg?branch=master)](https://travis-ci.org/phw/ruby-discid)
 [![Code Climate](https://codeclimate.com/github/phw/ruby-discid.png)](https://codeclimate.com/github/phw/ruby-discid)
 [![Code Climate](https://codeclimate.com/github/phw/ruby-discid/coverage.png)](https://codeclimate.com/github/phw/ruby-discid)
+[![Gem Version](https://badge.fury.io/rb/discid.svg)](http://badge.fury.io/rb/discid)
 
 ## About
 ruby-discid provides Ruby bindings for the MusicBrainz DiscID library libdiscid.
