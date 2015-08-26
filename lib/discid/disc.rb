@@ -59,7 +59,7 @@ module DiscId
     def put(first_track, sectors, offsets)
       @read = false
       @device = nil
-      last_track = offsets.length - 1 + first_track
+      last_track = offsets.length
 
       # discid_put expects always an offsets array with exactly 100 elements.
       FFI::MemoryPointer.new(:int, 100) do |p|

@@ -62,7 +62,8 @@ class TestDiscId < Test::Unit::TestCase
 
   def test_put_first_track_not_one
     disc = DiscId.put(3, @fiction_sectors,
-                      @fiction_offsets)
+                      [0, 0, 150, 18901, 39738, 59557, 79152, 100126,
+                       124833, 147278, 166336, 182560])
     assert_equal 3, disc.first_track_number
     assert_equal 12, disc.last_track_number
     assert_equal 10, disc.tracks.size
