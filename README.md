@@ -67,7 +67,7 @@ and Kramdown). `rake install` will build the discid gem and install it.
       puts "  ISRC  : %s" % track.isrc
     end
 
-See the [API documentation](http://rubydoc.info/github/phw/ruby-discid/master/frames)
+See the [API documentation](http://www.rubydoc.info/github/phw/ruby-discid/master)
 of {DiscId} or the files in the `examples` directory for more usage information.
 
 ## Contribute
