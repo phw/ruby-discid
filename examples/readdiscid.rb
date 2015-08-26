@@ -1,11 +1,11 @@
 #!/usr/bin/env ruby
 #
 # Example script for DiscId.
-# 
+#
 # This script will read the disc ID from the default device and print
 # the results. You can specify an alternate device to use by giving the
 # device's name as the first command line argument.
-# 
+#
 # Example:
 #  ./discid.rb /dev/dvd
 
@@ -23,7 +23,7 @@ device = $*[0] ? $*[0] : DiscId.default_device
 puts "Reading TOC from device '#{device}'."
 begin
   disc = DiscId.read(device, :isrc, :mcn)
-  
+
   # Instead of reading from a device we could set the TOC directly:
   #disc = DiscId.put(1, 82255, [150, 16157, 35932, 57527])
 rescue DiscId::DiscError => e

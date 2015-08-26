@@ -34,10 +34,10 @@ require 'discid/version'
 #
 # @example Read the TOC, MCN and ISRCs
 #     require 'discid'
-# 
+#
 #     device = "/dev/cdrom"
 #     disc = DiscId.read(device, :mcn, :isrc)
-# 
+#
 #     # Print information about the disc:
 #     puts "DiscID      : #{disc.id}"
 #     puts "FreeDB ID   : #{disc.freedb_id}"
@@ -76,7 +76,7 @@ module DiscId
   # This function will always read the TOC, but additional features like `:mcn`
   # and `:isrc` can be set using the features parameter. You can set multiple
   # features.
-  # 
+  #
   # @example Read only the TOC:
   #     disc = DiscId.read(device)
   #
@@ -101,11 +101,11 @@ module DiscId
     disc.read device, *features
     return disc
   end
-    
+
   # Provides the TOC of a known CD.
   #
   # This function may be used if the TOC has been read earlier and you want to
-  # calculate the disc ID afterwards, without accessing the disc drive. 
+  # calculate the disc ID afterwards, without accessing the disc drive.
   #
   # @raise [DiscError] The TOC could not be set. `Exception#message`contains
   #    error details.
@@ -119,7 +119,7 @@ module DiscId
     disc.put first_track, sectors, offsets
     return disc
   end
-    
+
   # Return the name of the default disc drive for this operating system.
   #
   # @return [String] An operating system dependent device identifier
@@ -142,9 +142,9 @@ module DiscId
   end
 
   # A list of features supported by the current platform.
-  # 
+  #
   # Currently the following features are available:
-  # 
+  #
   # * :read
   # * :mcn
   # * :isrc
@@ -157,7 +157,7 @@ module DiscId
   end
 
   # Converts sectors to seconds.
-  # 
+  #
   # According to the red book standard 75 sectors are one second.
   #
   # @private

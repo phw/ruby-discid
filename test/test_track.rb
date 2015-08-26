@@ -58,7 +58,7 @@ class TestTrack < Test::Unit::TestCase
 
   def test_selector_access
     track = DiscId::Track.new @number, @offset, @length, @isrc
- 
+
     assert_equal track.number, track[:number]
     assert_equal track.offset, track[:offset]
     assert_equal track.sectors, track[:sectors]

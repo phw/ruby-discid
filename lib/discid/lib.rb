@@ -29,12 +29,12 @@ module DiscId
     attach_function :new, :discid_new, [], :pointer
 
     attach_function :free, :discid_free, [:pointer], :void
-  
+
     begin
       attach_function :read, :discid_read_sparse, [:pointer, :string, :uint], :int
     rescue FFI::NotFoundError
       attach_function :legacy_read, :discid_read, [:pointer, :string], :int
-      
+
       def self.read(handle, device, features)
         legacy_read(handle, device)
       end
@@ -43,13 +43,13 @@ module DiscId
     attach_function :put, :discid_put, [:pointer, :int, :int, :pointer], :int
 
     attach_function :get_error_msg, :discid_get_error_msg, [:pointer], :string
-    
+
     attach_function :get_id, :discid_get_id, [:pointer], :string
 
     attach_function :get_freedb_id, :discid_get_freedb_id, [:pointer], :string
 
     attach_function :get_submission_url, :discid_get_submission_url, [:pointer], :string
-    
+
     attach_function :default_device, :discid_get_default_device, [], :string
 
     attach_function :get_first_track_num, :discid_get_first_track_num, [:pointer], :int
@@ -91,7 +91,7 @@ module DiscId
     end
 
     #attach_function :get_feature_list, :discid_get_feature_list, [:pointer], :void
-    
+
     begin
       attach_function :get_version_string, :discid_get_version_string, [], :string
     rescue FFI::NotFoundError

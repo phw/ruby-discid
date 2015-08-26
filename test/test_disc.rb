@@ -19,7 +19,7 @@ require 'discid'
 
 # Unit test for the DiscId::Disc class.
 class TestDisc < Test::Unit::TestCase
-  
+
   def setup
     @fiction_disc_id     = 'Wn8eRBtfLDfM0qjYPdxrz.Zjs_U-'
     @fiction_first_track = 1
@@ -34,7 +34,7 @@ class TestDisc < Test::Unit::TestCase
 
   def teardown
   end
-  
+
   def test_empty_disc
     disc = DiscId::Disc.new
     assert_equal nil, disc.id
@@ -57,7 +57,7 @@ class TestDisc < Test::Unit::TestCase
   # successfull put before.
   def test_put
     disc = DiscId::Disc.new
-    
+
     # Erroneous put
     assert_raise(DiscId::DiscError) do
       disc = DiscId.put(-1, @fiction_sectors, @fiction_offsets)
@@ -69,7 +69,7 @@ class TestDisc < Test::Unit::TestCase
     assert_equal nil, disc.sectors
     assert_equal nil, disc.seconds
     assert_equal nil, disc.tracks
-    
+
     # Second successfull put
     assert_nothing_raised do
       disc = DiscId.put(@fiction_first_track, @fiction_sectors,

@@ -1,11 +1,11 @@
 #!/usr/bin/env ruby
 #
 # Example script for DiscId.
-# 
+#
 # This script will read the disc ID from the default device and print
 # the results. You can specify an alternate device to use by giving the
 # device's name as the first command line argument.
-# 
+#
 # Example:
 #  ./discid.rb /dev/dvd
 

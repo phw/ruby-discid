@@ -19,9 +19,9 @@ require 'discid'
 
 # Helper class which can't be converted into a string.
 class NotAString
-  
+
   private
-  
+
   def to_s
   end
 
@@ -44,13 +44,13 @@ class TestDiscId < Test::Unit::TestCase
 
   def teardown
   end
-  
+
   # Test reading the disc id from a device.
   # We would need some kind of small test data to do this.
   #def test_read
   #  assert false, "Not implemented yet"
   #end
-  
+
   # Test how read reacts on different arguments.
   # Those reads should all fail, but they must never cause a segmentation fault.
   def test_read_invalid_arguments
@@ -59,7 +59,7 @@ class TestDiscId < Test::Unit::TestCase
     assert_raise(DiscId::DiscError) {DiscId.read('invalid_device')}
     assert_raise(DiscId::DiscError) {DiscId.read(:invalid_device)}
   end
-  
+
   def test_put_first_track_not_one
     disc = DiscId.put(3, @fiction_sectors,
                       @fiction_offsets)
@@ -67,26 +67,26 @@ class TestDiscId < Test::Unit::TestCase
     assert_equal 12, disc.last_track_number
     assert_equal 10, disc.tracks.size
   end
-  
+
   # Test the tracks method and TrackInfo objects
   def test_put_and_tracks
     disc = nil
-    
+
     assert_nothing_raised do
       disc = DiscId.put(@fiction_first_track, @fiction_sectors,
                         @fiction_offsets)
     end
-    
+
     # Save a block for testing each track
     number = 0
     proc_test_track = lambda do |track|
       assert_equal number + 1, track.number
-      
+
       assert_equal @fiction_offsets[number], track.offset
       assert_equal @fiction_lengths[number], track.sectors
       assert_equal @fiction_offsets[number]+ @fiction_lengths[number],
                    track.end_sector
-                   
+
       assert_equal(DiscId.sectors_to_seconds(@fiction_offsets[number]),
                    track.start_time)
       assert_equal(DiscId.sectors_to_seconds(@fiction_lengths[number]),
@@ -94,24 +94,24 @@ class TestDiscId < Test::Unit::TestCase
       assert_equal(DiscId.sectors_to_seconds(
                    @fiction_offsets[number]+ @fiction_lengths[number]),
                    track.end_time)
-      
+
       number += 1
     end
-    
+
     # Call track_info and retrieve an Array
-    track_info = []                               
+    track_info = []
     assert_nothing_raised {track_info = disc.tracks}
     assert track_info.is_a?(Array)
     track_info.each(&proc_test_track)
     assert_equal disc.last_track_number, number
-    
+
     # Calling track_info directly with a given block
     # Reset the number of tracks (the above block is a closure, so this works)
     number = 0
     assert_equal nil, disc.tracks(&proc_test_track)
     assert_equal disc.last_track_number, number
   end
-  
+
   # Test the conversion from sectors to seconds
   def test_sectors_to_seconds
     assert_equal 0, DiscId.sectors_to_seconds(0)
@@ -129,7 +129,7 @@ class TestDiscId < Test::Unit::TestCase
     assert(!DiscId.has_feature?("notafeature"),
            "Feature 'notafeature' should not be supported")
   end
-  
+
   def test_feature_list_must_contain_read
     assert(DiscId.feature_list.include?(:read),
            "Feature :read should be supported")

@@ -17,7 +17,7 @@
 module DiscId
 
   # This class holds information about a single track.
-  # 
+  #
   # Currently this includes the following fields:
   #
   # * number:       The number of the track on the disc.
@@ -29,32 +29,32 @@ module DiscId
   # * end_time:     End position of the track on the disc in seconds.
   # * isrc:         The track's ISRC (International Standard Recordings Code)
   #                if available.
-  # 
+  #
   # You can access all fields either directly or with the square bracket
   # notation:
-  # 
+  #
   #     track = Track.new(1, 150, 16007)
   #     puts track.sectors   # 16007
   #     puts track[:sectors] # 16007
-  #  
+  #
   # @see DiscId::Disc#tracks
   class Track
-      
+
     # The number of the track on the disc.
     #
     # @return [Integer]
     attr_reader :number
-    
+
     # Length of the track in sectors.
     #
     # @return [Integer]
     attr_reader :sectors
-    
+
     # Start position of the track on the disc in sectors.
     #
     # @return [Integer]
     attr_reader :offset
-    
+
     # ISRC number of the track.
     #
     # @note libdiscid >= 0.3.0 required. Older versions will always return nil.
@@ -63,7 +63,7 @@ module DiscId
     #
     # @return [String]
     attr_reader :isrc
-    
+
     # Initializes a new Track object.
     def initialize(number, offset, sectors, isrc)
       @number = number
@@ -71,37 +71,37 @@ module DiscId
       @sectors = sectors
       @isrc = isrc
     end
-      
+
     # End position of the track on the disc in sectors.
     #
     # @return [Integer]
     def end_sector
       offset + sectors
     end
-      
+
     # Length of the track in seconds.
     #
     # @return [Integer]
     def seconds
       DiscId.sectors_to_seconds(sectors)
     end
-      
+
     # Start position of the track on the disc in seconds.
     #
     # @return [Integer]
     def start_time
       DiscId.sectors_to_seconds(offset)
     end
-    
+
     # End position of the track on the disc in seconds.
     #
     # @return [Integer]
     def end_time
       DiscId.sectors_to_seconds(end_sector)
     end
-      
+
     # Allows access to all fields similar to accessing values in a hash.
-    # 
+    #
     # Example:
     #
     #     track = Track.new(1, 150, 16007)
@@ -113,7 +113,7 @@ module DiscId
         method(key).call
       end
     end
-    
+
     # Converts the Track into a Hash.
     #
     # @return [Hash]
@@ -129,6 +129,6 @@ module DiscId
         :isrc         => isrc,
       }
     end
-    
+
   end
 end
