@@ -29,6 +29,7 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "rake"
   spec.add_development_dependency "yard"
   spec.add_development_dependency "kramdown"
+  spec.add_development_dependency "test-unit"
 
   # The code coverage is only supported for Ruby >= 1.9
   if (RUBY_VERSION.split('.').map{|s|s.to_i} <=> [1, 9, 0]) >= 0
