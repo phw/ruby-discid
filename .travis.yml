@@ -8,7 +8,8 @@ rvm:
   - jruby-18mode # JRuby in 1.8 mode
   - jruby-19mode # JRuby in 1.9 mode
   - rbx-2
-before_install:
-  - sudo apt-get update -qq
-  - sudo apt-get install -qq libdiscid0
+addons:
+  apt:
+    packages:
+    - libdiscid0
 script: CODECLIMATE_REPO_TOKEN=40f40f3d9e79b5e7051d7564172541932d6799ba585a5ada684695c0fb3e5e5e bundle exec rake test
