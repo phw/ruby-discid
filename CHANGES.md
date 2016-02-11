@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.1.2 (2016-02-11)
+* Fixed first and last track being swapped in example readdiscid.rb
+* Restricted dependencies for Ruby 1.8 to maintain compatibility
+* Test against Ruby 2.3
+
 ## 1.1.1 (2015-08-27)
 * Fixed gem file permissions
 
