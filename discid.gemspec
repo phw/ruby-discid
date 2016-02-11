@@ -28,13 +28,14 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "bundler", ">= 1.3"
   spec.add_development_dependency "yard"
   spec.add_development_dependency "kramdown"
-  spec.add_development_dependency "test-unit"
 
   # The code coverage is only supported for Ruby >= 1.9
   if (RUBY_VERSION.split('.').map{|s|s.to_i} <=> [1, 9, 0]) >= 0
     spec.add_development_dependency "rake"
+    spec.add_development_dependency "test-unit"
     spec.add_development_dependency "codeclimate-test-reporter"
   else
     spec.add_development_dependency "rake", "~> 10.4.0"
+    spec.add_development_dependency "test-unit", "~> 3.1.0", "< 3.1.4"
   end
 end
