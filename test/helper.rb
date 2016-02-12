@@ -13,11 +13,8 @@
 # You should have received a copy of the GNU Lesser General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-# The code coverage is only supported for Ruby >= 1.9
-if (RUBY_VERSION.split('.').map{|s|s.to_i} <=> [1, 9, 0]) >= 0
-  require 'codeclimate-test-reporter'
+require 'codeclimate-test-reporter'
 
-  CodeClimate::TestReporter.start do
-    add_filter "/test/"
-  end
+CodeClimate::TestReporter.start do
+  add_filter "/test/"
 end
