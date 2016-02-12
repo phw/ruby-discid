@@ -25,6 +25,12 @@ Installing ruby-discid is best done using RubyGems:
 
     gem install discid
 
+### Installing from package repository
+For some Linux distributions packages are available:
+
+* [Arch Linux AUR package](https://aur.archlinux.org/packages/ruby-discid/)
+* [Ubuntu PPA](https://launchpad.net/~musicbrainz-developers/+archive/ubuntu/stable)
+
 ### Install from source
 You can also install from source. This requires RubyGems and Bundler installed.
 First make sure you have installed bundler:
