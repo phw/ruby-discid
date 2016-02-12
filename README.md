@@ -5,7 +5,7 @@
 [![Gem Version](https://badge.fury.io/rb/discid.svg)](http://badge.fury.io/rb/discid)
 
 ## About
-ruby-discid provides Ruby bindings for the MusicBrainz DiscID library libdiscid.
+ruby-discid provides Ruby bindings for the MusicBrainz DiscID library [libdiscid](http://musicbrainz.org/doc/libdiscid).
 It allows calculating DiscIDs (MusicBrainz and freedb) for Audio CDs. Additionally
 the library can extract the MCN/UPC/EAN and the ISRCs from disc.
 
@@ -63,35 +63,41 @@ for further details.
 
 ### Read only the TOC
 
-    require 'discid'
+```Ruby
+require 'discid'
 
-    device = "/dev/cdrom"
-    disc = DiscId.read(device)
-    puts disc.id
+# Specifying the device is optional. If omitted a platform
+# specific default will be used.
+device = "/dev/cdrom"
+disc = DiscId.read(device)
+puts disc.id
+```
 
 ### Read the TOC, MCN and ISRCs
 
-    require 'discid'
+```Ruby
+require 'discid'
 
-    device = "/dev/cdrom"
-    disc = DiscId.read(device, :mcn, :isrc)
+device = "/dev/cdrom"
+disc = DiscId.read(device, :mcn, :isrc)
 
-    # Print information about the disc:
-    puts "DiscID      : #{disc.id}"
-    puts "FreeDB ID   : #{disc.freedb_id}"
-    puts "Total length: #{disc.seconds} seconds"
-    puts "MCN         : #{disc.mcn}"
+# Print information about the disc:
+puts "DiscID      : #{disc.id}"
+puts "FreeDB ID   : #{disc.freedb_id}"
+puts "Total length: #{disc.seconds} seconds"
+puts "MCN         : #{disc.mcn}"
 
-    # Print information about individual tracks:
-    disc.tracks do |track|
-      puts "Track ##{track.number}"
-      puts "  Length: %02d:%02d (%i sectors)" %
-          [track.seconds / 60, track.seconds % 60, track.sectors]
-      puts "  ISRC  : %s" % track.isrc
-    end
+# Print information about individual tracks:
+disc.tracks do |track|
+  puts "Track ##{track.number}"
+  puts "  Length: %02d:%02d (%i sectors)" %
+      [track.seconds / 60, track.seconds % 60, track.sectors]
+  puts "  ISRC  : %s" % track.isrc
+end
+```
 
 See the [API documentation](http://www.rubydoc.info/github/phw/ruby-discid/master)
-of {DiscId} or the files in the `examples` directory for more usage information.
+of `DiscId` or the files in the `examples` directory for more usage information.
 
 ## Contribute
 The source code for ruby-discid is available on
