@@ -13,8 +13,12 @@
 # You should have received a copy of the GNU Lesser General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-require 'codeclimate-test-reporter'
+begin
+  require 'codeclimate-test-reporter'
 
-CodeClimate::TestReporter.start do
-  add_filter "/test/"
+  CodeClimate::TestReporter.start do
+    add_filter "/test/"
+  end
+rescue LoadError
+  puts 'WARNING: codeclimate-test-reporter not available, no code coverage reported.'
 end
