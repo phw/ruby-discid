@@ -1,6 +1,6 @@
 # Changelog
 
-## 1.2.0 (2016-??-??)
+## 1.2.0 (2016-02-12)
 * `DiscId.sectors_to_seconds`: Truncate instead of round resulting float
 
 ## 1.1.2 (2016-02-11)
