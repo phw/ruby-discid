@@ -37,7 +37,7 @@ class TestTrack < Test::Unit::TestCase
 
     assert_equal @offset + @length, track.end_sector
     assert_equal 315, track.seconds
-    assert_equal 14, track.start_time
+    assert_equal 13, track.start_time
     assert_equal 329, track.end_time
   end
 

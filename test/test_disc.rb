@@ -25,7 +25,7 @@ class TestDisc < Test::Unit::TestCase
     @fiction_first_track = 1
     @fiction_last_track  = 10
     @fiction_sectors     = 206535
-    @fiction_seconds     = 2754
+    @fiction_seconds     = 2753
     @fiction_offsets     = [150, 18901, 39738, 59557, 79152, 100126,
                             124833, 147278, 166336, 182560]
     @fiction_lengths     = [18751, 20837, 19819, 19595, 20974,

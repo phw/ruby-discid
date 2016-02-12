@@ -35,7 +35,7 @@ class TestDiscId < Test::Unit::TestCase
     @fiction_first_track = 1
     @fiction_last_track  = 10
     @fiction_sectors     = 206535
-    @fiction_seconds     = 2754
+    @fiction_seconds     = 2753
     @fiction_offsets     = [150, 18901, 39738, 59557, 79152, 100126,
                             124833, 147278, 166336, 182560]
     @fiction_lengths     = [18751, 20837, 19819, 19595, 20974,
@@ -118,6 +118,9 @@ class TestDiscId < Test::Unit::TestCase
     assert_equal 0, DiscId.sectors_to_seconds(0)
     assert_equal @fiction_seconds,
                  DiscId.sectors_to_seconds(@fiction_sectors)
+    assert_equal 1, DiscId.sectors_to_seconds(75)
+    assert_equal 1, DiscId.sectors_to_seconds(75+74)
+    assert_equal 2, DiscId.sectors_to_seconds(75+75)
   end
 
   def test_has_feature
