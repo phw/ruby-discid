@@ -164,7 +164,7 @@ module DiscId
   # @param sectors [Integer] Number of sectors
   # @return [Integer] The seconds
   def self.sectors_to_seconds(sectors)
-    return (sectors.to_f / 75).round
+    return (sectors.to_f / 75).truncate
   end
 
   # The libdiscid version.

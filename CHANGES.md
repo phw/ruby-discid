@@ -1,5 +1,8 @@
 # Changelog
 
+## 1.2.0 (2016-??-??)
+* `DiscId.sectors_to_seconds`: Truncate instead of round resulting float
+
 ## 1.1.2 (2016-02-11)
 * Fixed first and last track being swapped in example readdiscid.rb
 * Restricted dependencies for Ruby 1.8 to maintain compatibility
