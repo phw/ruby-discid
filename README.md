@@ -18,11 +18,14 @@ the library can extract the MCN/UPC/EAN and the ISRCs from disc.
 ## Installation
 Before installing ruby-discid make sure you have libdiscid installed. See
 http://musicbrainz.org/doc/libdiscid for more information on how to do this.
+For Windows see also the notes below.
 
+### Installing with RubyGems
 Installing ruby-discid is best done using RubyGems:
 
     gem install discid
 
+### Install from source
 You can also install from source. This requires RubyGems and Bundler installed.
 First make sure you have installed bundler:
 
@@ -35,6 +38,20 @@ Then inside the ruby-discid source directory run:
 
 `bundle install` will install additional development dependencies (Rake, Yard
 and Kramdown). `rake install` will build the discid gem and install it.
+
+### Windows installation notes
+On Windows you will need `discid.dll` available in a place where Windows can
+find it, see [Search Path Used by Windows to Locate a DLL](https://msdn.microsoft.com/en-us/library/7d83bc18.aspx).
+You can install the `discid.dll` system wide, but it is recommended to place
+it in the local working directory of your application.
+
+Also the architecture (32 or 64 bit) of the DLL must match your Ruby version.
+As the official build of libdiscid contains only a 32 bit version of `discid.dll`
+it is recommended to use the 32 bit version of Ruby.
+
+If you want or need to use 64 bit Ruby you will have to compile libdiscid
+yourself. Refer to the [libdiscid install instructions](https://github.com/metabrainz/libdiscid/blob/master/INSTALL)
+for further details.
 
 ## Usage
 
@@ -78,5 +95,16 @@ Please report any issues on the
 [issue tracker](https://github.com/phw/ruby-discid/issues).
 
 ## License
-ruby-discid is released under the GNU Lesser General Public License Version 3.
+ruby-discid Copyright (c) 2007-2016 by Philipp Wolfer <ph.wolfer@gmail.com>
+
+ruby-discid is free software: you can redistribute it and/or modify
+it under the terms of the GNU Lesser General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU Lesser General Public License for more details.
+
 See LICENSE for details.
