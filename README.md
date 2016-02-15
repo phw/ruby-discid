@@ -47,8 +47,8 @@ Then inside the ruby-discid source directory run:
     bundle install
     rake install
 
-`bundle install` will install additional development dependencies (Rake, Yard
-and Kramdown). `rake install` will build the discid gem and install it.
+`bundle install` will install additional development dependencies (Rake,
+Yard etc.). `rake install` will build the discid gem and install it.
 
 ### Windows installation notes
 On Windows you will need `discid.dll` available in a place where Windows can
