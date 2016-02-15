@@ -68,7 +68,7 @@ for further details.
 
 ### Read only the TOC
 
-```Ruby
+```ruby
 require 'discid'
 
 # Specifying the device is optional. If omitted a platform
@@ -80,7 +80,7 @@ puts disc.id
 
 ### Read the TOC, MCN and ISRCs
 
-```Ruby
+```ruby
 require 'discid'
 
 device = "/dev/cdrom"
@@ -102,7 +102,7 @@ end
 ```
 
 See the [API documentation](http://www.rubydoc.info/github/phw/ruby-discid/master)
-of `DiscId` or the files in the `examples` directory for more usage information.
+of {DiscId} or the files in the `examples` directory for more usage information.
 
 ## Contribute
 The source code for ruby-discid is available on

@@ -138,7 +138,7 @@ module DiscId
     #
     # Note that this is the unencoded value, which still contains spaces.
     #
-    # New in version 1.3
+    # @note New in version 1.3
     #
     # @return [String] The TOC string or `nil` if no ID was yet read.
     def toc_string

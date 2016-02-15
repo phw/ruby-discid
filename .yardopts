@@ -1,1 +1,1 @@
---no-private --markup markdown --markup-provider kramdown - CHANGES
+--no-private --markup markdown --markup-provider redcarpet - CHANGES.md examples/*.rb

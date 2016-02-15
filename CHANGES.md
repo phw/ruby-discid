@@ -1,17 +1,17 @@
 # Changelog
 
 ## 1.3.0 (2016-??-??)
-* Add support for `Disc#toc_string`. Will use the implementation from libdiscid
-  0.6 or a fallback for older versions.
+* Add support for {DiscId::Disc#toc_string}. Will use the implementation from
+  libdiscid 0.6 or a fallback for older versions.
 * Removed support for Ruby 1.8
 * codeclimate-test-reporter is not required anymore for running the tests
 * Updated documentation
 
 ## 1.2.0 (2016-02-12)
-* `DiscId.sectors_to_seconds`: Truncate instead of round resulting float
+* {DiscId.sectors_to_seconds}: Truncate instead of round resulting float
 
 ## 1.1.2 (2016-02-11)
-* Fixed first and last track being swapped in example readdiscid.rb
+* Fixed first and last track being swapped in {file:examples/readdiscid.rby example readdiscid.rb}
 * Restricted dependencies for Ruby 1.8 to maintain compatibility
 * Test against Ruby 2.3
 
@@ -19,7 +19,7 @@
 * Fixed gem file permissions
 
 ## 1.1.0 (2015-08-26)
-* Fixed Disc#put handling of first_track being > 1
+* Fixed {DiscId.put} handling of first_track being > 1
 
 ## 1.0.0 (2013-05-01)
 * Final API and documentation cleanup.
