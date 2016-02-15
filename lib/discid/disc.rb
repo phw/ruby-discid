@@ -138,8 +138,10 @@ module DiscId
     #
     # Note that this is the unencoded value, which still contains spaces.
     #
-    # @note New in version 1.3
+    # @since 1.3
     #
+    # @raise [RuntimeError] get_toc_string is unsupported by libdiscid and
+    #                       could not get extracted from {Disc#submission_url}
     # @return [String] The TOC string or `nil` if no ID was yet read.
     def toc_string
       return nil if not @read
