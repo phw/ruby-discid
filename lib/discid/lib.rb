@@ -63,6 +63,14 @@ module DiscId
     attach_function :get_track_length, :discid_get_track_length, [:pointer, :int], :int
 
     begin
+      attach_function :get_toc_string, :discid_get_toc_string, [:pointer], :string
+    rescue FFI::NotFoundError
+      def self.get_toc_string
+        return nil
+      end
+    end
+
+    begin
       attach_function :get_mcn, :discid_get_mcn, [:pointer], :string
     rescue FFI::NotFoundError
       def self.get_mcn(handle)

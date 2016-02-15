@@ -9,6 +9,11 @@ ruby-discid provides Ruby bindings for the MusicBrainz DiscID library [libdiscid
 It allows calculating DiscIDs (MusicBrainz and freedb) for Audio CDs. Additionally
 the library can extract the MCN/UPC/EAN and the ISRCs from disc.
 
+ruby-discid supports all features from libdiscid 0.6, but will also work with
+any earlier version. If a feature is unsupported in the libdiscid version used
+ruby-discid will just return a default value. The version required for a feature
+is documented in the [API documentation](http://www.rubydoc.info/github/phw/ruby-discid/master).
+
 ## Requirements
 * Ruby >= 1.9.0
 * RubyGems >= 1.3.6

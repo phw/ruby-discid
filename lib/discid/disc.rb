@@ -130,6 +130,34 @@ module DiscId
       return Lib.get_mcn @handle if @read
     end
 
+    # Return a string representing CD Table Of Contents (TOC).
+    #
+    # The TOC suitable as value of the toc parameter when accessing the
+    # MusicBrainz Web Service. This enables fuzzy searching when the actual
+    # DiscID is not found.
+    #
+    # Note that this is the unencoded value, which still contains spaces.
+    #
+    # New in version 1.3
+    #
+    # @return [String] The TOC string or `nil` if no ID was yet read.
+    def toc_string
+      return nil if not @read
+      result = Lib.get_toc_string
+      if not result
+        # probably an old version of libdiscid (< 0.6.0)
+        # gather toc string from submission_url
+        match = /toc=([0-9+]+)/.match self.submission_url
+        if match
+          result = match[1].gsub("+", " ")
+        else
+          raise "can't get toc string from submission url"
+        end
+      end
+
+      return result
+    end
+
     # An URL for submitting the DiscID to MusicBrainz.
     #
     # The URL leads to an interactive disc submission wizard that guides the
