@@ -3,6 +3,9 @@
 ## 1.3.0 (2016-??-??)
 * Add support for `Disc#toc_string`. Will use the implementation from libdiscid
   0.6 or a fallback for older versions.
+* Removed support for Ruby 1.8
+* codeclimate-test-reporter is not required anymore for running the tests
+* Updated documentation
 
 ## 1.2.0 (2016-02-12)
 * `DiscId.sectors_to_seconds`: Truncate instead of round resulting float
