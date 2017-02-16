@@ -23,4 +23,4 @@ sudo: true
 before_install:
   - gem install codeclimate-test-reporter
 script: bundle exec rake test
-after_script: codeclimate-test-reporter
+after_script: '[ "${TRAVIS_RUBY_VERSION}" = "2.4" ] && codeclimate-test-reporter'
