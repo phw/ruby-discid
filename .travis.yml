@@ -1,21 +1,24 @@
 language: ruby
+dist: trusty
 cache: bundler
 rvm:
-  - 1.9.3
-  - 2.0.0
-  - 2.1.0
-  - 2.2.3
-  - 2.3.0
-  - 2.4.0
+  - 1.9
+  - 2.0
+  - 2.1
+  - 2.2
+  - 2.3
+  - 2.4
   - jruby-19mode # JRuby in 1.9 mode
-  - rbx-2.2.7
+  - jruby
+  # - rubinius-2
+  - rubinius-3
 addons:
   apt:
     packages:
     - libdiscid0
-sudo: false
+sudo: true
 before_install:
   - gem install codeclimate-test-reporter
 script:
   - bundle exec rake test
-  - CODECLIMATE_REPO_TOKEN=40f40f3d9e79b5e7051d7564172541932d6799ba585a5ada684695c0fb3e5e5e codeclimate-test-reporter
+  - codeclimate-test-reporter
