@@ -2,25 +2,24 @@ language: ruby
 dist: trusty
 cache: bundler
 rvm:
-  - 1.9
-  - 2.0
-  - 2.1
-  - 2.2
-  - 2.3
-  - 2.4
-  - jruby-19mode # JRuby in 1.9 mode
-  - jruby
-  # - rubinius-2
-  - rubinius-3
+- 1.9
+- 2.0
+- 2.1
+- 2.2
+- 2.3
+- 2.4
+- jruby-19mode
+- jruby
+- rubinius-3
 env:
   global:
-    secure: "FaEyI0sYCngZjuXzMV9b9IS3e/cSFhxmmyXDAk+dWrriuO/uJsWY30d4yhQopswHIZMKyMN25GC6KPFdaX1BOlIisNwuEmUKiFxXPQyD+GriI/bBnzaaTmDSzFtVtvIor4ko4375uVJqLcgRdH++nlZfGy4qs3ifa5y/htmYNWLDwxxCP1wtHP2NDuo2yPd2ivec4/deU3ByaVblx882drRxYuY8gM2kRgIbOjVJyaCmo8bh9TQGV5QjXuNx447tgMdRL3RjnQ3ADKZ29RCVl8tbnKdE1292ogbOEecoPBYIMsDQxx+NFAaBeQrC4upzYErqUFZueerTeWV5Vw4yXvocEpTNXhG2KwKFo/pTqQulF3ftmDmn4JtRZOzEARyJKrjT552uJV6264sLmtBKjoc9xLb0pLUPri/7em2F+3LMTDmbXlWmlxU+eST1OJAKKy/h00xOp7S5wB7HNJdc6ssK1p4enwoD0hwuS0J1y0FEYCk4BjHt48qC6IeRltzfNfX7ZWWl7180wfApYsIOwvGAAy9G+/iykMMz+vclTDwzOz3mfVy/m1DQXHhkvuFbBvhhmabyEn4iSvHDfnnS4Bvc4ZvCxA7mkk9GuzZV2kfZK3SmCOwxCek8UBFai0psFgUVi9MeT1Gd/k19OYvYSVaJUEosfXu5m9d/ADVXyKU="
+    secure: iWhWlsjVg1ut2PSjBhDCwmRRNG5e3Q1TSRNQyTcVbuq8JNC12amObcp6+xlMur0fBtdgNgiE70iXlpC3WD+wRSRumXfSUwhzIk88XuFQtwm62lo3oboJp/LqiTJfexm5yuBC8tRkHfPsR0aW+7fplMElQWaMPl47Rt51KKJJKQE=
 addons:
   apt:
     packages:
     - libdiscid0
 sudo: true
 before_install:
-  - gem install codeclimate-test-reporter
+- gem install codeclimate-test-reporter
 script: bundle exec rake test
 after_script: '[ "${TRAVIS_RUBY_VERSION}" = "2.4" ] && codeclimate-test-reporter'
