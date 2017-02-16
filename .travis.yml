@@ -12,6 +12,9 @@ rvm:
   - jruby
   # - rubinius-2
   - rubinius-3
+env:
+  global:
+    secure: "FDe9D9XtzZm9ow8177Qn/hEcfkbJTfXRiRsrxes0/ssdHD37wO3/CwOa5H3IHv39qIWTOAxkrJPPPSSa0QQPrJOtu1wOTguYkmbLG4bFtfD1HaqXeNgyFy5bL2x7PSpM27KpI3u2WxFmTToVYZ3WnNAlJHx9vGmtw37Ua4+zmQy7bJ6iW1k02ap/ga3Ey8USWPpuea1Xs/sgXGKv82DwwyBa6j0uaMSPkFwiVogS68JPaNhxakwK96W5pmh8M/I1A6uY8uJvAfHczpX96PCy9XAiBJl/7zGAqY9JONo+2y60LPU1rMRBfKRnslOnKcHC6EFRaX106DlnEG/U9SzaarvgVZHWYhmJmEeIuVivyWOEDFZF3Q6rAXtiOtnRyle/br+om5nIEpXHN4TyKNs8cKeWV1CH5Vj+de4a8evJAoZYuHcOom27q8ulw4qVT9n5Nq5j9CaY4x6GT0uPddZudzALB/y3wmAYwWKAkeCUR9K3o/+7FPyRuqfIfRpBI79K7JLz3pH4gX8YnJ/Bc9N2R70QCBqFDTrInsk+N4vjjojkgxzOyYFlpAOK+67SHbzhToQTMMViryCvVQ2k3yth9g0Q5O9iaHa8mSs0spOia0JX11L5KXFQsH7k5EZqsPhBtzPeuJppfaBotatxEdEv9o7iOMIAgdtgEKfGYpdY4us="
 addons:
   apt:
     packages:
@@ -19,6 +22,5 @@ addons:
 sudo: true
 before_install:
   - gem install codeclimate-test-reporter
-script:
-  - bundle exec rake test
-  - codeclimate-test-reporter
+script: bundle exec rake test
+after_script: codeclimate-test-reporter
