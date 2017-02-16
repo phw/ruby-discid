@@ -23,3 +23,12 @@ before_install:
 - gem install codeclimate-test-reporter
 script: bundle exec rake test
 after_script: '[ "${TRAVIS_RUBY_VERSION}" = "2.4" ] && codeclimate-test-reporter'
+deploy:
+  provider: rubygems
+  api_key:
+    secure: hM0SrqauBY3aOh9y6ri9R+DAjaArsH8V41IjUP9PYya5fV+K7JyNCzZB9KaolZGfnLc/U32hUDItKJaTw5GpaA8/wHj9cndkyjfPsjTaIzY8GODdBwDpquDt8yiHnMH6apRKn+habPheXQ1fQwJsD42HSUZIvH97pj20Nis2Ux4=
+  gem: discid
+  on:
+    branch: master
+    tags: true
+    ruby: '2.4'
