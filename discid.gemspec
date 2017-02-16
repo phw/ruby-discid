@@ -32,5 +32,4 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "redcarpet" if not RUBY_PLATFORM == "java"
   spec.add_development_dependency "test-unit"
   spec.add_development_dependency "simplecov"
-  spec.add_development_dependency "codeclimate-test-reporter", ">= 1.0"
 end
