@@ -14,9 +14,9 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 begin
-  require 'codeclimate-test-reporter'
+  require 'simplecov'
 
-  CodeClimate::TestReporter.start do
+  SimpleCov.start do
     add_filter "/test/"
   end
 rescue LoadError

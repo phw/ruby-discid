@@ -13,4 +13,6 @@ addons:
     packages:
     - libdiscid0
 sudo: false
-script: CODECLIMATE_REPO_TOKEN=40f40f3d9e79b5e7051d7564172541932d6799ba585a5ada684695c0fb3e5e5e bundle exec rake test
+script:
+  - bundle exec rake test
+  - CODECLIMATE_REPO_TOKEN=40f40f3d9e79b5e7051d7564172541932d6799ba585a5ada684695c0fb3e5e5e codeclimate-test-reporter

@@ -13,9 +13,9 @@
 # You should have received a copy of the GNU Lesser General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+require_relative 'helper'
 require 'test/unit'
 require 'discid'
-require_relative 'helper'
 
 # Helper class which can't be converted into a string.
 class NotAString
