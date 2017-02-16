@@ -1,5 +1,8 @@
 # Changelog
 
+## 1.3.1 (2017-02-16)
+* codeclimate-test-reporter is no longer a development depdendency
+
 ## 1.3.0 (2016-02-19)
 * Add support for {DiscId::Disc#toc_string}. Will use the implementation from
   libdiscid 0.6 or a fallback for older versions.
