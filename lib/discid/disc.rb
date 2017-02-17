@@ -151,7 +151,7 @@ module DiscId
         # gather toc string from submission_url
         match = /toc=([0-9+]+)/.match self.submission_url
         if match
-          result = match[1].gsub("+", " ")
+          result = match[1].tr("+", " ")
         else
           raise "can't get toc string from submission url"
         end

@@ -35,7 +35,7 @@ module DiscId
     rescue FFI::NotFoundError
       attach_function :legacy_read, :discid_read, [:pointer, :string], :int
 
-      def self.read(handle, device, features)
+      def self.read(handle, device, _features)
         legacy_read(handle, device)
       end
     end
@@ -73,7 +73,7 @@ module DiscId
     begin
       attach_function :get_mcn, :discid_get_mcn, [:pointer], :string
     rescue FFI::NotFoundError
-      def self.get_mcn(handle)
+      def self.get_mcn(_handle)
         return nil
       end
     end
@@ -81,7 +81,7 @@ module DiscId
     begin
       attach_function :get_track_isrc, :discid_get_track_isrc, [:pointer, :int], :string
     rescue FFI::NotFoundError
-      def self.get_track_isrc(handle, track)
+      def self.get_track_isrc(_handle, _track)
         return nil
       end
     end
