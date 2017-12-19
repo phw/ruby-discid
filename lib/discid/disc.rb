@@ -18,6 +18,7 @@ require 'discid/disc_error'
 require 'discid/lib'
 require 'discid/track'
 
+#
 module DiscId
   # This class holds information about a disc (TOC, MCN, ISRCs).
   #

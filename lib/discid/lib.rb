@@ -15,6 +15,7 @@
 
 require "ffi"
 
+#
 module DiscId
 
   # This module encapsulates the C interface for libdiscid using FFI.
