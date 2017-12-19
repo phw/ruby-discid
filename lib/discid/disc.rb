@@ -132,11 +132,14 @@ module DiscId
 
     # Return a string representing CD Table Of Contents (TOC).
     #
-    # The TOC suitable as value of the toc parameter when accessing the
+    # The TOC suitable as a value of the toc parameter when accessing the
     # MusicBrainz Web Service. This enables fuzzy searching when the actual
     # DiscID is not found.
     #
     # Note that this is the unencoded value, which still contains spaces.
+    #
+    # For libdiscid >= 0.6 the native implementation will be used. For older
+    # versions falls back to extract the TOC from {Disc#submission_url}.
     #
     # @since 1.3
     #
@@ -186,7 +189,7 @@ module DiscId
     # Returns always `nil` if no ID was yet read. The block won't be
     # called in this case.
     #
-    # @yield [track_info] If a block is given this method returns `nil` and
+    # @yield [Track] If a block is given this method returns `nil` and
     #     instead iterates over the block calling the block with one argument.
     # @yieldreturn [nil]
     # @return [Array<Track>] Array of {Track} objects.
