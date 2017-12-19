@@ -109,17 +109,24 @@ module DiscId
     end
 
     def self.features_to_int(features)
-      feature_flag = 0
+      feature_flags = 0
       features.each do |feature|
         if feature.respond_to? :to_sym
           feature = feature.to_sym
-          feature_flag |= self::Features[feature] if
-            self::Features.symbols.include?(feature) and
-            self.has_feature(feature)
+          feature_flags = self.add_feature_to_flags(feature_flags, feature)
         end
       end
 
-      return feature_flag
+      return feature_flags
+    end
+
+    private
+
+    def self.add_feature_to_flags(flags, feature)
+      flags |= self::Features[feature] if
+        self::Features.symbols.include?(feature) and
+        self.has_feature(feature)
+      return flags
     end
   end
 end
