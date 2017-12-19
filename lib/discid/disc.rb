@@ -145,7 +145,7 @@ module DiscId
     # @return [String] The TOC string or `nil` if no ID was yet read.
     def toc_string
       return nil if not @read
-      result = Lib.get_toc_string
+      result = Lib.get_toc_string @handle
       if not result
         # probably an old version of libdiscid (< 0.6.0)
         # gather toc string from submission_url

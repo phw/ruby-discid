@@ -85,4 +85,10 @@ class TestDisc < Test::Unit::TestCase
     assert_equal @fiction_lengths, disc.tracks.map{|t| t.sectors}
   end
 
+  def test_toc_string
+    disc = DiscId.put(@fiction_first_track, @fiction_sectors, @fiction_offsets)
+    expected_toc = '1 10 206535 150 18901 39738 59557 79152 100126 124833 147278 166336 182560'
+    assert_equal expected_toc, disc.toc_string
+  end
+
 end
