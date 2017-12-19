@@ -1,7 +1,10 @@
 # Changelog
 
+## 1.3.2 (2017-12-19)
+* Fixed call to {DiscId::Disc#toc_string} with native implementation
+
 ## 1.3.1 (2017-02-16)
-* codeclimate-test-reporter is no longer a development depdendency
+* codeclimate-test-reporter is no longer a development dependency
 
 ## 1.3.0 (2016-02-19)
 * Add support for {DiscId::Disc#toc_string}. Will use the implementation from
