@@ -60,10 +60,13 @@ module DiscId
     def put(first_track, sectors, offsets)
       @read = false
       @device = nil
-      last_track = offsets.length
+      last_track = first_track - 1 + offsets.length
 
       # discid_put expects always an offsets array with exactly 100 elements.
       FFI::MemoryPointer.new(:int, 100) do |p|
+        if last_track > offsets.length
+          offsets = Array.new(last_track - offsets.length, 0) + offsets
+        end
         p.write_array_of_int([sectors] + offsets)
         result = Lib.put @handle, first_track, last_track, p
 

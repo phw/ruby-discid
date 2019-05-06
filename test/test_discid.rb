@@ -117,6 +117,7 @@ class TestDiscId < Test::Unit::TestCase
     assert_nothing_raised do
       disc = DiscId.parse(toc)
       assert_equal 'lSOVc5h6IXSuzcamJS1Gp4_tRuA-', disc.id
+      assert_equal toc, disc.toc_string
     end
   end
 
@@ -125,6 +126,16 @@ class TestDiscId < Test::Unit::TestCase
     assert_nothing_raised do
       disc = DiscId.parse(toc)
       assert_equal 'ANJa4DGYN_ktpzOwvVPtcjwP7mE-', disc.id
+      assert_equal toc, disc.toc_string
+    end
+  end
+
+  def test_parse_first_track_not_one
+    toc = '3 12 242457 150 18901 39738 59557 79152 100126 124833 147278 166336 182560'
+    assert_nothing_raised do
+      disc = DiscId.parse(toc)
+      assert_equal 'fC1yNbC5bVjbvphqlAY9JyYoWEY-', disc.id
+      assert_equal toc, disc.toc_string
     end
   end
 
