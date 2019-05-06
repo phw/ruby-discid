@@ -63,6 +63,7 @@ class TestDiscId < Test::Unit::TestCase
     disc = DiscId.put(3, @fiction_sectors,
                       [150, 18901, 39738, 59557, 79152, 100126,
                        124833, 147278, 166336, 182560])
+    assert_equal "ByBKvJM1hBL7XtvsPyYtIjlX0Bw-", disc.id
     assert_equal 3, disc.first_track_number
     assert_equal 12, disc.last_track_number
     assert_equal 10, disc.tracks.size
