@@ -55,14 +55,13 @@ class TestDiscId < Test::Unit::TestCase
   # Those reads should all fail, but they must never cause a segmentation fault.
   def test_read_invalid_arguments
     assert_raise(TypeError) {DiscId.read(NotAString.new)}
-    assert_raise(DiscId::DiscError) {DiscId.read(1)}
-    assert_raise(DiscId::DiscError) {DiscId.read('invalid_device')}
-    assert_raise(DiscId::DiscError) {DiscId.read(:invalid_device)}
+    assert_raise(DiscId::DiscError) { DiscId.read('invalid_device') }
+    assert_raise(DiscId::DiscError) { DiscId.read(:invalid_device) }
   end
 
   def test_put_first_track_not_one
     disc = DiscId.put(3, @fiction_sectors,
-                      [0, 0, 150, 18901, 39738, 59557, 79152, 100126,
+                      [150, 18901, 39738, 59557, 79152, 100126,
                        124833, 147278, 166336, 182560])
     assert_equal 3, disc.first_track_number
     assert_equal 12, disc.last_track_number
@@ -111,6 +110,36 @@ class TestDiscId < Test::Unit::TestCase
     number = 0
     assert_equal nil, disc.tracks(&proc_test_track)
     assert_equal disc.last_track_number, number
+  end
+
+  def test_parse
+    toc = '1 11 242457 150 44942 61305 72755 96360 130485 147315 164275 190702 205412 220437'
+    assert_nothing_raised do
+      disc = DiscId.parse(toc)
+      assert_equal 'lSOVc5h6IXSuzcamJS1Gp4_tRuA-', disc.id
+    end
+  end
+
+  def test_parse_minimal
+    toc = '1 1 44942 150'
+    assert_nothing_raised do
+      disc = DiscId.parse(toc)
+      assert_equal 'ANJa4DGYN_ktpzOwvVPtcjwP7mE-', disc.id
+    end
+  end
+
+  def test_parse_invalid_empty
+    assert_raise(DiscId::DiscError) { DiscId.parse("") }
+    assert_raise(DiscId::DiscError) { DiscId.parse(nil) }
+  end
+
+  def test_parse_invalid_nan
+    assert_raise(DiscId::DiscError) { DiscId.parse("1 2 242457 150 a") }
+  end
+
+  def test_parse_invalid_not_enough_elements
+    assert_raise(DiscId::DiscError) { DiscId.parse("1 2 242457") }
+    assert_raise(DiscId::DiscError) { DiscId.parse("1 242457") }
   end
 
   # Test the conversion from sectors to seconds

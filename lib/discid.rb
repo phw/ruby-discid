@@ -1,4 +1,4 @@
-# Copyright (C) 2013 Philipp Wolfer
+# Copyright (C) 2013-2017, 2019 Philipp Wolfer
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Lesser General Public License as published by
@@ -118,6 +118,29 @@ module DiscId
     disc = Disc.new
     disc.put first_track, sectors, offsets
     return disc
+  end
+
+  # Parses a TOC string and returns a [Disc] instance for it.
+  #
+  # This function can be used if you already have a TOC string like e.g.
+  # `1 11 242457 150 44942 61305 72755 96360 130485 147315 164275 190702 205412 220437`
+  #
+  # @raise [DiscError] The TOC string was invalid and could not be parsed.
+  # @param toc [String] A TOC string in the format `1 11 242457 150 44942 61305 72755 96360 130485 147315 164275 190702 205412 220437`.
+  # @return [Disc]
+  def self.parse(toc)
+    if toc.nil? || toc.empty?
+      raise DiscError, "Invalid TOC #{toc.inspect}"
+    end
+    begin
+      parts = toc.split(' ')
+      first_track = Integer(parts[0])
+      sectors = Integer(parts[2])
+      offsets = parts[3..].map{|i| Integer(i)}
+    rescue ArgumentError, TypeError => e
+      raise DiscError, e
+    end
+    return self.put(first_track, sectors, offsets)
   end
 
   # Return the name of the default disc drive for this operating system.
