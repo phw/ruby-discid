@@ -67,7 +67,7 @@ module DiscId
         if last_track > offsets.length
           offsets = Array.new(last_track - offsets.length, 0) + offsets
         end
-        p.write_array_of_int([sectors] + offsets)
+        p.write_array_of_int(([sectors] + offsets)[0, 100])
         result = Lib.put @handle, first_track, last_track, p
 
         if result == 0
