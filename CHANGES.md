@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.4.0 (2019-05-06)
+* Fixed {DiscId.put} handling of first_track being > 1
+* Added {DiscId.parse} to parse a TOC string
+* Documentation fixes
+
 ## 1.3.2 (2017-12-19)
 * Fixed call to {DiscId::Disc#toc_string} with native implementation
 

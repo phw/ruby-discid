@@ -112,7 +112,7 @@ Please report any issues on the
 [issue tracker](https://github.com/phw/ruby-discid/issues).
 
 ## License
-ruby-discid Copyright (c) 2007-2017 by Philipp Wolfer <ph.wolfer@gmail.com>
+ruby-discid Copyright (c) 2007-2019 by Philipp Wolfer <ph.wolfer@gmail.com>
 
 ruby-discid is free software: you can redistribute it and/or modify
 it under the terms of the GNU Lesser General Public License as published by
