@@ -136,7 +136,7 @@ module DiscId
       parts = toc.split(' ')
       first_track = Integer(parts[0])
       sectors = Integer(parts[2])
-      offsets = parts[3..].map{|i| Integer(i)}
+      offsets = parts[3..-1].map{|i| Integer(i)}
     rescue ArgumentError, TypeError => e
       raise DiscError, e
     end
