@@ -1,7 +1,7 @@
 # Ruby bindings for MusicBrainz libdiscid
 [![Build Status](https://travis-ci.org/phw/ruby-discid.svg?branch=master)](https://travis-ci.org/phw/ruby-discid)
-[![Code Climate](https://codeclimate.com/github/phw/ruby-discid.png)](https://codeclimate.com/github/phw/ruby-discid)
-[![Code Climate](https://codeclimate.com/github/phw/ruby-discid/coverage.png)](https://codeclimate.com/github/phw/ruby-discid)
+[![Maintainability](https://api.codeclimate.com/v1/badges/50e356f4260a127af75b/maintainability)](https://codeclimate.com/github/phw/ruby-discid/maintainability)
+[![Test Coverage](https://api.codeclimate.com/v1/badges/50e356f4260a127af75b/test_coverage)](https://codeclimate.com/github/phw/ruby-discid/test_coverage)
 [![Gem Version](https://badge.fury.io/rb/discid.svg)](http://badge.fury.io/rb/discid)
 
 ## About
