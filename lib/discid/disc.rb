@@ -197,12 +197,12 @@ module DiscId
     #     instead iterates over the block calling the block with one argument.
     # @yieldreturn [nil]
     # @return [Array<Track>] Array of {Track} objects.
-    def tracks
+    def tracks(&block)
       if @read
         read_tracks if @tracks.nil?
 
-        if block_given?
-          @tracks.each(&Proc.new)
+        if block
+          @tracks.each(&block)
           return nil
         else
           return @tracks
