@@ -23,8 +23,6 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-    - name: Install libdiscid
-      run: sudo apt-get install libdiscid0
     - name: Set up Ruby
     # To automatically get bug fixes and new Ruby versions for ruby/setup-ruby,
     # change this to (see https://github.com/ruby/setup-ruby#versioning):
@@ -32,5 +30,13 @@ jobs:
       with:
         ruby-version: ${{ matrix.ruby-version }}
         bundler-cache: true # runs 'bundle install' and caches installed gems automatically
+    - name: Install libdiscid
+      run: sudo apt-get install libdiscid0
+    - name: Install codeclimate-test-reporter
+      run: gem install codeclimate-test-reporter
     - name: Run tests
       run: bundle exec rake test
+    - name: Submit code coverage results
+      env:
+        CODECLIMATE_REPO_TOKEN: ${{ secrets.CODECLIMATE_REPO_TOKEN }}
+      run: codeclimate-test-reporter
