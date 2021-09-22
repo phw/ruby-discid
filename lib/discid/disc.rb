@@ -1,4 +1,4 @@
-# Copyright (C) 2013-2014 Philipp Wolfer
+# Copyright (C) 2013-2014, 2021 Philipp Wolfer
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Lesser General Public License as published by

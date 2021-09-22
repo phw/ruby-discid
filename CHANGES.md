@@ -1,5 +1,8 @@
 # Changelog
 
+## 1.4.1 (2021-09-23)
+* Fix Ruby 3 compatibility if {DiscId.tracks} gets called with a block
+
 ## 1.4.0 (2019-05-06)
 * Fixed {DiscId.put} handling of first_track being > 1
 * Added {DiscId.parse} to parse a TOC string
