@@ -14,7 +14,7 @@ ruby-discid will just return a default value. The version required for a feature
 is documented in the [API documentation](http://www.rubydoc.info/github/phw/ruby-discid/master).
 
 ## Requirements
-* Ruby >= 1.9.0
+* Ruby >= 2.0
 * RubyGems >= 1.3.6
 * Ruby-FFI >= 1.6.0
 * libdiscid >= 0.1.0
@@ -111,7 +111,7 @@ Please report any issues on the
 [issue tracker](https://github.com/phw/ruby-discid/issues).
 
 ## License
-ruby-discid Copyright (c) 2007-2021 by Philipp Wolfer <ph.wolfer@gmail.com>
+ruby-discid Copyright (c) 2007-2023 by Philipp Wolfer <ph.wolfer@gmail.com>
 
 ruby-discid is free software: you can redistribute it and/or modify
 it under the terms of the GNU Lesser General Public License as published by
