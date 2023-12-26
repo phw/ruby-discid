@@ -70,9 +70,9 @@ class TestDiscId < Test::Unit::TestCase
   end
 
   def test_put_invalid_track_count
-    assert_raise(DiscId::DiscError) {
-      disc = DiscId.put(1, @fiction_sectors, Array.new(101) {|i| i + 150 })
-    }
+    assert_raise(DiscId::DiscError) do
+      DiscId.put(1, @fiction_sectors, Array.new(101) {|i| i + 150 })
+    end
   end
 
   # Test the tracks method and TrackInfo objects
