@@ -1,4 +1,4 @@
-# Copyright (C) 2013 Philipp Wolfer
+# Copyright (C) 2013-2023 Philipp Wolfer
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Lesser General Public License as published by
@@ -16,5 +16,5 @@
 #
 module DiscId
   # The version of ruby-discid.
-  VERSION = "1.4.1"
+  VERSION = "1.5.0"
 end

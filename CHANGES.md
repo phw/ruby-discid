@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.5.0 (2023-12-27)
+* Added {DiscId::Track#to_h} for consistency with standard library. A backward
+  compatible alias {DiscId::Track#to_hash} is still available.
+* Removed support for Ruby 1.8
+
 ## 1.4.1 (2021-09-23)
 * Fix Ruby 3 compatibility if {DiscId.tracks} gets called with a block
 
