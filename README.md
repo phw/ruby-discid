@@ -100,7 +100,7 @@ disc.tracks do |track|
 end
 ```
 
-See the [API documentation](http://www.rubydoc.info/github/phw/ruby-discid/master)
+See the [API documentation](https://www.rubydoc.info/gems/discid/)
 of {DiscId} or the files in the `examples` directory for more usage information.
 
 ## Contribute
