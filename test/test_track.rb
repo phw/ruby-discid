@@ -43,17 +43,20 @@ class TestTrack < Test::Unit::TestCase
 
   def test_to_hash
     track = DiscId::Track.new @number, @offset, @length, @isrc
-    hash = track.to_hash
 
-    assert_equal track.number, hash[:number]
-    assert_equal track.offset, hash[:offset]
-    assert_equal track.sectors, hash[:sectors]
-    assert_equal track.isrc, hash[:isrc]
+    for f in %i(to_h to_hash) do
+      hash = track.send(f)
 
-    assert_equal track.end_sector, hash[:end_sector]
-    assert_equal track.seconds, hash[:seconds]
-    assert_equal track.start_time, hash[:start_time]
-    assert_equal track.end_time, hash[:end_time]
+      assert_equal track.number, hash[:number]
+      assert_equal track.offset, hash[:offset]
+      assert_equal track.sectors, hash[:sectors]
+      assert_equal track.isrc, hash[:isrc]
+
+      assert_equal track.end_sector, hash[:end_sector]
+      assert_equal track.seconds, hash[:seconds]
+      assert_equal track.start_time, hash[:start_time]
+      assert_equal track.end_time, hash[:end_time]
+    end
   end
 
   def test_selector_access

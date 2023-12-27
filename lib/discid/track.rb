@@ -1,4 +1,4 @@
-# Copyright (C) 2008 - 2013 Philipp Wolfer
+# Copyright (C) 2008-2023 Philipp Wolfer
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Lesser General Public License as published by
@@ -117,7 +117,7 @@ module DiscId
     # Converts the Track into a Hash.
     #
     # @return [Hash]
-    def to_hash
+    def to_h
       {
         :number       => number,
         :sectors      => sectors,
@@ -130,5 +130,6 @@ module DiscId
       }
     end
 
+    alias_method :to_hash, :to_h
   end
 end
