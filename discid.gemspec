@@ -31,5 +31,10 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "yard"
   spec.add_development_dependency "redcarpet" if not RUBY_PLATFORM == "java"
   spec.add_development_dependency "test-unit"
-  spec.add_development_dependency "simplecov", "< 0.18"
+
+  # The code coverage is only supported for Ruby >= 2.4
+  if (RUBY_VERSION.split('.').map{|s|s.to_i} <=> [2, 4, 0]) >= 0
+    spec.add_development_dependency "simplecov"
+    spec.add_development_dependency "simplecov_json_formatter"
+  end
 end
