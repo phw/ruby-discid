@@ -1,7 +1,6 @@
 # Ruby bindings for MusicBrainz libdiscid
 [![Gem Version](https://badge.fury.io/rb/discid.svg)](http://badge.fury.io/rb/discid)
-[![Maintainability](https://api.codeclimate.com/v1/badges/50e356f4260a127af75b/maintainability)](https://codeclimate.com/github/phw/ruby-discid/maintainability)
-[![Test Coverage](https://api.codeclimate.com/v1/badges/50e356f4260a127af75b/test_coverage)](https://codeclimate.com/github/phw/ruby-discid/test_coverage)
+[![Test Coverage](https://phw.srht.site/ruby-discid/coverage/coverage_badge_total.svg)](https://phw.srht.site/ruby-discid/coverage/)
 
 ## About
 ruby-discid provides Ruby bindings for the MusicBrainz DiscID library [libdiscid](http://musicbrainz.org/doc/libdiscid).

@@ -16,10 +16,12 @@
 begin
   require 'simplecov'
   require "simplecov_json_formatter"
+  require 'simplecov_small_badge'
 
   SimpleCov.formatter = SimpleCov::Formatter::MultiFormatter.new([
     SimpleCov::Formatter::JSONFormatter,
-    SimpleCov::Formatter::HTMLFormatter
+    SimpleCov::Formatter::HTMLFormatter,
+    SimpleCovSmallBadge::Formatter
   ])
   SimpleCov.start do
     add_filter "/test/"

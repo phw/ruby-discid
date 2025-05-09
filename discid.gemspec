@@ -36,5 +36,6 @@ Gem::Specification.new do |spec|
   if (RUBY_VERSION.split('.').map{|s|s.to_i} <=> [2, 4, 0]) >= 0
     spec.add_development_dependency "simplecov"
     spec.add_development_dependency "simplecov_json_formatter"
+    spec.add_development_dependency "simplecov-small-badge"
   end
 end
