@@ -1,4 +1,4 @@
-# Copyright (C) 2013-2014 Philipp Wolfer
+# Copyright (C) 2013-2014, 2025 Philipp Wolfer
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Lesser General Public License as published by
@@ -15,10 +15,12 @@
 
 begin
   require 'simplecov'
+  require "simplecov_json_formatter"
 
+  SimpleCov.formatter = SimpleCov::Formatter::JSONFormatter
   SimpleCov.start do
     add_filter "/test/"
   end
 rescue LoadError
-  puts 'WARNING: codeclimate-test-reporter not available, no code coverage reported.'
+  puts 'WARNING: simplecov not available, no code coverage reported.'
 end
