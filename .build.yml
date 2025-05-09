@@ -4,8 +4,10 @@ packages:
   - ruby-bundler
   - ruby-dev
   - libdiscid
+  - hut
 environment:
   BUNDLE_PATH: ~/bundle
+oauth: pages.sr.ht/PAGES:RW
 secrets:
   - c8a363fe-8a12-461c-b57b-6aed5f744939
 tasks:
@@ -13,6 +15,10 @@ tasks:
       cd ruby-discid
       bundle install
       bundle exec rake test
+  - publish-coverage: |
+      cd ruby-discid
+      tar -cvzf ./coverage.tar.gz coverage
+      hut pages publish -d phw.srht.site -s ruby-discid coverage.tar.gz
   # Skip publishing if this is not a tagged release
   - only-tags: |
       cd ruby-discid
