@@ -2,6 +2,9 @@
 [![Gem Version](https://badge.fury.io/rb/discid.svg)](http://badge.fury.io/rb/discid)
 [![Test Coverage](https://phw.srht.site/ruby-discid/coverage/coverage_badge_total.svg)](https://phw.srht.site/ruby-discid/coverage/)
 
+> [!NOTE]
+> **This project has moved to https://git.sr.ht/~phw/ruby-discid**
+
 ## About
 ruby-discid provides Ruby bindings for the MusicBrainz DiscID library [libdiscid](http://musicbrainz.org/doc/libdiscid).
 It allows calculating DiscIDs (MusicBrainz and freedb) for Audio CDs. Additionally
