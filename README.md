@@ -13,7 +13,7 @@ ruby-discid will just return a default value. The version required for a feature
 is documented in the [API documentation](http://www.rubydoc.info/github/phw/ruby-discid/master).
 
 ## Requirements
-* Ruby >= 2.0
+* Ruby >= 2.1
 * RubyGems >= 1.3.6
 * Ruby-FFI >= 1.6.0
 * libdiscid >= 0.1.0
@@ -55,11 +55,11 @@ You can install the `discid.dll` system wide, but it is recommended to place
 it in the local working directory of your application.
 
 Also the architecture (32 or 64 bit) of the DLL must match your Ruby version.
-As the official build of libdiscid contains only a 32 bit version of `discid.dll`
-it is recommended to use the 32 bit version of Ruby.
+Since libdiscid 0.6.3 the [official Windows builds](https://musicbrainz.org/doc/libdiscid)
+of libdiscid contain both the 32 and 64 bit DLLs.
 
-If you want or need to use 64 bit Ruby you will have to compile libdiscid
-yourself. Refer to the [libdiscid install instructions](https://github.com/metabrainz/libdiscid/blob/master/INSTALL)
+You can also compile libdiscid yourself. Refer to the
+[libdiscid install instructions](https://github.com/metabrainz/libdiscid/blob/master/INSTALL)
 for further details.
 
 ## Usage
@@ -110,7 +110,7 @@ Please report any issues on the
 [issue tracker](https://github.com/phw/ruby-discid/issues).
 
 ## License
-ruby-discid Copyright (c) 2007-2023 by Philipp Wolfer <ph.wolfer@gmail.com>
+ruby-discid Copyright (c) 2007-2025 by Philipp Wolfer <ph.wolfer@gmail.com>
 
 ruby-discid is free software: you can redistribute it and/or modify
 it under the terms of the GNU Lesser General Public License as published by
