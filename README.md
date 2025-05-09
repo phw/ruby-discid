@@ -104,10 +104,10 @@ of {DiscId} or the files in the `examples` directory for more usage information.
 
 ## Contribute
 The source code for ruby-discid is available on
-[GitHub](https://github.com/phw/ruby-discid).
+[GitHub](https://git.sr.ht/~phw/ruby-discid).
 
 Please report any issues on the
-[issue tracker](https://github.com/phw/ruby-discid/issues).
+[issue tracker](https://todo.sr.ht/~phw/discid-bindings).
 
 ## License
 ruby-discid Copyright (c) 2007-2025 by Philipp Wolfer <ph.wolfer@gmail.com>

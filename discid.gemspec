@@ -10,7 +10,7 @@ Gem::Specification.new do |spec|
   spec.email         = ["ph.wolfer@gmail.com"]
   spec.description   = %q{ruby-discid provides Ruby bindings for the MusicBrainz DiscID library libdiscid. It allows calculating DiscIDs (MusicBrainz and freedb) for Audio CDs. Additionally the library can extract the MCN/UPC/EAN and the ISRCs from disc.}
   spec.summary       = %q{Ruby bindings for libdiscid}
-  spec.homepage      = "https://github.com/phw/ruby-discid"
+  spec.homepage      = "https://git.sr.ht/~phw/ruby-discid"
   spec.license       = "LGPL-3.0"
   spec.post_install_message = %q{Please make sure you have libdiscid (http://musicbrainz.org/doc/libdiscid) installed.}
 
