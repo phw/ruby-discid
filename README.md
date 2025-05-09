@@ -104,7 +104,7 @@ of {DiscId} or the files in the `examples` directory for more usage information.
 
 ## Contribute
 The source code for ruby-discid is available on
-[GitHub](https://git.sr.ht/~phw/ruby-discid).
+[SourceHut](https://git.sr.ht/~phw/ruby-discid).
 
 Please report any issues on the
 [issue tracker](https://todo.sr.ht/~phw/discid-bindings).
