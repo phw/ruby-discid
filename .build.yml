@@ -1,0 +1,23 @@
+image: alpine/latest
+packages:
+  - ruby
+  - ruby-bundler
+  - ruby-dev
+  - libdiscid
+environment:
+  BUNDLE_PATH: ~/bundle
+secrets:
+  - c8a363fe-8a12-461c-b57b-6aed5f744939
+tasks:
+  - test: |
+      cd ruby-discid
+      bundle install
+      bundle exec rake test
+  # Skip publishing if this is not a tagged release
+  - only-tags: |
+      cd ruby-discid
+      GIT_REF=$(git describe --always)
+      [[ "$GIT_REF" =~ ^v[0-9]+\.[0-9]+(\.[0-9]+)?$ ]] || complete-build
+  - publish: |
+      gem build *.gemspec
+      gem push *.gem
